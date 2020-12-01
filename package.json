@@ -2,26 +2,66 @@
   "name": "@efox/emp-gui",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
+  "files": [
+    "dist",
+    "server",
+    "public"
+  ],
+  "scripts": {
+    "dev": "yarn client:dev",
+    "build": "yarn client:build && yarn server:build",
+    "client:dev": "cross-env NODE_ENV=development react-app-rewired start",
+    "client:build": "cross-env NODE_ENV=production react-app-rewired build",
+    "server:dev": "cross-env NODE_ENV=development node ./server-entry.js",
+    "server:build": "cross-env NODE_ENV=production",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src --ext .js --ext .ts --ext .tsx --fix"
+  },
   "dependencies": {
+    "express": "^4.17.1",
+    "express-history-api-fallback": "^2.2.1",
+    "fs-extra": "^9.0.1",
+    "lowdb": "^1.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@efox/eslint-config-react-prittier-ts": "^1.2.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.6",
     "antd": "^4.8.6",
+    "babel-loader": "^8.2.2",
+    "body-parser": "^1.19.0",
+    "chalk": "^4.1.0",
+    "commitlint": "^11.0.0",
+    "cross-env": "^7.0.2",
+    "customize-cra": "^1.0.0",
+    "deepmerge": "^4.2.2",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.2",
+    "mobx": "^6.0.4",
+    "mobx-react-lite": "^3.1.6",
     "react": "^17.0.1",
+    "react-app-rewired": "^2.1.6",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
-  "scripts": {
-    "dev": "yarn client:dev ",
-    "build": "yarn client:build",
-    "client:dev": "react-app-rewired start",
-    "client:build": "react-app-rewired build",
-    "server:dev": "node ./server/index.js",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
-    "lint": "eslint ./src --ext .js --ext .ts --ext .tsx --fix"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,tsx,d.ts}": "eslint --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -39,39 +79,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
-    "@efox/eslint-config-react-prittier-ts": "^1.2.3",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/react-router-dom": "^5.1.6",
-    "apollo-server-express": "^2.19.0",
-    "babel-loader": "^8.2.2",
-    "body-parser": "^1.19.0",
-    "chalk": "^4.1.0",
-    "commitlint": "^11.0.0",
-    "customize-cra": "^1.0.0",
-    "deepmerge": "^4.2.2",
-    "express": "^4.17.1",
-    "express-history-api-fallback": "^2.2.1",
-    "fs-extra": "^9.0.1",
-    "graphql-subscriptions": "^1.1.0",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.5.2",
-    "lowdb": "^1.0.0",
-    "mobx": "^6.0.4",
-    "mobx-react-lite": "^3.1.6",
-    "react-app-rewired": "^2.1.6"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,ts,tsx,d.ts}": "eslint --fix"
   }
 }

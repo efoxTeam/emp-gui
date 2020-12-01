@@ -3,7 +3,7 @@ const chalk = require('chalk')
 const express = require('express')
 const {router} = require('./router')
 
-const start = (options = {}, cb = null) => {
+const startServer = (options = {}, cb = null) => {
   const host = options.host || 'localhost'
   const port = options.port || '1234'
   const app = express()
@@ -25,4 +25,4 @@ const start = (options = {}, cb = null) => {
   }
 }
 
-start()
+exports.start = startServer
