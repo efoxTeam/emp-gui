@@ -1,13 +1,10 @@
 const path = require('path')
 const {
   override,
-  // overrideDevServer,
-  // fixBabelImports,
-  addWebpackPlugin,
-  disableEsLint,
+  // addWebpackPlugin,
   addBundleVisualizer,
-  //addLessLoader,
   addWebpackAlias,
+  disableEsLint
 } = require('customize-cra')
 
 module.exports = {
@@ -15,5 +12,17 @@ module.exports = {
     addWebpackAlias({
       ['@']: path.resolve(__dirname, 'src'),
     }),
+    addBundleVisualizer(
+      {
+        analyzerMode: 'static',
+        reportFilename: 'report.html',
+      },
+      true,
+    ),
+    disableEsLint()
   ),
+  paths: function(paths, env) {
+    paths.appBuild = path.resolve(__dirname, 'dist')
+    return paths;
+  },
 }

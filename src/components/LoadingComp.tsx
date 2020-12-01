@@ -1,6 +1,6 @@
 import {Spin} from 'antd'
 import React from 'react'
-import './LoadingCompStyle.less'
+import './LoadingCompStyle.scss'
 const LoadingComp = () => (
   <div className="loadingComp">
     <Spin />

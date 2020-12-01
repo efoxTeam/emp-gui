@@ -17,7 +17,7 @@ const Main = () => {
     console.log('===done===', res)
     alert('done')
   }
-  return <div onClick={() => onAdd()}>addd</div>
+  return <div onClick={() => onAdd()}>add</div>
 }
 
 export default Main
