@@ -7,6 +7,6 @@
 yarn server:dev
 
 // 起客户端服务：
-yarn client:dev  
+yarn dev  
 
 ```

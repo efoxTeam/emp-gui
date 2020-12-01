@@ -4,8 +4,7 @@ const express = require('express')
 const {router} = require('./router')
 
 const startServer = (options = {}, cb = null) => {
-  const host = options.host || 'localhost'
-  const port = options.port || '1234'
+  const {host = 'localhost', port = '1234'} = options
   const app = express()
   router(app)
   const httpServer = http.createServer(app)
@@ -15,7 +14,7 @@ const startServer = (options = {}, cb = null) => {
     port
   }, () => {
     if (process.env.NODE_ENV !== 'production') {
-      console.log(`✔️  Server is running on ${chalk.cyan(`http://localhost:${port}`)}`)
+      console.log(`✔️  Server is running on ${chalk.cyan(`http://${host}:${port}`)}`)
     }
     cb && cb()
   })
