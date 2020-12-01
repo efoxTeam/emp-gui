@@ -1,5 +1,5 @@
-const {db} = require('../db')
-
+const {db} = require('../data/db')
+const {dbService} = require('../data/index')
 function search(req, res) {
   const {id} = req.params
   const project = db.get('projects').find({ id: Number(id) })
@@ -11,12 +11,10 @@ function search(req, res) {
 function alert(req, res) {
   const {id, name} = req.body
   const project = {
-    id,
-    name
+    id: '1',
+    name: 'name'
   }
-  db.get('projects')
-  .push(project)
-  .write()
+  dbService.insert(project)
   res.setHeader('Content-Type', 'application/json')
   res.json(project)
 }
