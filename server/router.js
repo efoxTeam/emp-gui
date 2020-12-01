@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const fallback = require('express-history-api-fallback')
 // controllers
 const demo = require('./controller/demo')
+const project = require('./controller/project')
 
 const distPath = path.resolve(__dirname, '../dist')
 const publicPath = path.resolve(__dirname, '../public')
@@ -31,4 +32,12 @@ exports.router = app => {
   });
   app.use('/demo/search/:id', demo.search)
   app.use('/demo/alert', demo.alert)
+
+  // 项目管理
+  app.use('/projects', project.list)
+  app.use('/projects/search', project.search)
+  app.use('/project/add', project.add)
+  app.use('/project/del', project.del)
+  app.use('/project/alter', project.alter)
+  
 }
