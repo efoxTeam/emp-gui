@@ -1,4 +1,4 @@
-const {db} = require('../db')
+const {db} = require('../data/db')
 
 function list(req, res) {
   const projects = db.get('projects')

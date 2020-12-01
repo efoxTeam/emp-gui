@@ -2,9 +2,7 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const fallback = require('express-history-api-fallback')
-// controllers
-const demo = require('./controller/demo')
-const project = require('./controller/project')
+const {Routes} = require('./routes')
 
 const distPath = path.resolve(__dirname, '../dist')
 const publicPath = path.resolve(__dirname, '../public')
@@ -13,6 +11,11 @@ const CACHE_CONTROL = 'no-store, no-cache, must-revalidate, private'
 
 function setHeaders(res, path, stat) {
   res.set('Cache-Control', CACHE_CONTROL)
+}
+function routeUse(){
+  Route.map(()=>{
+
+  })
 }
 
 exports.router = app => {
@@ -30,14 +33,9 @@ exports.router = app => {
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
   });
-  app.use('/demo/search/:id', demo.search)
-  app.use('/demo/alert', demo.alert)
-
-  // 项目管理
-  app.use('/projects', project.list)
-  app.use('/projects/search', project.search)
-  app.use('/project/add', project.add)
-  app.use('/project/del', project.del)
-  app.use('/project/alter', project.alter)
-  
+  /*app.use('/demo/search/:id', demo.search)
+  app.use('/demo/alert', demo.alert)*/
+  Routes.map((route)=>{
+    app.use(route.path, route.method)
+  })
 }

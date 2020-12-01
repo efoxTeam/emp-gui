@@ -1,7 +1,7 @@
 const http = require('http')
 const chalk = require('chalk')
 const express = require('express')
-const {router} = require('./router')
+const {router} = require('./routers/index')
 
 const startServer = (options = {}, cb = null) => {
   const {host = 'localhost', port = '1234'} = options
