@@ -1620,7 +1620,7 @@
 
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
-  resolved "https://registry.npm.taobao.org/@rollup/plugin-node-resolve/download/@rollup/plugin-node-resolve-7.1.3.tgz?cache=0&sync_timestamp=1603765888985&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40rollup%2Fplugin-node-resolve%2Fdownload%2F%40rollup%2Fplugin-node-resolve-7.1.3.tgz#80de384edfbd7bfc9101164910f86078151a3eca"
+  resolved "https://registry.npm.taobao.org/@rollup/plugin-node-resolve/download/@rollup/plugin-node-resolve-7.1.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40rollup%2Fplugin-node-resolve%2Fdownload%2F%40rollup%2Fplugin-node-resolve-7.1.3.tgz#80de384edfbd7bfc9101164910f86078151a3eca"
   integrity sha1-gN44Tt+9e/yRARZJEPhgeBUaPso=
   dependencies:
     "@rollup/pluginutils" "^3.0.8"
@@ -2078,7 +2078,20 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@typescript-eslint/eslint-plugin@^4.5.0", "@typescript-eslint/eslint-plugin@^4.6.1":
+"@typescript-eslint/eslint-plugin@^4.5.0":
+  version "4.9.0"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/eslint-plugin/download/@typescript-eslint/eslint-plugin-4.9.0.tgz#8fde15743413661fdc086c9f1f5d74a80b856113"
+  integrity sha1-j94VdDQTZh/cCGyfH110qAuFYRM=
+  dependencies:
+    "@typescript-eslint/experimental-utils" "4.9.0"
+    "@typescript-eslint/scope-manager" "4.9.0"
+    debug "^4.1.1"
+    functional-red-black-tree "^1.0.1"
+    regexpp "^3.0.0"
+    semver "^7.3.2"
+    tsutils "^3.17.1"
+
+"@typescript-eslint/eslint-plugin@^4.6.1":
   version "4.8.2"
   resolved "https://registry.npm.taobao.org/@typescript-eslint/eslint-plugin/download/@typescript-eslint/eslint-plugin-4.8.2.tgz?cache=0&sync_timestamp=1606697404920&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Feslint-plugin%2Fdownload%2F%40typescript-eslint%2Feslint-plugin-4.8.2.tgz#cf9102ec800391caa574f589ffe0623cca1d9308"
   integrity sha1-z5EC7IADkcqldPWJ/+BiPModkwg=
@@ -2091,7 +2104,7 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
-"@typescript-eslint/experimental-utils@4.8.2", "@typescript-eslint/experimental-utils@^4.0.1":
+"@typescript-eslint/experimental-utils@4.8.2":
   version "4.8.2"
   resolved "https://registry.npm.taobao.org/@typescript-eslint/experimental-utils/download/@typescript-eslint/experimental-utils-4.8.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Fexperimental-utils%2Fdownload%2F%40typescript-eslint%2Fexperimental-utils-4.8.2.tgz#8909a5732f19329cf5ef0c39766170476bff5e50"
   integrity sha1-iQmlcy8ZMpz17ww5dmFwR2v/XlA=
@@ -2103,9 +2116,21 @@
     eslint-scope "^5.0.0"
     eslint-utils "^2.0.0"
 
+"@typescript-eslint/experimental-utils@4.9.0", "@typescript-eslint/experimental-utils@^4.0.1":
+  version "4.9.0"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/experimental-utils/download/@typescript-eslint/experimental-utils-4.9.0.tgz?cache=0&sync_timestamp=1606760526393&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Fexperimental-utils%2Fdownload%2F%40typescript-eslint%2Fexperimental-utils-4.9.0.tgz#23a296b85d243afba24e75a43fd55aceda5141f0"
+  integrity sha1-I6KWuF0kOvuiTnWkP9VaztpRQfA=
+  dependencies:
+    "@types/json-schema" "^7.0.3"
+    "@typescript-eslint/scope-manager" "4.9.0"
+    "@typescript-eslint/types" "4.9.0"
+    "@typescript-eslint/typescript-estree" "4.9.0"
+    eslint-scope "^5.0.0"
+    eslint-utils "^2.0.0"
+
 "@typescript-eslint/experimental-utils@^3.10.1":
   version "3.10.1"
-  resolved "https://registry.npm.taobao.org/@typescript-eslint/experimental-utils/download/@typescript-eslint/experimental-utils-3.10.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Fexperimental-utils%2Fdownload%2F%40typescript-eslint%2Fexperimental-utils-3.10.1.tgz#e179ffc81a80ebcae2ea04e0332f8b251345a686"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/experimental-utils/download/@typescript-eslint/experimental-utils-3.10.1.tgz?cache=0&sync_timestamp=1606760526393&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Fexperimental-utils%2Fdownload%2F%40typescript-eslint%2Fexperimental-utils-3.10.1.tgz#e179ffc81a80ebcae2ea04e0332f8b251345a686"
   integrity sha1-4Xn/yBqA68ri6gTgMy+LJRNFpoY=
   dependencies:
     "@types/json-schema" "^7.0.3"
@@ -2114,7 +2139,17 @@
     eslint-scope "^5.0.0"
     eslint-utils "^2.0.0"
 
-"@typescript-eslint/parser@^4.5.0", "@typescript-eslint/parser@^4.6.1":
+"@typescript-eslint/parser@^4.5.0":
+  version "4.9.0"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/parser/download/@typescript-eslint/parser-4.9.0.tgz?cache=0&sync_timestamp=1606760527122&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Fparser%2Fdownload%2F%40typescript-eslint%2Fparser-4.9.0.tgz#bb65f1214b5e221604996db53ef77c9d62b09249"
+  integrity sha1-u2XxIUteIhYEmW21Pvd8nWKwkkk=
+  dependencies:
+    "@typescript-eslint/scope-manager" "4.9.0"
+    "@typescript-eslint/types" "4.9.0"
+    "@typescript-eslint/typescript-estree" "4.9.0"
+    debug "^4.1.1"
+
+"@typescript-eslint/parser@^4.6.1":
   version "4.8.2"
   resolved "https://registry.npm.taobao.org/@typescript-eslint/parser/download/@typescript-eslint/parser-4.8.2.tgz?cache=0&sync_timestamp=1606697403541&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Fparser%2Fdownload%2F%40typescript-eslint%2Fparser-4.8.2.tgz#78dccbe5124de2b8dea2d4c363dee9f769151ca8"
   integrity sha1-eNzL5RJN4rjeotTDY97p92kVHKg=
@@ -2132,6 +2167,14 @@
     "@typescript-eslint/types" "4.8.2"
     "@typescript-eslint/visitor-keys" "4.8.2"
 
+"@typescript-eslint/scope-manager@4.9.0":
+  version "4.9.0"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/scope-manager/download/@typescript-eslint/scope-manager-4.9.0.tgz#5eefe305d6b71d1c85af6587b048426bfd4d3708"
+  integrity sha1-Xu/jBda3HRyFr2WHsEhCa/1NNwg=
+  dependencies:
+    "@typescript-eslint/types" "4.9.0"
+    "@typescript-eslint/visitor-keys" "4.9.0"
+
 "@typescript-eslint/types@3.10.1":
   version "3.10.1"
   resolved "https://registry.npm.taobao.org/@typescript-eslint/types/download/@typescript-eslint/types-3.10.1.tgz#1d7463fa7c32d8a23ab508a803ca2fe26e758727"
@@ -2142,9 +2185,14 @@
   resolved "https://registry.npm.taobao.org/@typescript-eslint/types/download/@typescript-eslint/types-4.8.2.tgz#c862dd0e569d9478eb82d6aee662ea53f5661a36"
   integrity sha1-yGLdDladlHjrgtau5mLqU/VmGjY=
 
+"@typescript-eslint/types@4.9.0":
+  version "4.9.0"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/types/download/@typescript-eslint/types-4.9.0.tgz#3fe8c3632abd07095c7458f7451bd14c85d0033c"
+  integrity sha1-P+jDYyq9BwlcdFj3RRvRTIXQAzw=
+
 "@typescript-eslint/typescript-estree@3.10.1":
   version "3.10.1"
-  resolved "https://registry.npm.taobao.org/@typescript-eslint/typescript-estree/download/@typescript-eslint/typescript-estree-3.10.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Ftypescript-estree%2Fdownload%2F%40typescript-eslint%2Ftypescript-estree-3.10.1.tgz#fd0061cc38add4fad45136d654408569f365b853"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/typescript-estree/download/@typescript-eslint/typescript-estree-3.10.1.tgz?cache=0&sync_timestamp=1606760525761&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Ftypescript-estree%2Fdownload%2F%40typescript-eslint%2Ftypescript-estree-3.10.1.tgz#fd0061cc38add4fad45136d654408569f365b853"
   integrity sha1-/QBhzDit1PrUUTbWVECFafNluFM=
   dependencies:
     "@typescript-eslint/types" "3.10.1"
@@ -2170,6 +2218,20 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
+"@typescript-eslint/typescript-estree@4.9.0":
+  version "4.9.0"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/typescript-estree/download/@typescript-eslint/typescript-estree-4.9.0.tgz?cache=0&sync_timestamp=1606760525761&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Ftypescript-estree%2Fdownload%2F%40typescript-eslint%2Ftypescript-estree-4.9.0.tgz#38a98df6ee281cfd6164d6f9d91795b37d9e508c"
+  integrity sha1-OKmN9u4oHP1hZNb52ReVs32eUIw=
+  dependencies:
+    "@typescript-eslint/types" "4.9.0"
+    "@typescript-eslint/visitor-keys" "4.9.0"
+    debug "^4.1.1"
+    globby "^11.0.1"
+    is-glob "^4.0.1"
+    lodash "^4.17.15"
+    semver "^7.3.2"
+    tsutils "^3.17.1"
+
 "@typescript-eslint/visitor-keys@3.10.1":
   version "3.10.1"
   resolved "https://registry.npm.taobao.org/@typescript-eslint/visitor-keys/download/@typescript-eslint/visitor-keys-3.10.1.tgz#cd4274773e3eb63b2e870ac602274487ecd1e931"
@@ -2183,6 +2245,14 @@
   integrity sha1-Ys0/u79l+OzPvm8VnrG4SiQ6P3c=
   dependencies:
     "@typescript-eslint/types" "4.8.2"
+    eslint-visitor-keys "^2.0.0"
+
+"@typescript-eslint/visitor-keys@4.9.0":
+  version "4.9.0"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/visitor-keys/download/@typescript-eslint/visitor-keys-4.9.0.tgz#f284e9fac43f2d6d35094ce137473ee321f266c8"
+  integrity sha1-8oTp+sQ/LW01CUzhN0c+4yHyZsg=
+  dependencies:
+    "@typescript-eslint/types" "4.9.0"
     eslint-visitor-keys "^2.0.0"
 
 "@webassemblyjs/ast@1.9.0":
@@ -2798,7 +2868,7 @@ aws4@^1.8.0:
 
 axe-core@^4.0.2:
   version "4.1.1"
-  resolved "https://registry.npm.taobao.org/axe-core/download/axe-core-4.1.1.tgz?cache=0&sync_timestamp=1606326697100&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faxe-core%2Fdownload%2Faxe-core-4.1.1.tgz#70a7855888e287f7add66002211a423937063eaf"
+  resolved "https://registry.npm.taobao.org/axe-core/download/axe-core-4.1.1.tgz?cache=0&sync_timestamp=1606750729535&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faxe-core%2Fdownload%2Faxe-core-4.1.1.tgz#70a7855888e287f7add66002211a423937063eaf"
   integrity sha1-cKeFWIjih/et1mACIRpCOTcGPq8=
 
 axobject-query@^2.2.0:
@@ -3398,9 +3468,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001157:
-  version "1.0.30001161"
-  resolved "https://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30001161.tgz#64f7ffe79ee780b8c92843ff34feb36cea4651e0"
-  integrity sha1-ZPf/557ngLjJKEP/NP6zbOpGUeA=
+  version "1.0.30001164"
+  resolved "https://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30001164.tgz?cache=0&sync_timestamp=1606806176444&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcaniuse-lite%2Fdownload%2Fcaniuse-lite-1.0.30001164.tgz#5bbfd64ca605d43132f13cc7fdabb17c3036bfdc"
+  integrity sha1-W7/WTKYF1DEy8TzH/auxfDA2v9w=
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -4676,9 +4746,9 @@ ejs@^2.6.1:
   integrity sha1-SGYSh1c9zFPjZsehrlLDoSDuybo=
 
 electron-to-chromium@^1.3.564, electron-to-chromium@^1.3.591:
-  version "1.3.610"
-  resolved "https://registry.npm.taobao.org/electron-to-chromium/download/electron-to-chromium-1.3.610.tgz?cache=0&sync_timestamp=1606501939338&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felectron-to-chromium%2Fdownload%2Felectron-to-chromium-1.3.610.tgz#1254eb394acd220a836ea1f203f8cded4e487052"
-  integrity sha1-ElTrOUrNIgqDbqHyA/jN7U5IcFI=
+  version "1.3.612"
+  resolved "https://registry.npm.taobao.org/electron-to-chromium/download/electron-to-chromium-1.3.612.tgz?cache=0&sync_timestamp=1606789990661&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felectron-to-chromium%2Fdownload%2Felectron-to-chromium-1.3.612.tgz#4a49864b9de694403a69d5a9f439cbceca543e48"
+  integrity sha1-SkmGS53mlEA6adWp9DnLzspUPkg=
 
 elliptic@^6.5.3:
   version "6.5.3"
@@ -5035,9 +5105,9 @@ eslint-visitor-keys@^2.0.0:
   integrity sha1-If3I+82ceVzAMh8FY3AglXUVEag=
 
 eslint-webpack-plugin@^2.1.0:
-  version "2.4.0"
-  resolved "https://registry.npm.taobao.org/eslint-webpack-plugin/download/eslint-webpack-plugin-2.4.0.tgz?cache=0&sync_timestamp=1605885156902&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-webpack-plugin%2Fdownload%2Feslint-webpack-plugin-2.4.0.tgz#dcfd2653d0e15e52251f34dd3690ce60718d5589"
-  integrity sha1-3P0mU9DhXlIlHzTdNpDOYHGNVYk=
+  version "2.4.1"
+  resolved "https://registry.npm.taobao.org/eslint-webpack-plugin/download/eslint-webpack-plugin-2.4.1.tgz#9353ec46a31d29558734a38a05eb14c5760a7144"
+  integrity sha1-k1PsRqMdKVWHNKOKBesUxXYKcUQ=
   dependencies:
     "@types/eslint" "^7.2.4"
     arrify "^2.0.1"
@@ -8075,9 +8145,9 @@ nan@^2.12.1:
   integrity sha1-9TdkAGlRaPTMaUrJOT0MlYXu6hk=
 
 nanoid@^3.1.18:
-  version "3.1.18"
-  resolved "https://registry.npm.taobao.org/nanoid/download/nanoid-3.1.18.tgz?cache=0&sync_timestamp=1605907803916&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnanoid%2Fdownload%2Fnanoid-3.1.18.tgz#0680db22ab01c372e89209f5d18283d98de3e96d"
-  integrity sha1-BoDbIqsBw3Lokgn10YKD2Y3j6W0=
+  version "3.1.19"
+  resolved "https://registry.npm.taobao.org/nanoid/download/nanoid-3.1.19.tgz?cache=0&sync_timestamp=1606781958074&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnanoid%2Fdownload%2Fnanoid-3.1.19.tgz#baf8331efb722320f7ea4ef367f056e8d965172d"
+  integrity sha1-uvgzHvtyIyD36k7zZ/BW6NllFy0=
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -10246,7 +10316,7 @@ react-router@5.2.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-scripts@4.0.1:
+react-scripts@^4.0.1:
   version "4.0.1"
   resolved "https://registry.npm.taobao.org/react-scripts/download/react-scripts-4.0.1.tgz?cache=0&sync_timestamp=1606109653905&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-scripts%2Fdownload%2Freact-scripts-4.0.1.tgz#34974c0f4cfdf1655906c95df6a04d80db8b88f0"
   integrity sha1-NJdMD0z98WVZBsld9qBNgNuLiPA=
@@ -12549,21 +12619,21 @@ word-wrap@^1.2.3, word-wrap@~1.2.3:
 
 workbox-background-sync@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-background-sync/download/workbox-background-sync-5.1.4.tgz?cache=0&sync_timestamp=1605541293200&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-background-sync%2Fdownload%2Fworkbox-background-sync-5.1.4.tgz#5ae0bbd455f4e9c319e8d827c055bb86c894fd12"
+  resolved "https://registry.npm.taobao.org/workbox-background-sync/download/workbox-background-sync-5.1.4.tgz#5ae0bbd455f4e9c319e8d827c055bb86c894fd12"
   integrity sha1-WuC71FX06cMZ6NgnwFW7hsiU/RI=
   dependencies:
     workbox-core "^5.1.4"
 
 workbox-broadcast-update@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-broadcast-update/download/workbox-broadcast-update-5.1.4.tgz?cache=0&sync_timestamp=1605543158156&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-broadcast-update%2Fdownload%2Fworkbox-broadcast-update-5.1.4.tgz#0eeb89170ddca7f6914fa3523fb14462891f2cfc"
+  resolved "https://registry.npm.taobao.org/workbox-broadcast-update/download/workbox-broadcast-update-5.1.4.tgz#0eeb89170ddca7f6914fa3523fb14462891f2cfc"
   integrity sha1-DuuJFw3cp/aRT6NSP7FEYokfLPw=
   dependencies:
     workbox-core "^5.1.4"
 
 workbox-build@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-build/download/workbox-build-5.1.4.tgz?cache=0&sync_timestamp=1605541289965&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-build%2Fdownload%2Fworkbox-build-5.1.4.tgz#23d17ed5c32060c363030c8823b39d0eabf4c8c7"
+  resolved "https://registry.npm.taobao.org/workbox-build/download/workbox-build-5.1.4.tgz#23d17ed5c32060c363030c8823b39d0eabf4c8c7"
   integrity sha1-I9F+1cMgYMNjAwyII7OdDqv0yMc=
   dependencies:
     "@babel/core" "^7.8.4"
@@ -12605,26 +12675,26 @@ workbox-build@^5.1.4:
 
 workbox-cacheable-response@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-cacheable-response/download/workbox-cacheable-response-5.1.4.tgz?cache=0&sync_timestamp=1605541293068&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-cacheable-response%2Fdownload%2Fworkbox-cacheable-response-5.1.4.tgz#9ff26e1366214bdd05cf5a43da9305b274078a54"
+  resolved "https://registry.npm.taobao.org/workbox-cacheable-response/download/workbox-cacheable-response-5.1.4.tgz#9ff26e1366214bdd05cf5a43da9305b274078a54"
   integrity sha1-n/JuE2YhS90Fz1pD2pMFsnQHilQ=
   dependencies:
     workbox-core "^5.1.4"
 
 workbox-core@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-core/download/workbox-core-5.1.4.tgz?cache=0&sync_timestamp=1605541292834&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-core%2Fdownload%2Fworkbox-core-5.1.4.tgz#8bbfb2362ecdff30e25d123c82c79ac65d9264f4"
+  resolved "https://registry.npm.taobao.org/workbox-core/download/workbox-core-5.1.4.tgz#8bbfb2362ecdff30e25d123c82c79ac65d9264f4"
   integrity sha1-i7+yNi7N/zDiXRI8gseaxl2SZPQ=
 
 workbox-expiration@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-expiration/download/workbox-expiration-5.1.4.tgz?cache=0&sync_timestamp=1605541291636&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-expiration%2Fdownload%2Fworkbox-expiration-5.1.4.tgz#92b5df461e8126114943a3b15c55e4ecb920b163"
+  resolved "https://registry.npm.taobao.org/workbox-expiration/download/workbox-expiration-5.1.4.tgz#92b5df461e8126114943a3b15c55e4ecb920b163"
   integrity sha1-krXfRh6BJhFJQ6OxXFXk7LkgsWM=
   dependencies:
     workbox-core "^5.1.4"
 
 workbox-google-analytics@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-google-analytics/download/workbox-google-analytics-5.1.4.tgz?cache=0&sync_timestamp=1605541291886&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-google-analytics%2Fdownload%2Fworkbox-google-analytics-5.1.4.tgz#b3376806b1ac7d7df8418304d379707195fa8517"
+  resolved "https://registry.npm.taobao.org/workbox-google-analytics/download/workbox-google-analytics-5.1.4.tgz#b3376806b1ac7d7df8418304d379707195fa8517"
   integrity sha1-szdoBrGsfX34QYME03lwcZX6hRc=
   dependencies:
     workbox-background-sync "^5.1.4"
@@ -12634,35 +12704,35 @@ workbox-google-analytics@^5.1.4:
 
 workbox-navigation-preload@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-navigation-preload/download/workbox-navigation-preload-5.1.4.tgz?cache=0&sync_timestamp=1605541291138&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-navigation-preload%2Fdownload%2Fworkbox-navigation-preload-5.1.4.tgz#30d1b720d26a05efc5fa11503e5cc1ed5a78902a"
+  resolved "https://registry.npm.taobao.org/workbox-navigation-preload/download/workbox-navigation-preload-5.1.4.tgz#30d1b720d26a05efc5fa11503e5cc1ed5a78902a"
   integrity sha1-MNG3INJqBe/F+hFQPlzB7Vp4kCo=
   dependencies:
     workbox-core "^5.1.4"
 
 workbox-precaching@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-precaching/download/workbox-precaching-5.1.4.tgz?cache=0&sync_timestamp=1605541292154&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-precaching%2Fdownload%2Fworkbox-precaching-5.1.4.tgz#874f7ebdd750dd3e04249efae9a1b3f48285fe6b"
+  resolved "https://registry.npm.taobao.org/workbox-precaching/download/workbox-precaching-5.1.4.tgz#874f7ebdd750dd3e04249efae9a1b3f48285fe6b"
   integrity sha1-h09+vddQ3T4EJJ766aGz9IKF/ms=
   dependencies:
     workbox-core "^5.1.4"
 
 workbox-range-requests@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-range-requests/download/workbox-range-requests-5.1.4.tgz?cache=0&sync_timestamp=1605541293560&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-range-requests%2Fdownload%2Fworkbox-range-requests-5.1.4.tgz#7066a12c121df65bf76fdf2b0868016aa2bab859"
+  resolved "https://registry.npm.taobao.org/workbox-range-requests/download/workbox-range-requests-5.1.4.tgz#7066a12c121df65bf76fdf2b0868016aa2bab859"
   integrity sha1-cGahLBId9lv3b98rCGgBaqK6uFk=
   dependencies:
     workbox-core "^5.1.4"
 
 workbox-routing@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-routing/download/workbox-routing-5.1.4.tgz?cache=0&sync_timestamp=1605541293331&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-routing%2Fdownload%2Fworkbox-routing-5.1.4.tgz#3e8cd86bd3b6573488d1a2ce7385e547b547e970"
+  resolved "https://registry.npm.taobao.org/workbox-routing/download/workbox-routing-5.1.4.tgz#3e8cd86bd3b6573488d1a2ce7385e547b547e970"
   integrity sha1-PozYa9O2VzSI0aLOc4XlR7VH6XA=
   dependencies:
     workbox-core "^5.1.4"
 
 workbox-strategies@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-strategies/download/workbox-strategies-5.1.4.tgz?cache=0&sync_timestamp=1605541291386&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-strategies%2Fdownload%2Fworkbox-strategies-5.1.4.tgz#96b1418ccdfde5354612914964074d466c52d08c"
+  resolved "https://registry.npm.taobao.org/workbox-strategies/download/workbox-strategies-5.1.4.tgz#96b1418ccdfde5354612914964074d466c52d08c"
   integrity sha1-lrFBjM395TVGEpFJZAdNRmxS0Iw=
   dependencies:
     workbox-core "^5.1.4"
@@ -12670,7 +12740,7 @@ workbox-strategies@^5.1.4:
 
 workbox-streams@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-streams/download/workbox-streams-5.1.4.tgz?cache=0&sync_timestamp=1605541292012&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-streams%2Fdownload%2Fworkbox-streams-5.1.4.tgz#05754e5e3667bdc078df2c9315b3f41210d8cac0"
+  resolved "https://registry.npm.taobao.org/workbox-streams/download/workbox-streams-5.1.4.tgz#05754e5e3667bdc078df2c9315b3f41210d8cac0"
   integrity sha1-BXVOXjZnvcB43yyTFbP0EhDYysA=
   dependencies:
     workbox-core "^5.1.4"
@@ -12678,12 +12748,12 @@ workbox-streams@^5.1.4:
 
 workbox-sw@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-sw/download/workbox-sw-5.1.4.tgz?cache=0&sync_timestamp=1605541292716&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-sw%2Fdownload%2Fworkbox-sw-5.1.4.tgz#2bb34c9f7381f90d84cef644816d45150011d3db"
+  resolved "https://registry.npm.taobao.org/workbox-sw/download/workbox-sw-5.1.4.tgz#2bb34c9f7381f90d84cef644816d45150011d3db"
   integrity sha1-K7NMn3OB+Q2EzvZEgW1FFQAR09s=
 
 workbox-webpack-plugin@5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-webpack-plugin/download/workbox-webpack-plugin-5.1.4.tgz?cache=0&sync_timestamp=1605541290120&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-webpack-plugin%2Fdownload%2Fworkbox-webpack-plugin-5.1.4.tgz#7bfe8c16e40fe9ed8937080ac7ae9c8bde01e79c"
+  resolved "https://registry.npm.taobao.org/workbox-webpack-plugin/download/workbox-webpack-plugin-5.1.4.tgz#7bfe8c16e40fe9ed8937080ac7ae9c8bde01e79c"
   integrity sha1-e/6MFuQP6e2JNwgKx66ci94B55w=
   dependencies:
     "@babel/runtime" "^7.5.5"
@@ -12695,7 +12765,7 @@ workbox-webpack-plugin@5.1.4:
 
 workbox-window@^5.1.4:
   version "5.1.4"
-  resolved "https://registry.npm.taobao.org/workbox-window/download/workbox-window-5.1.4.tgz?cache=0&sync_timestamp=1605541291528&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fworkbox-window%2Fdownload%2Fworkbox-window-5.1.4.tgz#2740f7dea7f93b99326179a62f1cc0ca2c93c863"
+  resolved "https://registry.npm.taobao.org/workbox-window/download/workbox-window-5.1.4.tgz#2740f7dea7f93b99326179a62f1cc0ca2c93c863"
   integrity sha1-J0D33qf5O5kyYXmmLxzAyiyTyGM=
   dependencies:
     workbox-core "^5.1.4"

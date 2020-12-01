@@ -10,8 +10,8 @@
   "scripts": {
     "dev": "yarn client:dev",
     "build": "yarn client:build && yarn server:build",
-    "client:dev": "cross-env NODE_ENV=development react-app-rewired start",
-    "client:build": "cross-env NODE_ENV=production react-app-rewired build",
+    "client:dev": "cross-env NODE_ENV=development npx react-app-rewired start",
+    "client:build": "cross-env NODE_ENV=production npx react-app-rewired build",
     "server:dev": "cross-env NODE_ENV=development node ./server-entry.js",
     "server:build": "cross-env NODE_ENV=production",
     "test": "react-app-rewired test",
@@ -52,7 +52,7 @@
     "react-dom": "^17.0.1",
     "react-hot-loader": "^4.13.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
+    "react-scripts": "^4.0.1",
     "web-vitals": "^0.2.4"
   },
   "husky": {
