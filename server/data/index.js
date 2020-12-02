@@ -1,6 +1,7 @@
 const {db} = require('./db')
 class Service {
-  select(parmas){
+
+  search(parmas){
     db.get('project').find(parmas)
   }
   insert(parmas){
