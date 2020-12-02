@@ -22,6 +22,9 @@ module.exports = ({config, env, empEnv}) => {
         },
         exposes: {},
         shared: {
+          react: {eager: true, singleton: true, requiredVersion: '^16.13.1'},
+          'react-dom': {eager: true, singleton: true, requiredVersion: '^16.13.1'},
+          'react-router-dom': {requiredVersion: '^5.1.2'},
         },
       },
     }

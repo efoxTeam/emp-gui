@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {useStores} from 'src/stores'
+import {useStores} from '@emp-antd/base/stores'
 
 const Main = () => {
   const {demoStore} = useStores()
