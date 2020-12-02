@@ -7,5 +7,5 @@ ReactDOM.render(
   <StoreProvider>
     <App />
   </StoreProvider>,
-  document.getElementById('root'),
+  document.getElementById('emp-root'),
 )

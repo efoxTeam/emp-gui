@@ -1,88 +1,44 @@
 {
-  "name": "@efox/emp-gui",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@emp/react-project",
+  "version": "1.0.0",
   "main": "index.js",
-  "files": [
-    "dist",
-    "server"
-  ],
+  "license": "MIT",
+  "private": true,
   "scripts": {
-    "dev": "yarn client:dev",
-    "build": "yarn client:build && yarn server:build",
-    "client:dev": "cross-env NODE_ENV=development npx react-app-rewired start",
-    "client:build": "cross-env NODE_ENV=production npx react-app-rewired build",
+    "dev": "emp dev",
+    "dev:hot": "emp dev --hot",
+    "build": "emp build",
+    "build:ts": "emp build -t",
+    "build:lab": "emp build --env lab",
+    "tss": "emp tss http://localhost:8001/index.d.ts -n @emp-react-base.d.ts",
+    "start": "emp serve",
+    "stat": "emp build --analyze",
     "server": "cross-env NODE_ENV=development node ./server-entry.js",
     "server:build": "cross-env NODE_ENV=production",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .js --ext .ts --ext .tsx --fix"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@efox/emp-cli": "^1.1.19",
+    "@efox/emp-tsconfig": "^1.0.5",
+    "@efox/eslint-config-react-prittier-ts": "^1.1.0",
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "@types/react-router-dom": "^5.1.6",
     "axios": "^0.21.0",
+    "cross-env": "^7.0.2",
     "express": "^4.17.1",
     "express-history-api-fallback": "^2.2.1",
     "fs-extra": "^9.0.1",
-    "lowdb": "^1.0.0",
-    "node-sass": "4.14.1",
-    "typescript": "^4.1.2",
-    "webpack-bundle-analyzer": "^4.2.0"
+    "lowdb": "^1.0.0"
   },
-  "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
-    "@efox/eslint-config-react-prittier-ts": "^1.2.3",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/react-router-dom": "^5.1.6",
-    "antd": "^4.8.6",
-    "babel-loader": "^8.2.2",
-    "body-parser": "^1.19.0",
-    "chalk": "^4.1.0",
-    "commitlint": "^11.0.0",
-    "cross-env": "^7.0.2",
-    "customize-cra": "^1.0.0",
-    "deepmerge": "^4.2.2",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.5.2",
+  "dependencies": {
     "mobx": "^6.0.4",
     "mobx-react-lite": "^3.1.6",
-    "module-to-cdn": "^3.1.5",
     "react": "^17.0.1",
-    "react-app-rewired": "^2.1.6",
     "react-dom": "^17.0.1",
     "react-hot-loader": "^4.13.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.1",
-    "web-vitals": "^0.2.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,ts,tsx,d.ts}": "eslint --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react-router-dom": "^5.2.0"
   }
 }

@@ -1,0 +1,49 @@
+const path = require('path')
+const packagePath = path.join(path.resolve('./'), 'package.json')
+const {dependencies} = require(packagePath)
+
+module.exports = ({config, env, empEnv}) => {
+  console.log('empEnv===> 部署环境变量 serve模式不需要该变量', empEnv, env)
+  const port = 8002
+  const projectName = 'emp-gui'
+  const publicPath = `http://localhost:${port}/`
+  const remoteEntry = 'https://emp-antd-base.yy.com/emp.js'
+  config.resolve.alias
+    .set('@', path.resolve('./', 'src'))
+  config.plugin('mf').tap(args => {
+    args[0] = {
+      ...args[0],
+      ...{
+        name: projectName,
+        library: {type: 'var', name: projectName},
+        filename: 'emp.js',
+        remotes: {
+          '@emp-antd/base': 'empBase',
+        },
+        exposes: {},
+        shared: {
+        },
+      },
+    }
+    return args
+  })
+  /*config.module
+    .rule('scripts')
+    .test(/\.(js|jsx|ts|tsx)$/)
+    .use('babel')
+    .loader('babel-loader')*/
+  config.output.publicPath(publicPath)
+  config.devServer.port(port)
+  config.plugin('html').tap(args => {
+    args[0] = {
+      ...args[0],
+      ...{
+        title: 'EMP - Project',
+        files: {
+          js: [remoteEntry],
+        },
+      },
+    }
+    return args
+  })
+}
