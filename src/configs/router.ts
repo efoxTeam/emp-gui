@@ -1,9 +1,12 @@
+import {RoutesType} from '@emp-antd/base/types'
 import {lazy} from 'react'
 
-export const routes: Array<Troutes> = [
+export const routes: Array<RoutesType> = [
   {
     path: '/',
+    name: '主页',
     component: lazy(() => import('src/pages/Main')),
+    withoutLayout: true,
   },
   {
     path: '/projects', // 项目列表
@@ -39,9 +42,4 @@ export const routes: Array<Troutes> = [
   },
 ]
 
-export type Troutes = {
-  path: string
-  component?: any
-  routes?: Array<Troutes>
-  exact?: boolean
-}
+export type Troutes = RoutesType

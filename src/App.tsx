@@ -3,7 +3,6 @@ import EMPApp from '@emp-antd/base/App'
 import configStores from 'src/stores/config'
 import {routes} from 'src/configs/router'
 
-
 const App = () => (
   <>
     <EMPApp
@@ -11,20 +10,14 @@ const App = () => (
       routes={routes}
       titleInfo={{
         logo: 'https://setmefree.yy.com/Joyy.png',
-        text: (
-          <>
-            EMP UI
-          </>
-        ),
+        text: <>EMP UI</>,
       }}
-      menuClick={({key}: {key: string}, history: any) => {
-      }}
+      menuClick={({key}: {key: string}, history: any) => {}}
       pageview={(location, useStore) => {
         // 路由更改的时候可以执行某些操作
         // console.log('ssss', location, useStore)
       }}
     />
-
   </>
 )
 export default App
