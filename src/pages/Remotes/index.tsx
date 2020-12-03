@@ -53,7 +53,7 @@ const Com = () => {
         page={1}
         pageSize={10}
         count={1000}
-        layout="flex"
+        layout="row"
         cardDom={item => (
           <Card
             style={{width: '250px', margin: '0 10px 10px'}}
