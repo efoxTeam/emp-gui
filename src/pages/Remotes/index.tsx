@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {SForm} from '@emp-antd/base/components/common/crud'
+import {ModalForm, SForm} from '@emp-antd/base/components/common/crud'
 import CardList from 'src/components/CardList'
 import {SearchOutlined} from '@ant-design/icons'
 import {Card, Button, Drawer, Descriptions, Divider, List, Typography} from 'antd'
@@ -8,6 +8,8 @@ const {Meta} = Card
 const {Title} = Typography
 const Com = () => {
   const [drawerVisible, setDrawerVisible] = useState(false)
+  const [showCreateModal, setShowCreateModal] = useState(false)
+  const [templates, templatesAction] = useState([{id: 1, name: 'react-base'}])
   return (
     <>
       <Card style={{marginBottom: '20px'}}>
@@ -41,6 +43,7 @@ const Com = () => {
                 {
                   label: '引入远程基站',
                   value: 'add',
+                  onClick: () => setShowCreateModal(true),
                 },
               ],
             },
@@ -123,6 +126,43 @@ const Com = () => {
           renderItem={item => <List.Item>{item}</List.Item>}
         />
       </Drawer>
+      <ModalForm
+        title={'新建项目'}
+        visible={showCreateModal}
+        name={'createModalForm'}
+        fromItems={[
+          // {
+          //   type: 'Select',
+          //   label: '远程基站别名',
+          //   name: 'name',
+          //   data: templates.map(item => ({label: item.name, value: item.id})),
+          //   rules: [{required: true, message: ''}],
+          // },
+          {
+            type: 'Input',
+            label: '基站别名',
+            name: 'name',
+            rules: [{required: true, message: '请输入基站别名'}],
+          },
+          {
+            type: 'Input',
+            label: 'emp路径',
+            name: 'empPath',
+            rules: [{required: true, message: '请输入emp.js路径'}],
+          },
+          {
+            type: 'Input',
+            label: 'd.ts路径',
+            name: 'tsPath',
+            options: {
+              // enterButton: <input type="file" ref={inputFileRef} onChange={(e: any) => console.log(e.target)} />,
+              // onSearch: () => browseFolder('projectPath'),
+            },
+            // rules: [{required: true, message: '请输入项目名称'}],
+          },
+        ]}
+        onCancel={() => setShowCreateModal(false)}
+      />
     </>
   )
 }

@@ -123,9 +123,9 @@ const Main = () => {
             <Card
               style={{margin: '0 10px 10px'}}
               cover={
-                <div className={style.cardCover}>
+                <a href={'/project'} className={style.cardCover}>
                   <img src={require('src/assets/img/remotes-icon.png')} />
-                </div>
+                </a>
               }
               actions={[<EditOutlined key="edit" />, <DeleteOutlined key="ellipsis" />]}>
               <Card.Meta
