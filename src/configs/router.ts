@@ -23,11 +23,11 @@ export const routes: Array<RoutesType> = [
     name: '远程基站管理',
     component: lazy(() => import('src/pages/Remotes')),
   },
-  {
-    path: '/shareds', // 组件列表
-    name: '共享资源管理',
-    component: lazy(() => import('src/pages/Shared')),
-  },
+  // {
+  //   path: '/shareds', // 组件列表
+  //   name: '共享资源管理',
+  //   component: lazy(() => import('src/pages/Shared')),
+  // },
 ]
 
 export type Troutes = RoutesType

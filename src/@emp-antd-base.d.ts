@@ -80,6 +80,7 @@ declare module '@emp-antd/base/components/common/crud/CrudComponent' {
     edit?: ActionProps
     search?: SearchActionProps
     actions?: MoreActionProps[]
+    outerActions?: MoreActionProps[]
   }
   export interface MoreActionProps extends Partial<ButtonProps> {
     name: string
@@ -391,10 +392,12 @@ declare module '@emp-antd/base/components/layout/FixSlideHeader' {
     headerChildren,
     headerMenu,
     theme,
+    userProfile,
   }: {
     collapsed?: boolean | undefined
     setCollapsed?: (() => any) | undefined
     headerChildren?: TLayoutProps['headerChildren']
+    userProfile?: TLayoutProps['userProfile']
     headerMenu?: TmenuItem[] | undefined
     theme?: 'light' | 'dark' | undefined
   }) => JSX.Element
@@ -670,6 +673,7 @@ declare module '@emp-antd/base/types' {
     routes?: RoutesType[]
     headerMenu?: TmenuItem[]
     headerChildren?: React.ReactNode
+    userProfile?: React.ReactNode
     layoutOptions?: TLayoutOptions
     footerText?: React.ReactText
     titleInfo?: TitleInfo
