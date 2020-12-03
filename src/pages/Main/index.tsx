@@ -118,6 +118,7 @@ const Main = () => {
           page={1}
           pageSize={10}
           count={1000}
+          span={4}
           cardDom={item => (
             <Card
               style={{margin: '0 10px 10px'}}

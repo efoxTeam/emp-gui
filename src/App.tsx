@@ -10,7 +10,11 @@ const App = () => (
       routes={routes}
       titleInfo={{
         logo: 'https://setmefree.yy.com/Joyy.png',
-        text: <>EMP UI</>,
+        text: (
+          <a style={{color: '#fff'}} href="/">
+            EMP UI
+          </a>
+        ),
       }}
       userProfile={null}
     />

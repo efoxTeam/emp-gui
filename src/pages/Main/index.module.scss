@@ -22,3 +22,18 @@
   font-size: 14px;
   font-weight: normal;
 }
+.cardCover {
+  padding: 10px;
+  img {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+  }
+}
+.cardMeta {
+  display: flex;
+  align-items: center;
+  span {
+    flex: 1;
+  }
+}
