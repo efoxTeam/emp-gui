@@ -1,0 +1,14 @@
+.cardCover {
+  padding: 10px;
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+.cardMeta {
+  display: flex;
+  align-items: center;
+  span {
+    flex: 1;
+  }
+}
