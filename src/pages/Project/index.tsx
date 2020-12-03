@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
-import {Descriptions, Card, Button} from 'antd'
-
+import {Descriptions, Card, Button, List, Divider, Typography} from 'antd'
+const {Title} = Typography
 const Com = () => {
   return (
     <>
@@ -13,6 +13,26 @@ const Com = () => {
             </a>
           </Descriptions.Item>
         </Descriptions>
+        <Divider />
+        <List
+          size="small"
+          header={
+            <Typography>
+              <Title level={5}>共享资源列表</Title>
+            </Typography>
+          }
+          dataSource={[
+            'src/App',
+            'src/stores',
+            'src/stores/common/crud',
+            'src/components/layout/FixSlideLayout',
+            'src/components/layout/MarginLayout',
+            'src/components/common/crud',
+            'src/components/common/RouterComp',
+            'src/components/common/socketConnectMask',
+          ]}
+          renderItem={item => <List.Item>{item}</List.Item>}
+        />
       </Card>
     </>
   )
