@@ -8,8 +8,7 @@ module.exports = ({config, env, empEnv}) => {
   const projectName = 'emp-gui'
   const publicPath = `http://localhost:${port}/`
   const remoteEntry = 'https://emp-antd-base.yy.com/emp.js'
-  config.resolve.alias
-    .set('@', path.resolve('./', 'src'))
+  config.resolve.alias.set('@', path.resolve('./', 'src'))
   config.plugin('mf').tap(args => {
     args[0] = {
       ...args[0],

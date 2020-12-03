@@ -9,15 +9,18 @@ const startServer = (options = {}, cb = null) => {
   router(app)
   const httpServer = http.createServer(app)
 
-  httpServer.listen({
-    host,
-    port
-  }, () => {
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`✔️  Server is running on ${chalk.cyan(`http://${host}:${port}`)}`)
-    }
-    cb && cb()
-  })
+  httpServer.listen(
+    {
+      host,
+      port,
+    },
+    () => {
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(`✔️  Server is running on ${chalk.cyan(`http://${host}:${port}`)}`)
+      }
+      cb && cb()
+    },
+  )
 
   return {
     httpServer,
