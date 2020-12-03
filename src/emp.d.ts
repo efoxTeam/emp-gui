@@ -4,33 +4,27 @@ type JSONValue = JSONPrimitive | JSONObject | JSONArray
 type JSONObject = {[member: string]: JSONValue}
 type JSONArray = Array<JSONValue>
 
-declare module '*.png' {
-  const content: any
-  export default content
+declare module '*.css' {
+  const classes: {[key: string]: string}
+  export default classes
+}
+
+declare module '*.scss' {
+  const classes: {[key: string]: string}
+  export default classes
+}
+
+declare module '*.sass' {
+  const classes: {[key: string]: string}
+  export default classes
 }
 
 declare module '*.less' {
-  const content: any
-  export default content
+  const classes: {[key: string]: string}
+  export default classes
 }
 
-declare module 'classnames'
-
-declare interface PromiseConstructor {
-  retry(
-    promiseFunc: (...args: any[]) => any,
-    num?: number,
-    ...args: any[]
-  ): Promise<{status: 'fulfilled' | 'rejected'; value?: any; reason?: any}>
+declare module '*.styl' {
+  const classes: {[key: string]: string}
+  export default classes
 }
-
-// import picture
-declare module '*.svg'
-declare module '*.png'
-declare module '*.jpg'
-declare module '*.jpeg'
-declare module '*.gif'
-declare module '*.bmp'
-declare module '*.tiff'
-declare module '*.scss'
-declare module '*.less'
