@@ -4,3 +4,21 @@
     border: 0px;
   }
 }
+
+.Header_RightChild {
+  padding: 0 5px;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.cardMetaType {
+  font-size: 14px;
+  font-weight: normal;
+}

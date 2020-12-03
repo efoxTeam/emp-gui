@@ -5,6 +5,7 @@ import {SearchOutlined} from '@ant-design/icons'
 import {Card, Button, Drawer} from 'antd'
 import style from './index.module.scss'
 const {Meta} = Card
+
 const Com = () => {
   const [drawerVisible, setDrawerVisible] = useState(false)
   return (
@@ -52,7 +53,7 @@ const Com = () => {
         page={1}
         pageSize={10}
         count={1000}
-        layout="flex"
+        layout="row"
         cardDom={item => (
           <Card
             style={{margin: '0 10px 10px'}}
