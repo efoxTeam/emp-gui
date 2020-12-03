@@ -12,7 +12,6 @@ const App = () => (
         logo: 'https://setmefree.yy.com/Joyy.png',
         text: <>EMP UI</>,
       }}
-      menuClick={({key}: {key: string}, history: any) => {}}
       pageview={(location, useStore) => {
         // 路由更改的时候可以执行某些操作
         // console.log('ssss', location, useStore)

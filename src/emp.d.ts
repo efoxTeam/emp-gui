@@ -1,9 +1,3 @@
-/*
- * @Author: zhangjianping3
- * @Date: 2020-08-24 17:01:07
- * @LastEditors: zhangjianping3
- * @LastEditTime: 2020-09-12 19:22:02
- */
 // JSON TYPE
 type JSONPrimitive = string | number | boolean | null
 type JSONValue = JSONPrimitive | JSONObject | JSONArray

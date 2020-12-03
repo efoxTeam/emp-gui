@@ -1,7 +1,7 @@
 import React from 'react'
 
-const List = () => {
+const Com = () => {
   return <div></div>
 }
 
-export default List
+export default Com

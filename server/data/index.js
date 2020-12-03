@@ -1,18 +1,15 @@
 const {db} = require('./db')
 class Service {
-
-  search(parmas){
+  search(parmas) {
     db.get('project').find(parmas)
   }
-  insert(parmas){
-    db.get('projects')
-      .push(parmas)
-      .write()
+  insert(parmas) {
+    db.get('projects').push(parmas).write()
   }
-  update(){}
+  update() {}
 }
 const dbService = new Service()
 
 module.exports = {
-  dbService
+  dbService,
 }

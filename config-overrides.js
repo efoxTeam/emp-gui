@@ -4,7 +4,7 @@ const {
   // addWebpackPlugin,
   addBundleVisualizer,
   addWebpackAlias,
-  disableEsLint
+  disableEsLint,
 } = require('customize-cra')
 
 module.exports = {
@@ -19,10 +19,10 @@ module.exports = {
       },
       true,
     ),
-    disableEsLint()
+    disableEsLint(),
   ),
-  paths: function(paths, env) {
+  paths: function (paths, env) {
     paths.appBuild = path.resolve(__dirname, 'dist')
-    return paths;
+    return paths
   },
 }
