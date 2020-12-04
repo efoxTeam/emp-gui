@@ -1,21 +1,49 @@
 import React, {useEffect, useState} from 'react'
 import Header from 'src/pages/Main/components/Header'
-import {SearchOutlined, EditOutlined, EllipsisOutlined, DeleteOutlined} from '@ant-design/icons'
-import {Button, Card, Input, Select} from 'antd'
+import {
+  SearchOutlined,
+  EditOutlined,
+  EllipsisOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from '@ant-design/icons'
+import {Button, Card, Input, Select, Modal} from 'antd'
 import {useStores} from '@emp-antd/base/stores'
 import style from './index.module.scss'
 import CardList from 'src/components/CardList'
 import {ModalForm} from '@emp-antd/base/components/common/crud'
-import {browseFolder} from 'src/helpers/utils'
 
-const {Option} = Select
+const PROJECTS = [
+  {
+    id: 1,
+    name: 'react-base',
+    type: 'react-base',
+    img:
+      'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png',
+    description: '描述',
+    fullPath: '/User/project/react-base',
+  },
+  {
+    id: 2,
+    name: 'vue-base',
+    type: 'vue-base',
+    img: 'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/vue/vue.png',
+    description: '描述',
+    fullPath: '/Users/project/vue-base',
+  },
+]
+
+const TEMPLATES = [
+  {id: 1, name: 'react-base'},
+  {id: 2, name: 'react-project'},
+]
 
 const Main = () => {
   const {demoStore} = useStores()
   // 项目列表
-  const [projectList, projectListAction] = useState([])
+  const [projectList, projectListAction] = useState(PROJECTS)
   // 模版列表
-  const [templates, templatesAction] = useState([{id: 1, name: 'react-base'}])
+  const [templates, templatesAction] = useState(TEMPLATES)
   const [showCreateModal, showCreateModalAction] = useState(false)
   const inputFileRef = React.useRef<HTMLInputElement>(null)
 
@@ -43,6 +71,23 @@ const Main = () => {
       inputFileRef.current.setAttribute('directory', 'true')
       inputFileRef.current.setAttribute('webkitdirectory', 'true')
     }
+  }
+
+  const onDeleteProject = () => {
+    Modal.confirm({
+      title: '确定删除该项目?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Some descriptions',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
   }
 
   React.useEffect(() => {
@@ -91,7 +136,7 @@ const Main = () => {
         rightProps={() => (
           <>
             <div className={style.Header_RightChild}>
-              <Button type="ghost" htmlType="submit">
+              <Button type="primary" htmlType="submit" className={style.Button_Import}>
                 导入项目
               </Button>
             </div>
@@ -102,44 +147,52 @@ const Main = () => {
             </div>
 
             <div className={style.Header_RightChild}>
-              <Input.Search
-                placeholder="input search text"
-                onSearch={onSearch}
-                style={{width: 200, margin: '0 10px'}}
-              />
+              <Input.Search placeholder="搜索项目" onSearch={onSearch} style={{width: 200, margin: '0 10px'}} />
             </div>
           </>
         )}></Header>
 
       <div className={style.Content}>
-        <CardList
-          list={[1, 2, 3, 4]}
-          nextPage={() => {}}
-          page={1}
-          pageSize={10}
-          count={1000}
-          span={4}
-          cardDom={item => (
-            <Card
-              style={{margin: '0 10px 10px'}}
-              cover={
-                <a href={'/project'} className={style.cardCover}>
-                  <img src={require('src/assets/img/remotes-icon.png')} />
-                </a>
-              }
-              actions={[<EditOutlined key="edit" />, <DeleteOutlined key="ellipsis" />]}>
-              <Card.Meta
-                title={
-                  <div className={style.cardMeta}>
-                    <span>项目名称</span>
-                    <span className={style.cardMetaType}>模版类型</span>
-                  </div>
+        <div className={style.Project_List}>
+          <CardList
+            list={projectList}
+            nextPage={() => {}}
+            page={1}
+            pageSize={10}
+            count={projectList.length}
+            paginationOpt={{
+              showSizeChanger: false,
+            }}
+            cardDom={item => (
+              <Card
+                style={{margin: '0 10px 10px'}}
+                cover={
+                  <a href={'/project'} className={style.cardCover}>
+                    <img src={item.img} />
+                  </a>
                 }
-                description="This is the description"
-              />
-            </Card>
-          )}
-        />
+                actions={[
+                  <EditOutlined key="edit" />,
+                  <DeleteOutlined key="ellipsis" onClick={() => onDeleteProject()} />,
+                ]}>
+                <Card.Meta
+                  title={
+                    <div className={style.cardMeta}>
+                      <span>{item.name}</span>
+                      <span className={style.cardMetaType}>{item.type}</span>
+                    </div>
+                  }
+                  description={
+                    <>
+                      <div className={style.Project_FullPath}>{item.fullPath}</div>
+                      <div className={style.description}>{item.description}</div>
+                    </>
+                  }
+                />
+              </Card>
+            )}
+          />
+        </div>
       </div>
     </div>
   )
