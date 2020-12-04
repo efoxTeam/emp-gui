@@ -1012,10 +1012,10 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@efox/emp-cli@^1.1.19":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@efox/emp-cli/-/emp-cli-1.6.0.tgz#fdfcfcda69c084c232d866c4188a73bd4a88ec8f"
-  integrity sha512-p7bDnQ+LZbyWL0m+Mfn6y0x7cz4lz8yCo1xKYo9sp/pYTZ0D79KGZFAQ3CtUT/Q1TXwpLdVquVrghVXLRbQ9tg==
+"@efox/emp-cli@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@efox/emp-cli/-/emp-cli-1.6.1.tgz#6f1fbf469b7d74f46ae8feab95fc70ba7d94a5be"
+  integrity sha512-42lYcv49VHGWG9kT6qFFo9qMA8Q/Hj8SAbqfx7GqGgwTvGtbMFIlLF/HWc4qlqM8GQhMOmnYQ/hIC4sx2RzQ3Q==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/plugin-proposal-class-properties" "^7.10.4"
@@ -1073,6 +1073,16 @@
     webpack-dev-server "^4.0.0-beta.0"
     webpackbar "^5.0.0-3"
 
+"@efox/emp-esbuild@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@efox/emp-esbuild/-/emp-esbuild-1.0.1.tgz#73c9c8503f1c7a25f33da396bfb971c8a173590c"
+  integrity sha512-u/D3wxGM6G6CsuI9tmEvM5ASSjYwmDA+V8mk9+MSN1+kKCTTb6tK2ibHQYizaVKZXMlyuX5VnCI+/EsJngdDOQ==
+  dependencies:
+    "@svgr/webpack" "^5.5.0"
+    esbuild-loader "^2.4.0"
+    loader-utils "^2.0.0"
+    url-loader "^4.1.1"
+
 "@efox/emp-react@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@efox/emp-react/-/emp-react-1.1.3.tgz#a0e603b82d35a2dd8d0fd23367b6f68876a55607"
@@ -1084,7 +1094,7 @@
     babel-plugin-named-asset-import "^0.3.7"
     react-refresh "^0.9.0"
 
-"@efox/emp-tsconfig@^1.0.5", "@efox/emp-tsconfig@^1.1.3":
+"@efox/emp-tsconfig@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@efox/emp-tsconfig/-/emp-tsconfig-1.1.3.tgz#5913692258a8217b2cb642d9efcc3366c6e29b30"
   integrity sha512-7vYQ8RRgBgQ+0LVnGsG1gCf696ondyPuACaGv+dIqFaBouIHjRRe6JGEvChyg1gMSF/PvDbZn0ing9z/9g5ioA==
@@ -1251,7 +1261,7 @@
     deepmerge "^4.2.2"
     svgo "^1.2.2"
 
-"@svgr/webpack@^5.4.0":
+"@svgr/webpack@^5.4.0", "@svgr/webpack@^5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@svgr/webpack/-/webpack-5.5.0.tgz#aae858ee579f5fa8ce6c3166ef56c6a1b381b640"
   integrity sha512-DOBOK255wfQxguUta2INKkzPj6AIS6iafZYiYmHn6W3pHlycSRRlvWKCfLDG10fXfLWqE3DJHgRUOyJYmARa7g==
@@ -3170,6 +3180,21 @@ es-to-primitive@^1.2.1:
     is-callable "^1.1.4"
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
+
+esbuild-loader@^2.4.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/esbuild-loader/-/esbuild-loader-2.6.1.tgz#3d444059db6e17e203552c996a593ecf8cf44dfb"
+  integrity sha512-IXIrOMtB4DtYcIjzHJO5v29WlZDkK84CA2oSpEhrphLlJb5SPP+iEARpHhU4qyxsZuwiQ9HyyRCPzkQ0xUchCA==
+  dependencies:
+    esbuild "^0.8.17"
+    loader-utils "^2.0.0"
+    type-fest "^0.20.2"
+    webpack-sources "^2.2.0"
+
+esbuild@^0.8.17:
+  version "0.8.18"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.18.tgz#4a8c70df8fffa27164a26daa3ec58ce6f1315446"
+  integrity sha512-EPbCSr7Ems1loeoy1faUGnJOwTwSrGcoYVQ4f4T4JMKjxJxrWAg+zqXkZK7GvqxfvokPp3HV6Raqn6rqAuW7+Q==
 
 escalade@^3.0.2, escalade@^3.1.1:
   version "3.1.1"
@@ -7421,6 +7446,11 @@ type-fest@^0.11.0:
   resolved "https://registry.npm.taobao.org/type-fest/download/type-fest-0.11.0.tgz?cache=0&sync_timestamp=1606468844109&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftype-fest%2Fdownload%2Ftype-fest-0.11.0.tgz#97abf0872310fed88a5c466b25681576145e33f1"
   integrity sha1-l6vwhyMQ/tiKXEZrJWgVdhReM/E=
 
+type-fest@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.20.2.tgz#1bf207f4b28f91583666cb5fbd327887301cd5f4"
+  integrity sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
+
 type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.npm.taobao.org/type-fest/download/type-fest-0.8.1.tgz?cache=0&sync_timestamp=1606468844109&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftype-fest%2Fdownload%2Ftype-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
@@ -7729,7 +7759,7 @@ webpack-dev-server@^4.0.0-beta.0:
     webpack-dev-middleware "^4.0.2"
     ws "^7.4.0"
 
-webpack-sources@^2.1.1:
+webpack-sources@^2.1.1, webpack-sources@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-2.2.0.tgz#058926f39e3d443193b6c31547229806ffd02bac"
   integrity sha512-bQsA24JLwcnWGArOKUxYKhX3Mz/nK1Xf6hxullKERyktjNMC4x8koOeaDNTA2fEJ09BdWLbM/iTW0ithREUP0w==

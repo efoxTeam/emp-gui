@@ -1,9 +1,9 @@
 const path = require('path')
 const packagePath = path.join(path.resolve('./'), 'package.json')
 const {dependencies} = require(packagePath)
-
-module.exports = ({config, env, empEnv}) => {
-  console.log('empEnv===> 部署环境变量 serve模式不需要该变量', empEnv, env)
+const withESbuild = require('@efox/emp-esbuild')
+module.exports = withESbuild(({config, env, empEnv}) => {
+  // console.log('empEnv===> 部署环境变量 serve模式不需要该变量', empEnv, env)
   const port = 8002
   const projectName = 'emp-gui'
   const publicPath = `http://localhost:${port}/`
@@ -29,11 +29,7 @@ module.exports = ({config, env, empEnv}) => {
     }
     return args
   })
-  /*config.module
-    .rule('scripts')
-    .test(/\.(js|jsx|ts|tsx)$/)
-    .use('babel')
-    .loader('babel-loader')*/
+
   config.output.publicPath(publicPath)
   config.devServer.port(port)
   config.plugin('html').tap(args => {
@@ -48,4 +44,4 @@ module.exports = ({config, env, empEnv}) => {
     }
     return args
   })
-}
+})
