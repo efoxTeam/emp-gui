@@ -9,7 +9,13 @@ const {Title} = Typography
 const Com = () => {
   const [drawerVisible, setDrawerVisible] = useState(false)
   const [showCreateModal, setShowCreateModal] = useState(false)
-  const [templates, templatesAction] = useState([{id: 1, name: 'react-base'}])
+  const [remotesList, setRemotesList] = useState([
+    {id: 1, name: 'emp-react-base', url: 'https://github.com/efoxTeam/emp-react-template.git'},
+    {id: 2, name: 'emp-react-project', url: 'https://github.com/efoxTeam/emp-react-project-template.git'},
+    {id: 3, name: 'emp-vue2-template', url: 'https://github.com/efoxTeam/emp-vue2-template.git'},
+    {id: 2, name: 'emp-preact', url: 'https://github.com/efoxTeam/emp-preact-template.git'},
+    {id: 3, name: 'emp-vue3-template', url: 'https://github.com/efoxTeam/emp-vue3-template.git'},
+  ])
   return (
     <>
       <Card style={{marginBottom: '20px'}}>
@@ -51,7 +57,7 @@ const Com = () => {
         />
       </Card>
       <CardList
-        list={[1, 2, 3, 4, 5, 6, 7, 8]}
+        list={remotesList}
         nextPage={() => {}}
         page={1}
         pageSize={10}
@@ -68,7 +74,7 @@ const Com = () => {
             <Meta
               title={
                 <div className={style.cardMeta}>
-                  <span>react-base</span>
+                  <span>{item.name}</span>
                   <Button type={'link'} onClick={() => setDrawerVisible(true)}>
                     查看
                   </Button>
@@ -77,9 +83,7 @@ const Com = () => {
               description={
                 <>
                   地址：
-                  <a href="https://github.com/efoxTeam/emp-react-template.git">
-                    https://github.com/efoxTeam/emp-react-template.git
-                  </a>
+                  <a href={item.url}>{item.url}</a>
                 </>
               }
             />
@@ -155,8 +159,7 @@ const Com = () => {
             label: 'd.ts路径',
             name: 'tsPath',
             options: {
-              // enterButton: <input type="file" ref={inputFileRef} onChange={(e: any) => console.log(e.target)} />,
-              // onSearch: () => browseFolder('projectPath'),
+              placeholder: '默认获取基站默认生成index.d.ts文件',
             },
             // rules: [{required: true, message: '请输入项目名称'}],
           },
