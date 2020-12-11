@@ -4,6 +4,7 @@ import configStores from 'src/stores/config'
 import {routes} from 'src/configs/router'
 import CardList from 'src/components/CardList'
 import {Dropdown, Card, Avatar} from 'antd'
+import 'antd/dist/antd.css'
 const {Meta} = Card
 const PROJECTS = [
   {
