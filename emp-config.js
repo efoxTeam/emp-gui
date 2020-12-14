@@ -29,7 +29,6 @@ module.exports = withESbuild(({config, env, empEnv}) => {
     }
     return args
   })
-
   config.output.publicPath(publicPath)
   config.devServer.port(port)
   config.plugin('html').tap(args => {

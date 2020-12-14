@@ -1,10 +1,3 @@
-const {db} = require('../data/db')
-
-function list(req, res) {
-  const projects = db.get('projects')
-  res.setHeader('Content-Type', 'application/json')
-  res.json(projects)
-}
 
 function search(req, res) {
   const {id, name, template, technologyType} = req.query
@@ -14,30 +7,19 @@ function search(req, res) {
     }
     return pre
   }, {})
-  const projects = db.get('projects').find(query)
+  console.log('req.query', req.query)
+  const projects = dbService.retrieve('projects', query)
   res.setHeader('Content-Type', 'application/json')
   res.json(projects)
 }
 
-function add(req, res) {
-  const {projects = []} = req.body
-  db.get('projects').concat(projects).write()
-  res.setHeader('Content-Type', 'application/json')
-  res.json(projects)
+const Base = require('./base')
+class ProjectRest extends Base {
+  constructor(...args) {
+    super(...args)
+  }
 }
+const project = new ProjectRest('project')
+module.exports = project
 
-function del(req, res) {
-  const {id} = req.body
-}
 
-function alter(req, res) {
-  const {id, content} = req.body
-}
-
-module.exports = {
-  list,
-  search,
-  add,
-  del,
-  alter,
-}

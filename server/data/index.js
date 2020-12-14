@@ -1,15 +1,31 @@
 const {db} = require('./db')
+const moment = require('moment')
+
+function modal(name) {
+  return db.get(name)
+}
 class Service {
-  search(parmas) {
-    db.get('project').find(parmas)
+  retrieve(name, parmas = {}) {
+    const res  = modal(name).find(parmas)
+    const total = modal(name).size().value()
+    return {res, total}
   }
-  insert(parmas) {
-    db.get('projects').push(parmas).write()
+  create(name, parmas) {
+    parmas.id = moment().format('YYYYMMDDHHmmss') + Math.random().toString().substring(2, 6)
+    parmas.createTime = moment().valueOf()
+    modal(name).push(parmas).write()
+}
+  update(name, parmas) {
+    if(!parmas.id) return
+    parmas.updateTime = moment().valueOf()
+    modal(name).find({id: parmas.id}).assign(parmas).write()
   }
-  update() {}
+  delete(name, id) {
+    if(!id) return
+    modal(name).remove({id: id}).write()
+  }
 }
 const dbService = new Service()
-
 module.exports = {
   dbService,
 }

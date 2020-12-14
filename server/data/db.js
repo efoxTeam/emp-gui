@@ -7,7 +7,7 @@ const db = new Lowdb(new FileSync(path.resolve(rcFolder, 'data.json')))
 
 // Seed an empty DB
 db.defaults({
-  projects: [],
+  project: [],
   foldersFavorite: [],
   tasks: [],
   config: {},

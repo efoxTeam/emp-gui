@@ -3,32 +3,20 @@ const project = require('../controller/project')
 
 const Routes = [
   {
-    path: '/demo/search/:id',
-    method: demo.search,
-  },
-  {
-    path: '/demo/alert',
-    method: demo.alert,
+    path: '/demo',
+    method: demo.get,
   },
   {
     path: '/projects',
-    method: project.list,
+    method: project.get,
   },
   {
     path: '/projects/search',
-    method: project.search,
+    method: project.get,
   },
   {
     path: '/project/add',
-    method: project.add,
-  },
-  {
-    path: '/project/del',
-    method: project.del,
-  },
-  {
-    path: '/project/alter',
-    method: project.alter,
+    method: project.post,
   },
 ]
 module.exports = {
