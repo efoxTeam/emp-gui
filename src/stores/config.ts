@@ -1,12 +1,13 @@
 import {demoStore, TDemoStore} from 'src/stores/demo/demoStore'
 import {projectStore, TProjectStore} from 'src/stores/project/projectStore'
+import {StoresType} from './index'
 
-const stores: {[key: string]: () => any} = {
-  demoStore,
-  projectStore,
-}
 export type TconfigStore = {
-  demoStore: TDemoStore
+  // demoStore: TDemoStore
   projectStore: TProjectStore
+}
+const stores: StoresType = {
+  // demoStore,
+  projectStore,
 }
 export default stores
