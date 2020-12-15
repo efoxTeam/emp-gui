@@ -7,16 +7,20 @@ const Routes = [
     method: demo.get,
   },
   {
-    path: '/projects',
-    method: project.get,
-  },
-  {
-    path: '/projects/search',
+    path: '/project',
     method: project.get,
   },
   {
     path: '/project/add',
     method: project.post,
+  },
+  {
+    path: '/project/put',
+    method: project.put,
+  },
+  {
+    path: '/project/delete',
+    method: project.delete,
   },
   {
     path: '/project/readDir',

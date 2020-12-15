@@ -1,18 +1,22 @@
 const Base = require('./base')
-const {readDir} = require('../lib/file')
+const {readDir, downloadRepo} = require('../lib/file')
 class ProjectRest extends Base {
   constructor(...args) {
     super(...args)
   }
-  post(...args){
-    return super.post(...args)
+  post(req, res){
+    console.log('post')
+    this.params = req.body
+    const downloadPath = req.body.path + req.body.name
+    downloadRepo(downloadPath)
+    return super.post(req, res)
   }
   readDir(req, res){
-    console.log(process.cwd())
-    const path = req.query.path || './'
+    const currentPath = process.cwd().replace('emp-gui', '')
+    const path = req.query.path || '../'
     const dirs = readDir(path)
     res.setHeader('Content-Type', 'application/json')
-    res.json(dirs)
+    res.json({path: currentPath, dirs})
   }
 }
 const project = new ProjectRest('project')

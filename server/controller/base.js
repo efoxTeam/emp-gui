@@ -2,33 +2,31 @@ const {dbService} = require('../data/index')
 class Base{
   constructor(modelName) {
     this.modelName = modelName
+    this.params = {}
     Object.getOwnPropertyNames(Base.prototype)
       .filter((propertyName) => propertyName !== 'constructor')
       .forEach((method) => (this[method] = this[method].bind(this)))
   }
   post(req, res) {
-    console.log(req.body)
-    const params = {name: 'test', type: '1', path: 'test/test'}
+    const params = req.body || this.params
     dbService.create(this.modelName, params)
     res.setHeader('Content-Type', 'application/json')
     res.json({code: 0, msg: 'success'})
   }
   get(req, res) {
-    console.log('this', req)
-    const params = {name: 'test', type: '1', path: 'test/test'}
-    dbService.retrieve(this.modelName)
+    const params = req.query
+    const data = dbService.retrieve(this.modelName, params)
     res.setHeader('Content-Type', 'application/json')
-    res.json({code: 0, msg: 'success'})
+    res.json({code: 0, msg: 'success', data})
   }
   put(req, res) {
-    const params = {name: 'test', type: '1', path: 'test/test'}
+    const params = req.query
     dbService.create(this.modelName, params)
     res.setHeader('Content-Type', 'application/json')
     res.json({code: 0, msg: 'success'})
   }
   delete(req, res) {
-    const params = {name: 'test', type: '1', path: 'test/test'}
-    dbService.create(this.modelName, params)
+    dbService.delete(this.modelName, req.query.id)
     res.setHeader('Content-Type', 'application/json')
     res.json({code: 0, msg: 'success'})
   }

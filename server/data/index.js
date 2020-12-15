@@ -6,7 +6,7 @@ function modal(name) {
 }
 class Service {
   retrieve(name, parmas = {}) {
-    const res  = modal(name).find(parmas)
+    const res = modal(name).find(parmas)
     const total = modal(name).size().value()
     return {res, total}
   }

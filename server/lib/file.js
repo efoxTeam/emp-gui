@@ -18,8 +18,12 @@ function writeFile(path, content){
     }
   })
 }
+function downloadRepo(repo, name){
+  require('@efox/emp-cli/helpers/downloadRepo')('https://github.com/efoxTeam/emp-react-template.git', name, '')
+}
 
 module.exports = {
   readDir,
-  writeFile
+  writeFile,
+  downloadRepo
 }
