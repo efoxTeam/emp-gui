@@ -2,19 +2,19 @@ import {RoutesType} from '@emp-antd/base/types'
 import {lazy} from 'react'
 
 export const routes: Array<RoutesType> = [
-  {
-    path: '/',
-    name: '主页',
-    hide: true,
-    component: lazy(() => import('src/pages/Main')),
-    withoutLayout: true,
-  },
+  // {
+  //   path: '/',
+  //   name: '主页',
+  //   hide: true,
+  //   component: lazy(() => import('src/pages/Main')),
+  //   withoutLayout: true,
+  // },
   // {
   //   path: '/projects', // 项目列表
   //   component: lazy(() => import('src/pages/Project/list')),
   // },
   {
-    path: '/project',
+    path: '/',
     name: '项目信息',
     component: lazy(() => import('src/pages/Project')),
   },

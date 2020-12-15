@@ -10,6 +10,7 @@ export interface CardListProps {
   span?: number
   nextPage: (d: any) => void
   pagination?: React.ReactNode
+  footer?: React.ReactNode
   paginationJustify?: 'start' | 'end' | 'center'
   paginationOpt?: PaginationProps
   cardDom: (item: any, index: number) => React.ReactNode
@@ -32,6 +33,7 @@ export default ({
   count,
   nextPage,
   pagination,
+  footer,
   paginationOpt,
 }: CardListProps) => {
   return (
@@ -54,6 +56,7 @@ export default ({
             </div>
           )}
           <div style={{display: 'flex', justifyContent: justifyContent[paginationJustify]}}>
+            {footer}
             {typeof pagination === 'undefined' ? (
               <Pagination
                 {...{

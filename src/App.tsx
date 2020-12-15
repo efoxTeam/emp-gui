@@ -60,10 +60,14 @@ const App = () => {
                         />
                       </Card>
                     )}
+                    footer={
+                      <div style={{flex: 1}}>
+                        <Button type="primary" onClick={() => createProjectShowAction(true)}>
+                          创建项目
+                        </Button>
+                      </div>
+                    }
                   />
-                  <Button type="primary" onClick={() => createProjectShowAction(true)}>
-                    创建项目
-                  </Button>
                 </div>
               }
               trigger={['click']}
