@@ -6,7 +6,7 @@ function modal(name) {
 }
 class Service {
   retrieve(name, parmas = {}) {
-    const res  = modal(name).find(parmas)
+    const res = modal(name).find(parmas)
     const total = modal(name).size().value()
     return {res, total}
   }
@@ -14,7 +14,7 @@ class Service {
     parmas.id = moment().format('YYYYMMDDHHmmss') + Math.random().toString().substring(2, 6)
     parmas.createTime = moment().valueOf()
     modal(name).push(parmas).write()
-}
+  }
   update(name, parmas) {
     if(!parmas.id) return
     parmas.updateTime = moment().valueOf()
