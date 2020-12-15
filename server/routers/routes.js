@@ -18,6 +18,10 @@ const Routes = [
     path: '/project/add',
     method: project.post,
   },
+  {
+    path: '/project/readDir',
+    method: project.readDir,
+  },
 ]
 module.exports = {
   Routes,

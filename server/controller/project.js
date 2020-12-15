@@ -1,22 +1,18 @@
-
-function search(req, res) {
-  const {id, name, template, technologyType} = req.query
-  const query = Object.entries({id, name, template, technologyType}).reduce((pre, [k, v]) => {
-    if (v !== undefined) {
-      pre[k] = v
-    }
-    return pre
-  }, {})
-  console.log('req.query', req.query)
-  const projects = dbService.retrieve('projects', query)
-  res.setHeader('Content-Type', 'application/json')
-  res.json(projects)
-}
-
 const Base = require('./base')
+const {readDir} = require('../lib/file')
 class ProjectRest extends Base {
   constructor(...args) {
     super(...args)
+  }
+  post(...args){
+    return super.post(...args)
+  }
+  readDir(req, res){
+    console.log(process.cwd())
+    const path = req.query.path || './'
+    const dirs = readDir(path)
+    res.setHeader('Content-Type', 'application/json')
+    res.json(dirs)
   }
 }
 const project = new ProjectRest('project')

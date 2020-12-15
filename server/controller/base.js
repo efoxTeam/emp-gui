@@ -16,7 +16,7 @@ class Base{
   get(req, res) {
     console.log('this', req)
     const params = {name: 'test', type: '1', path: 'test/test'}
-    dbService.retrieve(this.modelName, )
+    dbService.retrieve(this.modelName)
     res.setHeader('Content-Type', 'application/json')
     res.json({code: 0, msg: 'success'})
   }
