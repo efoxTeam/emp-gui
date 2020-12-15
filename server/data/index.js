@@ -6,9 +6,9 @@ function modal(name) {
 }
 class Service {
   retrieve(name, parmas = {}) {
-    const data = modal(name).find(parmas)  || []
+    const list = modal(name).find(parmas).value() || []
     const total = modal(name).size().value()
-    return {data, total}
+    return {list, total}
   }
   create(name, parmas) {
     parmas.id = moment().format('YYYYMMDDHHmmss') + Math.random().toString().substring(2, 6)

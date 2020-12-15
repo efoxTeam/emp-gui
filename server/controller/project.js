@@ -8,7 +8,7 @@ class ProjectRest extends Base {
     console.log('post')
     this.params = req.body
     const downloadPath = req.body.path + req.body.name
-    downloadRepo(downloadPath)
+    // downloadRepo(downloadPath)
     return super.post(req, res)
   }
   readDir(req, res){
