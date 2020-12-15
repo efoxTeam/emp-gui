@@ -21,7 +21,7 @@ class Base{
   }
   put(req, res) {
     const params = req.query
-    dbService.create(this.modelName, params)
+    dbService.update(this.modelName, params)
     res.setHeader('Content-Type', 'application/json')
     res.json({code: 0, msg: 'success'})
   }
