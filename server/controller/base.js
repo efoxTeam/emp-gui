@@ -9,9 +9,9 @@ class Base{
   }
   post(req, res) {
     const params = req.body || this.params
-    dbService.create(this.modelName, params)
+    const id = dbService.create(this.modelName, params)
     res.setHeader('Content-Type', 'application/json')
-    res.json({code: 0, msg: 'success'})
+    res.json({code: 0, msg: 'success', data: {id}})
   }
   get(req, res) {
     const params = req.query

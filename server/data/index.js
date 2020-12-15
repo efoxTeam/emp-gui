@@ -14,6 +14,7 @@ class Service {
     parmas.id = moment().format('YYYYMMDDHHmmss') + Math.random().toString().substring(2, 6)
     parmas.createTime = moment().valueOf()
     modal(name).push(parmas).write()
+    return parmas.id
   }
   update(name, parmas) {
     if(!parmas.id) return
