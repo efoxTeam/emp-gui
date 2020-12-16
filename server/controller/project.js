@@ -14,7 +14,7 @@ class ProjectRest extends Base {
     return super.post(req, res)
   }
   readDir(req, res){
-    const currentPath = process.cwd().replace('emp-gui', '')
+    const currentPath = req.query.path || process.cwd().replace('emp-gui', '')
     const path = req.query.path || '../'
     const dirs = readDir(path)
     res.setHeader('Content-Type', 'application/json')
