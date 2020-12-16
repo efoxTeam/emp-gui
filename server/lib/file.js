@@ -22,8 +22,9 @@ function readDir(path = './'){
   return dir
 }
 
-function writeFile(path, content) {
-  fs.writeFile(path, content, function (err) {
+function writeJson(path, content){
+  if(typeof content !== 'object') return
+  fs.writeFile(path, JSON.stringify(content,null, 2), 'utf-8',function (err) {
     if (err) {
       console.log(err)
     }
@@ -52,7 +53,7 @@ async function downloadRepo(repoPath, localPath) {
 
 module.exports = {
   readDir,
-  writeFile,
+  writeJson,
   downloadRepo,
   readFile
 }

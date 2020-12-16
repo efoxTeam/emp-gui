@@ -28,6 +28,14 @@ const Routes = [
     path: '/projects/detail',
     method: project.detail,
   },
+  {
+    path: '/projects/addRemote',
+    method: project.addRemote,
+  },
+  {
+    path: '/projects/deleteRemote',
+    method: project.deleteRemote,
+  },
 ]
 module.exports = {
   Routes,
