@@ -1,0 +1,8 @@
+.dirName {
+  cursor: pointer;
+  transition: all 0.2s linear;
+
+  &:hover {
+    background-color: #eee;
+  }
+}

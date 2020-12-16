@@ -94,18 +94,13 @@ export const projectStore = () => {
       })
       return data
     },
-    async getDirFileList({path}: {path: string}): Promise<{type: string; name: string}[]> {
+    async getDirFileList({path}: {path: string}): Promise<{dirs: string[]; path: string}> {
       const {data} = await http
-        .get('/project/get', {
+        .get('/projects/readDir', {
           params: {path},
         })
         .catch(err => err)
-      return [
-        {type: '', name: 'project'},
-        {type: '', name: 'project'},
-        {type: '', name: 'project'},
-        {type: '', name: 'project'},
-      ]
+      return data
     },
   }
 }

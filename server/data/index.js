@@ -6,9 +6,10 @@ function modal(name) {
 }
 class Service {
   retrieve(name, parmas = {}) {
-    const list = modal(name).find(parmas).value() || []
-    const total = modal(name).size().value()
-    return {list, total}
+    const pageSize = parmas.pageSize || 10
+    const list = modal(name).filter(parmas).sortBy('createTime').take(pageSize) || []
+    const total = modal(name).filter(parmas).size().value()
+    return {list, total, pageSize}
   }
   create(name, parmas) {
     parmas.id = moment().format('YYYYMMDDHHmmss') + Math.random().toString().substring(2, 6)

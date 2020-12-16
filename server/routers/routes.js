@@ -1,10 +1,5 @@
-const demo = require('../controller/demo')
 const project = require('../controller/project')
 const Routes = [
-  {
-    path: '/demoapi/get',
-    method: demo.test,
-  },
   {
     path: '/projects/get',
     method: project.get,

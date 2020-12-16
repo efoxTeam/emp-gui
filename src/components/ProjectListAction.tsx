@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import CardList from 'src/components/CardList'
-import CreateProject from 'src/components/createProject'
+import CreateProject from 'src/components/CreateProject'
 import {useStores} from '@emp-antd/base/stores'
 import {TprojectList, TprojectListParam} from 'src/stores/project/projectStore'
 import {useObserver} from 'mobx-react-lite'

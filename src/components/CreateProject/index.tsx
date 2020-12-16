@@ -4,35 +4,37 @@ import {FormInstance} from 'antd/lib/form'
 import React, {useEffect, useRef, useState} from 'react'
 import {useStores} from 'src/stores'
 import {observer} from 'mobx-react-lite'
+import style from './index.module.scss'
 
 function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => void}) {
-  const [dir, dirAction] = useState<{type: string; name: string}[]>([])
+  const [dir, dirAction] = useState<string[]>([])
   const formRef = useRef<FormInstance>(null)
   const {projectStore} = useStores()
 
   const onHandleFormChange = (value: any) => {}
 
-  const searchDir = (e: any) => {
-    getDirFileList()
+  const searchDir = () => {
+    getDirFileList(formRef.current?.getFieldValue('path') || '')
   }
 
   const changePath = (name: string) => {
-    const path = `${formRef.current?.getFieldValue('path') || ''}/${name}`
-    formRef.current?.setFieldsValue({
-      path,
-    })
-    getDirFileList()
+    const formPath = formRef.current?.getFieldValue('path').trim() || ''
+    const path = `${formPath}${formPath[formPath.length - 1] !== '/' ? '/' : ''}${name}`
+    getDirFileList(path)
   }
 
-  const getDirFileList = async () => {
-    const path = formRef.current?.getFieldValue('path')
+  const getDirFileList = async (path: string) => {
     const data = await projectStore.getDirFileList({path})
-    dirAction(data)
+    formRef.current?.setFieldsValue({
+      path: data.path,
+    })
+    dirAction(data.dirs)
   }
 
   useEffect(() => {
     projectStore.getTemplates()
-  }, [])
+    searchDir()
+  }, [visible])
 
   return (
     <Drawer
@@ -92,11 +94,8 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
         itemLayout="horizontal"
         dataSource={dir}
         renderItem={item => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<FolderOutlined />}
-              title={<div onClick={() => changePath(item.name)}>{item.name}</div>}
-            />
+          <List.Item className={style.dirName}>
+            <List.Item.Meta avatar={<FolderOutlined />} title={<div onClick={() => changePath(item)}>{item}</div>} />
           </List.Item>
         )}
       />
