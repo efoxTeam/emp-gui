@@ -15,8 +15,12 @@ class ProjectRest extends Base {
     return super.post(req, res)
   }
   typeList(req, res){
+    const templateList = []
+    Object.keys(template).map((key)=>{
+      templateList.push({type: key, repo: template[key]})
+    })
     res.setHeader('Content-Type', 'application/json')
-    res.json(super.successJson(template))
+    res.json(super.successJson(templateList))
   }
   readDir(req, res){
     const currentPath = req.query.path || process.cwd().replace('emp-gui', '')
