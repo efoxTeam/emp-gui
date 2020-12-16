@@ -14,7 +14,6 @@ class Base{
     res.json({code: 0, msg: 'success', data: {id}})
   }
   get(req, res) {
-    console.log('req', req.originalUrl)
     const params = req.query
     const data = dbService.retrieve(this.modelName, params)
     res.setHeader('Content-Type', 'application/json')
@@ -30,6 +29,12 @@ class Base{
     dbService.delete(this.modelName, req.query.id)
     res.setHeader('Content-Type', 'application/json')
     res.json({code: 0, msg: 'success'})
+  }
+  successJson(data= {}){
+    return {code: 0, msg: 'success', data}
+  }
+  errorJson(code, msg, data= {}){
+    return {code, msg, data}
   }
 }
 

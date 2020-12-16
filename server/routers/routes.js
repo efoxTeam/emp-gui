@@ -20,6 +20,14 @@ const Routes = [
     path: '/projects/readDir',
     method: project.readDir,
   },
+  {
+    path: '/projects/typeList',
+    method: project.typeList,
+  },
+  {
+    path: '/projects/remotes',
+    method: project.remotes,
+  },
 ]
 module.exports = {
   Routes,

@@ -1,4 +1,5 @@
 const fs = require('fs')
+const git = require('git-promise') // 运行git命令
 function readDir(path = './'){
   const dir = []
   const files = fs.readdirSync(path)
@@ -18,12 +19,30 @@ function writeFile(path, content){
     }
   })
 }
-function downloadRepo(repo, name){
-  require('@efox/emp-cli/helpers/downloadRepo')(repo, name, '')
+
+function readFile(filePath){
+  const content = fs.readFileSync(filePath, "utf-8")
+  return JSON.parse(content)
+}
+
+async function downloadRepo(repoPath, localPath) {
+  const _branch = '--'
+  const _repoPath = `clone ${_branch} ${repoPath} ${localPath}`
+  if (!fs.existsSync(localPath)) {
+    await git(_repoPath)
+    await fs.rmdir(`${localPath}/.git`, {recursive: true}, err => {
+      console.log(err)
+    })
+    return 1
+  } else {
+    console.log('已存在指定目录')
+    return 0
+  }
 }
 
 module.exports = {
   readDir,
   writeFile,
-  downloadRepo
+  downloadRepo,
+  readFile
 }
