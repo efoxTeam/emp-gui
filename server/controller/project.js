@@ -7,6 +7,7 @@ class ProjectRest extends Base {
     super(...args)
   }
   post(req, res){
+    console.log('post')
     this.params = req.body
     const downloadPath = req.body.path + req.body.name
     const repo = template[req.body.type] || template.react
