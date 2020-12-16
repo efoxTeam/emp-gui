@@ -29,16 +29,16 @@ class ProjectRest extends Base {
     res.setHeader('Content-Type', 'application/json')
     res.json({path: currentPath, dirs})
   }
-  remotes(req, res){
+  detail(req, res){
     const data = dbService.retrieve('project', {id: req.query.id})
     const project = data.list[0]
     const empJson = readFile(project.path + project.name + '/emp.json')
-    const remotes = []
+    project.remotes = []
     Object.keys(empJson.remotes).map((key)=>{
-      remotes.push({alias: key, aliasUrl: empJson.remotes[key]})
+      project.remotes.push({alias: key, aliasUrl: empJson.remotes[key]})
     })
     res.setHeader('Content-Type', 'application/json')
-    res.json(super.successJson(remotes))
+    res.json(super.successJson(project))
   }
 }
 const project = new ProjectRest('project')

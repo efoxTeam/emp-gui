@@ -25,8 +25,8 @@ const Routes = [
     method: project.typeList,
   },
   {
-    path: '/projects/remotes',
-    method: project.remotes,
+    path: '/projects/detail',
+    method: project.detail,
   },
 ]
 module.exports = {
