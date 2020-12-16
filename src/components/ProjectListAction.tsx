@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import CardList from 'src/components/CardList'
-import CreateProject from 'src/components/createProject'
-import {useStores} from '@emp-antd/base/stores'
+import CreateProject from 'src/components/CreateProject'
 import {Dropdown, Card, Avatar, Button} from 'antd'
 const {Meta} = Card
 const PROJECTS = [
