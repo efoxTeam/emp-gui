@@ -1,11 +1,24 @@
 import http from 'src/helpers/http'
 import {Project} from 'src/typing'
-
+import envStorage from 'src/helpers/envStorage'
+export type TprojectList = {id: number; name: string; type: string; path: string}[]
+export type TprojectListParam = {
+  name?: string
+  type?: string
+  page: number
+  pageSize: number
+  id?: string
+}
 export const projectStore = () => {
   const templates: {id: number; name: string}[] = []
-
+  const projectInfo: any = {}
   return {
     templates,
+    projectInfo,
+    setProjectInfo(val: any) {
+      envStorage.set('prodId', val.id)
+      this.projectInfo = val
+    },
     async getTemplates(): Promise<{id: number; name: string}[]> {
       const {data} = await http.get(`/projects/templates`).catch(err => err)
       this.templates = [
@@ -15,7 +28,7 @@ export const projectStore = () => {
       return data
     },
     async getProjects() {
-      const {data} = await http.get(`/projects`)
+      const {data} = await http.get(`/projects/get`)
       return data
     },
     async searchProjects({
@@ -39,16 +52,11 @@ export const projectStore = () => {
       })
       return data
     },
-    async getProjectList(info: {
-      name: string
-      type: string
-      page: number
-      pageSize: number
-    }): Promise<{total: number; data: {id: number; name: string; type: string; path: string}[]}> {
-      const {data} = await http.get('/project/list', {
+    async getProjectList(info: TprojectListParam): Promise<{total: number; list: TprojectList}> {
+      const {data} = await http.get('/projects/get', {
         params: info,
       })
-      return data
+      return data.data
     },
     async addProject(projects: {name: string; type: string; path: string}): Promise<any> {
       const {data} = await http.post('/project/add', {
