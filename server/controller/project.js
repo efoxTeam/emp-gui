@@ -1,5 +1,6 @@
 const Base = require('./base')
 const {readDir, downloadRepo} = require('../lib/file')
+const template = require('../config/template')
 class ProjectRest extends Base {
   constructor(...args) {
     super(...args)
@@ -8,7 +9,8 @@ class ProjectRest extends Base {
     console.log('post')
     this.params = req.body
     const downloadPath = req.body.path + req.body.name
-    // downloadRepo(downloadPath)
+    const repo = template[req.body.type] || template.react
+    // downloadRepo(repo, downloadPath)
     return super.post(req, res)
   }
   readDir(req, res){
