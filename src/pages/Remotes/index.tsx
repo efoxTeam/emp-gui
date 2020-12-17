@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ModalForm, SForm} from '@emp-antd/base/components/common/crud'
+import {ModalForm, SForm} from 'src/components/common/crud'
 import CardList from 'src/components/CardList'
 import {SearchOutlined} from '@ant-design/icons'
 import {Card, Button, Drawer, Descriptions, Divider, List, Typography} from 'antd'

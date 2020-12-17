@@ -1,0 +1,108 @@
+.EmpFixSideLayout {
+  &.light {
+    color: rgba(0, 0, 0, 0.65);
+    .ant-layout {
+      background: #f0f2f5;
+    }
+    .ant-layout-sider {
+      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+    }
+    .ant-breadcrumb {
+      color: rgba(0, 0, 0, 0.65);
+      span {
+        color: rgba(0, 0, 0, 0.65);
+      }
+    }
+  }
+  &.dark {
+    color: rgba(255, 255, 255, 0.65);
+    .ant-layout {
+      background: #000;
+    }
+    .ant-layout-sider {
+      box-shadow: 2px 0 6px rgb(39 39 39 / 0.65);
+    }
+    .ant-breadcrumb {
+      color: rgba(255, 255, 255, 0.65);
+      span {
+        color: rgba(255, 255, 255, 0.65);
+      }
+    }
+  }
+  &.empPCLayout {
+    .site-layout {
+      margin-left: 200px;
+    }
+    &.iscollapsed {
+      .site-layout {
+        margin-left: 80px;
+      }
+    }
+  }
+  &.empMobileLayout {
+    .AsideSider {
+      left: 0px;
+    }
+    &.iscollapsed {
+      .AsideSider {
+        left: -100%;
+      }
+    }
+  }
+}
+.EmpFixSideLayout {
+  min-height: 100vh;
+  .AsideSider {
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    overflow: auto;
+    z-index: 1;
+  }
+
+  .header-right {
+    float: right;
+    padding-right: 20px;
+  }
+
+  .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .trigger:hover {
+    color: #1890ff;
+  }
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.2;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+.fixlayout-header {
+  padding: 0;
+  display: 'flex';
+  .triggerCollapsed {
+    padding: 0 24px;
+  }
+  .header-left {
+    line-height: "64px";
+    display: 'inline-block';
+    float: 'right';
+  }
+  &.light {
+    background: #fff;
+  }
+  &.dark {
+    background: #001529;
+  }
+}

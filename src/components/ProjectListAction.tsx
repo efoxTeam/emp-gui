@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import CardList from 'src/components/CardList'
 import CreateProject from 'src/components/CreateProject'
-import {useStores} from '@emp-antd/base/stores'
+import {useStores} from 'src/stores'
 import {TprojectList, TprojectListParam} from 'src/stores/project/projectStore'
 import {useObserver} from 'mobx-react-lite'
 import {Dropdown, Card, Avatar, Button} from 'antd'
@@ -94,12 +94,12 @@ const ProjectListComp = () => {
           }
           trigger={['click']}
           placement="topRight">
-          <a style={{color: '#fff'}} href="javascript:;">
+          <a style={{color: '#333'}} href="javascript:;">
             {projectInfo.name}
           </a>
         </Dropdown>
       ) : (
-        <a style={{color: '#fff'}} href="javascript:;" onClick={() => createProjectShowAction(true)}>
+        <a style={{color: '#333'}} href="javascript:;" onClick={() => createProjectShowAction(true)}>
           创建项目
         </a>
       )}

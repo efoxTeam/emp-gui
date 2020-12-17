@@ -8,10 +8,10 @@ import {
   ExclamationCircleOutlined,
 } from '@ant-design/icons'
 import {Button, Card, Input, Select, Modal} from 'antd'
-import {useStores} from '@emp-antd/base/stores'
+import {useStores} from 'src/stores'
 import style from './index.module.scss'
 import CardList from 'src/components/CardList'
-import {ModalForm} from '@emp-antd/base/components/common/crud'
+import {ModalForm} from 'src/components/common/crud'
 
 const PROJECTS = [
   {

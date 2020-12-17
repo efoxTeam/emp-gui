@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import EMPApp from '@emp-antd/base/App'
+import React from 'react'
+import RouterComp from 'src/components/common/RouterComp'
 import configStores from 'src/stores/config'
 import {routes} from 'src/configs/router'
 import ProjectListAction from 'src/components/ProjectListAction'
@@ -8,9 +8,8 @@ import {StoreProvider} from './stores'
 
 const App = () => {
   return (
-    <StoreProvider>
-      <EMPApp
-        stores={configStores}
+    <StoreProvider stores={configStores}>
+      <RouterComp
         routes={routes}
         titleInfo={{
           logo: 'https://setmefree.yy.com/Joyy.png',

@@ -1,6 +1,6 @@
 import {demoStore, TDemoStore} from 'src/stores/demo/demoStore'
 import {projectStore, TProjectStore} from 'src/stores/project/projectStore'
-import {StoresType} from './index'
+import {StoresType} from 'src/types'
 
 export type TconfigStore = {
   // demoStore: TDemoStore

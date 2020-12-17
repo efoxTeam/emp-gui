@@ -1,4 +1,4 @@
-import {RoutesType} from '@emp-antd/base/types'
+import {RoutesType} from 'src/types'
 import {lazy} from 'react'
 
 export const routes: Array<RoutesType> = [

@@ -68,7 +68,7 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
                 // onBlur={onBlur}
                 // onSearch={onSearch}
               >
-                {projectStore.templates.map(item => (
+                {projectStore.templates.map((item: {id: string | number; name: React.ReactNode}) => (
                   <Select.Option value={item.id} key={item.id}>
                     {item.name}
                   </Select.Option>
