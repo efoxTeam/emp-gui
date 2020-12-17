@@ -1,10 +1,14 @@
-import {Button, Col, Drawer, Form, Input, Row, Select, List} from 'antd'
+import {Button, Col, Drawer, Form, Input, Row, Select, List, message} from 'antd'
 import {FolderOutlined} from '@ant-design/icons'
 import {FormInstance} from 'antd/lib/form'
 import React, {useEffect, useRef, useState} from 'react'
 import {useStores} from 'src/stores'
 import {observer} from 'mobx-react-lite'
 import style from './index.module.scss'
+import envStorage from 'src/helpers/envStorage'
+import {addProject, getDirFileList} from 'src/api/project'
+
+const LOCALSTORAGE_CREATE_URL = 'empGui-CreateProject-url'
 
 function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => void}) {
   const [dir, dirAction] = useState<string[]>([])
@@ -13,27 +17,58 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
 
   const onHandleFormChange = (value: any) => {}
 
+  /**
+   * 输入框回车搜索
+   */
   const searchDir = () => {
-    getDirFileList(formRef.current?.getFieldValue('path') || '')
+    fetchDirFileList(formRef.current?.getFieldValue('path') || envStorage.get(LOCALSTORAGE_CREATE_URL) || '')
   }
 
+  /**
+   * 点击目录名后替换form path 值，并请求接口
+   * @param name
+   */
   const changePath = (name: string) => {
     const formPath = formRef.current?.getFieldValue('path').trim() || ''
     const path = `${formPath}${formPath[formPath.length - 1] !== '/' ? '/' : ''}${name}`
-    getDirFileList(path)
+    fetchDirFileList(path)
   }
 
-  const getDirFileList = async (path: string) => {
-    const data = await projectStore.getDirFileList({path})
+  const fetchDirFileList = async (path: string) => {
+    const data = await getDirFileList({path})
     formRef.current?.setFieldsValue({
       path: data.path,
     })
+    // 本地存储路径
+    envStorage.set(LOCALSTORAGE_CREATE_URL, data.path)
     dirAction(data.dirs)
   }
 
+  /**
+   * 创建项目
+   */
+  const onCreate = async () => {
+    formRef.current?.submit()
+    // const data = projectStore.addProject()
+  }
+
+  /**
+   * 表单提交
+   */
+  const onFormFinish = async (values: any) => {
+    const response = await addProject(values)
+    const {code, msg} = response
+    message.success(msg)
+    if (code === 0) {
+      onClose?.()
+    }
+  }
+
   useEffect(() => {
-    projectStore.getTemplates()
-    searchDir()
+    if (visible) {
+      projectStore.getTemplates()
+      searchDir()
+    }
   }, [visible])
 
   return (
@@ -51,15 +86,15 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
           <Button onClick={onClose} style={{marginRight: 8}}>
             取消
           </Button>
-          <Button onClick={onClose} type="primary">
+          <Button onClick={onCreate} type="primary">
             创建
           </Button>
         </div>
       }>
-      <Form layout="vertical" onValuesChange={onHandleFormChange} ref={formRef}>
+      <Form layout="vertical" onValuesChange={onHandleFormChange} ref={formRef} onFinish={onFormFinish}>
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item name="template" label="选择模版" rules={[{required: true, message: 'Please enter user name'}]}>
+            <Form.Item name="type" label="选择模版" rules={[{required: true, message: '请选择模版'}]}>
               <Select
                 showSearch
                 placeholder="选择模版"
@@ -69,15 +104,15 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
                 // onSearch={onSearch}
               >
                 {projectStore.templates.map(item => (
-                  <Select.Option value={item.id} key={item.id}>
-                    {item.name}
+                  <Select.Option value={item.type} key={item.type}>
+                    {item.type}
                   </Select.Option>
                 ))}
               </Select>
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="projectName" label="项目名" rules={[{required: true, message: 'Please enter url'}]}>
+            <Form.Item name="name" label="项目名" rules={[{required: true, message: '请输入项目名'}]}>
               <Input style={{width: '100%'}} placeholder="输入项目名" />
             </Form.Item>
           </Col>
@@ -99,7 +134,6 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
           </List.Item>
         )}
       />
-      ,
     </Drawer>
   )
 }

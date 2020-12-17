@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const git = require('git-promise') // 运行git命令
-function readDir(path = './'){
+function readDir(pathname = './') {
   const dir = []
   // 判断当前是否是一个目录
   const stat = fs.existsSync(pathname)
@@ -22,17 +22,17 @@ function readDir(path = './'){
   return dir
 }
 
-function writeJson(path, content){
-  if(typeof content !== 'object') return
-  fs.writeFile(path, JSON.stringify(content,null, 2), 'utf-8',function (err) {
+function writeJson(path, content) {
+  if (typeof content !== 'object') return
+  fs.writeFile(path, JSON.stringify(content, null, 2), 'utf-8', function (err) {
     if (err) {
       console.log(err)
     }
   })
 }
 
-function readFile(filePath){
-  const content = fs.readFileSync(filePath, "utf-8")
+function readFile(filePath) {
+  const content = fs.readFileSync(filePath, 'utf-8')
   return JSON.parse(content)
 }
 
@@ -55,5 +55,5 @@ module.exports = {
   readDir,
   writeJson,
   downloadRepo,
-  readFile
+  readFile,
 }

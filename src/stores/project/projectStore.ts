@@ -1,6 +1,7 @@
 import http from 'src/helpers/http'
-import {Project} from 'src/typing'
+import {HTTP_RESP, Project} from 'src/typing'
 import envStorage from 'src/helpers/envStorage'
+import {getTemplates} from 'src/api/project'
 export type TprojectList = {id: number; name: string; type: string; path: string}[]
 export type TprojectListParam = {
   name?: string
@@ -10,7 +11,7 @@ export type TprojectListParam = {
   id?: string
 }
 export const projectStore = () => {
-  const templates: {id: number; name: string}[] = []
+  const templates: {type: string; repo: string}[] = []
   const projectInfo: any = {}
   return {
     templates,
@@ -19,13 +20,12 @@ export const projectStore = () => {
       envStorage.set('prodId', val.id)
       this.projectInfo = val
     },
-    async getTemplates(): Promise<{id: number; name: string}[]> {
-      const {data} = await http.get(`/projects/templates`).catch(err => err)
-      this.templates = [
-        {id: 1, name: 'react-base'},
-        {id: 2, name: 'vue-base'},
-      ]
-      return data
+    async getTemplates() {
+      const {data} = await getTemplates()
+      console.log(data)
+      if (Array.isArray(data)) {
+        this.templates = data
+      }
     },
     async getProjects() {
       const {data} = await http.get(`/projects/get`)
@@ -58,12 +58,6 @@ export const projectStore = () => {
       })
       return data.data
     },
-    async addProject(projects: {name: string; type: string; path: string}): Promise<any> {
-      const {data} = await http.post('/project/add', {
-        projects,
-      })
-      return data
-    },
     async delProject({id}: {id: number}): Promise<any> {
       const {data} = await http.post('/project/del', {
         id,
@@ -92,14 +86,6 @@ export const projectStore = () => {
       const {data} = await http.get('/project/get', {
         params: {id},
       })
-      return data
-    },
-    async getDirFileList({path}: {path: string}): Promise<{dirs: string[]; path: string}> {
-      const {data} = await http
-        .get('/projects/readDir', {
-          params: {path},
-        })
-        .catch(err => err)
       return data
     },
   }
