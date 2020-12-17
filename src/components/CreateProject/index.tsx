@@ -17,11 +17,18 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
 
   const onHandleFormChange = (value: any) => {}
 
+  const onDrawerClose = () => {
+    // 重置表单
+    formRef.current?.resetFields()
+    onClose?.()
+  }
+
   /**
    * 输入框回车搜索
    */
   const searchDir = () => {
-    fetchDirFileList(formRef.current?.getFieldValue('path') || envStorage.get(LOCALSTORAGE_CREATE_URL) || '')
+    const local = envStorage.get(LOCALSTORAGE_CREATE_URL)
+    fetchDirFileList(formRef.current?.getFieldValue('path') || (local !== 'undefined' ? local : '') || '')
   }
 
   /**
@@ -35,13 +42,15 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
   }
 
   const fetchDirFileList = async (path: string) => {
-    const data = await getDirFileList({path})
-    formRef.current?.setFieldsValue({
-      path: data.path,
-    })
-    // 本地存储路径
-    envStorage.set(LOCALSTORAGE_CREATE_URL, data.path)
-    dirAction(data.dirs)
+    const {data, code} = await getDirFileList({path})
+    if (code === 0) {
+      formRef.current?.setFieldsValue({
+        path: data.path,
+      })
+      // 本地存储路径
+      envStorage.set(LOCALSTORAGE_CREATE_URL, data.path)
+      dirAction(data.dirs)
+    }
   }
 
   /**
@@ -57,10 +66,12 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
    */
   const onFormFinish = async (values: any) => {
     const response = await addProject(values)
-    const {code, msg} = response
+    const {code, msg, data} = response
     message.success(msg)
     if (code === 0) {
-      onClose?.()
+      // 请求一下
+      await projectStore.getProjectInfo({id: data.id})
+      onDrawerClose?.()
     }
   }
 
@@ -75,7 +86,7 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
     <Drawer
       title="创建项目"
       width={720}
-      onClose={onClose}
+      onClose={onDrawerClose}
       visible={visible}
       bodyStyle={{paddingBottom: 80}}
       footer={
@@ -83,7 +94,7 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
           style={{
             textAlign: 'right',
           }}>
-          <Button onClick={onClose} style={{marginRight: 8}}>
+          <Button onClick={onDrawerClose} style={{marginRight: 8}}>
             取消
           </Button>
           <Button onClick={onCreate} type="primary">

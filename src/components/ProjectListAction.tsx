@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react'
 import CardList from 'src/components/CardList'
 import CreateProject from 'src/components/CreateProject'
 import {useStores} from 'src/stores'
-import {TprojectList, TprojectListParam} from 'src/stores/project/projectStore'
+import {TprojectList, TprojectListParam} from 'src/api/project'
 import {useObserver} from 'mobx-react-lite'
 import {Dropdown, Card, Avatar, Button} from 'antd'
 import envStorage from 'src/helpers/envStorage'
+import {getProjectList} from 'src/api/project'
 export interface TprojectListParams extends Partial<TprojectListParam> {
   page?: number
   pageSize?: number
@@ -19,37 +20,36 @@ const ProjectListComp = () => {
   const [total, setTotal] = useState(0)
   const [projectList, setProjectList] = useState<TprojectList>([])
   const {projectStore} = useStores()
-  const {getProjectList, getProjectInfo, setProjectInfo, projectInfo} = projectStore
+  const {getProjectInfo, setProjectInfo, projectInfo} = projectStore
   const [createProjectShow, createProjectShowAction] = useState(false)
   const getProjectListAct = async (param?: TprojectListParams) => {
     setInfo({
       ...info,
       ...param,
     })
-    const res = await getProjectList(info)
-    setProjectList(res.list)
-    setTotal(res.total)
+    const {code, data} = await getProjectList(info)
+    setProjectList(data.list)
+    setTotal(data.total)
   }
   useEffect(() => {
     ;(async () => {
       let prodId = envStorage.get('prodId')
-      if (!prodId) {
-        const res = await getProjectList({page: 1, pageSize: 10})
-        if (res.list.length > 0) {
-          prodId = res.list[0].id
+      if (!prodId || prodId === 'undefined') {
+        const {code, data} = await getProjectList({page: 1, pageSize: 10})
+        if (data.list.length > 0) {
+          prodId = data.list[0].id
         } else {
           createProjectShowAction(true)
           return
         }
       }
-      const project = await getProjectInfo(prodId)
-      setProjectInfo(project)
+      await getProjectInfo({id: prodId})
     })()
   }, [])
 
   return useObserver(() => (
     <>
-      {JSON.stringify(projectInfo) !== '{}' ? (
+      {projectInfo.id ? (
         <Dropdown
           onVisibleChange={visible => {
             visible && getProjectListAct({page: 1})

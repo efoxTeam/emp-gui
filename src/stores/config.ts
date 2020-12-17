@@ -7,10 +7,12 @@ export type TconfigStore = {
   demoStore: TDemoStore
   projectStore: TProjectStore
   remoteStore: TRemoteStore
+  userStore: any
 }
 const stores: StoresType = {
   demoStore,
   projectStore,
   remoteStore,
+  userStore: () => {},
 }
 export default stores

@@ -1,18 +1,18 @@
 import http from 'src/helpers/http'
 import {HTTP_RESP, Project} from 'src/typing'
 import envStorage from 'src/helpers/envStorage'
-import {getTemplates} from 'src/api/project'
-export type TprojectList = {id: number; name: string; type: string; path: string}[]
-export type TprojectListParam = {
-  name?: string
-  type?: string
-  page: number
-  pageSize: number
-  id?: string
-}
+import {getProjectInfo, getProjectList, getTemplates, TProjectDedetail} from 'src/api/project'
+
 export const projectStore = () => {
   const templates: {type: string; repo: string}[] = []
-  const projectInfo: any = {}
+  const projectInfo: TProjectDedetail = {
+    id: '0',
+    name: '',
+    type: '',
+    path: '',
+    remotes: [],
+    expose: [],
+  }
   return {
     templates,
     projectInfo,
@@ -52,12 +52,6 @@ export const projectStore = () => {
       })
       return data
     },
-    async getProjectList(info: TprojectListParam): Promise<{total: number; list: TprojectList}> {
-      const {data} = await http.get('/projects/get', {
-        params: info,
-      })
-      return data.data
-    },
     async delProject({id}: {id: number}): Promise<any> {
       const {data} = await http.post('/project/del', {
         id,
@@ -71,21 +65,11 @@ export const projectStore = () => {
       })
       return data
     },
-    async getProjectInfo({
-      id,
-    }: {
-      id: number
-    }): Promise<{
-      id: number
-      name: string
-      type: string
-      path: string
-      remote: Record<string, string>
-      expose: Record<string, string>
-    }> {
-      const {data} = await http.get('/project/get', {
-        params: {id},
-      })
+    async getProjectInfo({id}: {id: string}) {
+      const {code, data} = await getProjectInfo({id})
+      if (code === 0) {
+        this.setProjectInfo(data)
+      }
       return data
     },
   }

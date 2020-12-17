@@ -1,6 +1,23 @@
 import http from 'src/helpers/http'
 import {HTTP_RESP} from 'src/typing'
 
+export type TprojectList = {id: number; name: string; type: string; path: string}[]
+export type TprojectListParam = {
+  name?: string
+  type?: string
+  page: number
+  pageSize: number
+  id?: string
+}
+export type TProjectDedetail = {
+  id: string
+  name: string
+  type: string
+  path: string
+  remotes: {alias: string; aliasUrl: string}[]
+  expose: Record<string, string>[]
+}
+
 /**
  * 获取已有模版
  */
@@ -10,7 +27,7 @@ export const getTemplates = (): Promise<HTTP_RESP<{type: string; repo: string}[]
  * 获取当前项目目录结构
  * @param path 当前路径
  */
-export const getDirFileList = (data: {path: string}): Promise<{dirs: string[]; path: string}> =>
+export const getDirFileList = (data: {path: string}): Promise<HTTP_RESP<{dirs: string[]; path: string}>> =>
   http.get('/projects/readDir', {
     params: data,
   })
@@ -23,3 +40,17 @@ export const getDirFileList = (data: {path: string}): Promise<{dirs: string[]; p
  */
 export const addProject = (data: {name: string; type: string; path: string}): Promise<HTTP_RESP<{id: string}>> =>
   http.post('/projects/add', data)
+
+/**
+ * 获取项目详情
+ * @param id 项目id
+ */
+export const getProjectInfo = (data: {id: string}): Promise<HTTP_RESP<{}>> =>
+  http.get('/projects/detail', {
+    params: data,
+  })
+
+export const getProjectList = (data: TprojectListParam): Promise<HTTP_RESP<{total: number; list: TprojectList}>> =>
+  http.get('/projects/get', {
+    params: data,
+  })

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {ModalForm, SForm} from 'src/components/common/crud'
 import CardList from 'src/components/CardList'
 import {SearchOutlined} from '@ant-design/icons'
@@ -6,27 +6,28 @@ import {Card, Button, Drawer, Descriptions, Divider, List, Typography, message} 
 import style from './index.module.scss'
 import {FormInstance} from 'antd/lib/form'
 import {addRemote} from 'src/api/remote'
+import {useStores} from 'src/stores'
+import {useObserver} from 'mobx-react-lite'
 const {Meta} = Card
 const {Title} = Typography
 const Com = () => {
+  const {projectStore} = useStores()
+  const {remotes} = projectStore.projectInfo
   const [drawerVisible, setDrawerVisible] = useState(false)
   const [showCreateModal, setShowCreateModal] = useState(false)
-  const [remotesList, setRemotesList] = useState([
-    {id: 1, name: 'emp-react-base', url: 'https://github.com/efoxTeam/emp-react-template.git'},
-    {id: 2, name: 'emp-react-project', url: 'https://github.com/efoxTeam/emp-react-project-template.git'},
-    {id: 3, name: 'emp-vue2-template', url: 'https://github.com/efoxTeam/emp-vue2-template.git'},
-    {id: 2, name: 'emp-preact', url: 'https://github.com/efoxTeam/emp-preact-template.git'},
-    {id: 3, name: 'emp-vue3-template', url: 'https://github.com/efoxTeam/emp-vue3-template.git'},
-  ])
   const createRemoteForm = useRef<FormInstance>(null)
 
   const onSubmitCreateRemote = async () => {
     const values = createRemoteForm.current?.getFieldsValue()
-    const {data, code, msg} = await addRemote(values)
-    message[code === 0 ? 'success' : 'error'](msg)
+    const {data, code, msg} = await addRemote({...values, id: projectStore.projectInfo.id})
+    const success = code === 0
+    message[success ? 'success' : 'error'](msg)
+    if (success) {
+      setShowCreateModal(false)
+    }
   }
 
-  return (
+  return useObserver(() => (
     <>
       <Card style={{marginBottom: '20px'}}>
         <SForm
@@ -67,38 +68,41 @@ const Com = () => {
         />
       </Card>
       <CardList
-        list={remotesList}
+        list={remotes}
         nextPage={() => {}}
         page={1}
         pageSize={10}
-        count={1000}
+        count={remotes.length}
         layout="row"
-        cardDom={item => (
-          <Card
-            style={{width: '250px', margin: '0 10px 10px'}}
-            cover={
-              <div className={style.cardCover}>
-                <img src={require('src/assets/img/remotes-icon.png')} />
-              </div>
-            }>
-            <Meta
-              title={
-                <div className={style.cardMeta}>
-                  <span>{item.name}</span>
-                  <Button type={'link'} onClick={() => setDrawerVisible(true)}>
-                    查看
-                  </Button>
+        cardDom={item => {
+          const [name, url] = item.aliasUrl.split('@')
+          return (
+            <Card
+              style={{width: '250px', margin: '0 10px 10px'}}
+              cover={
+                <div className={style.cardCover}>
+                  <img src={require('src/assets/img/remotes-icon.png')} />
                 </div>
-              }
-              description={
-                <>
-                  地址：
-                  <a href={item.url}>{item.url}</a>
-                </>
-              }
-            />
-          </Card>
-        )}
+              }>
+              <Meta
+                title={
+                  <div className={style.cardMeta}>
+                    <span>{item.alias}</span>
+                    {/* <Button type={'link'} onClick={() => setDrawerVisible(true)}>
+                      查看
+                    </Button> */}
+                  </div>
+                }
+                description={
+                  <>
+                    地址：
+                    <a href={url}>{url}</a>
+                  </>
+                }
+              />
+            </Card>
+          )
+        }}
       />
       <Drawer
         width={500}
@@ -156,7 +160,7 @@ const Com = () => {
           {
             type: 'Input',
             label: '基站名称',
-            name: 'projectName',
+            name: 'alias',
             options: {
               placeholder: '请输入基站名称：package.json的name',
             },
@@ -165,7 +169,7 @@ const Com = () => {
           {
             type: 'Input',
             label: '基站别名',
-            name: 'alias',
+            name: 'projectName',
             rules: [{required: true, message: '请输入基站别名'}],
           },
           {
@@ -183,7 +187,7 @@ const Com = () => {
         onCancel={() => setShowCreateModal(false)}
       />
     </>
-  )
+  ))
 }
 
 export default Com
