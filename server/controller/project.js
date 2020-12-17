@@ -7,10 +7,12 @@ function projectDetail(id) {
   const data = dbService.retrieve('project', {id})
   const project = data.list[0]
   const empJson = readFile(Path.join(project.path, project.name, 'emp.json'))
-  project.remotes = []
-  Object.keys(empJson.remotes).map(key => {
-    project.remotes.push({alias: key, aliasUrl: empJson.remotes[key]})
-  })
+  if(empJson){
+    project.remotes = []
+    Object.keys(empJson.remotes).map(key => {
+      project.remotes.push({alias: key, aliasUrl: empJson.remotes[key]})
+    })
+  }
   return project
 }
 class ProjectRest extends Base {
@@ -22,7 +24,7 @@ class ProjectRest extends Base {
     this.params = req.body
     const downloadPath = Path.join(req.body.path, req.body.name)
     const repo = template[req.body.type] || template.react
-    // downloadRepo(repo, downloadPath)
+    downloadRepo(repo, downloadPath)
     return super.post(req, res)
   }
   typeList(req, res) {
@@ -42,11 +44,6 @@ class ProjectRest extends Base {
   }
   detail(req, res) {
     const project = projectDetail(req.query.id)
-    const empJson = readFile(Path.join(project.path, project.name, 'emp.json'))
-    project.remotes = []
-    Object.keys(empJson.remotes).map(key => {
-      project.remotes.push({alias: key, aliasUrl: empJson.remotes[key]})
-    })
     res.setHeader('Content-Type', 'application/json')
     res.json(super.successJson(project))
   }

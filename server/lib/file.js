@@ -32,8 +32,13 @@ function writeJson(path, content) {
 }
 
 function readFile(filePath) {
-  const content = fs.readFileSync(filePath, 'utf-8')
-  return JSON.parse(content)
+  const exist = fs.existsSync(filePath)
+  if(exist){
+    const content = fs.readFileSync(filePath, 'utf-8')
+    return JSON.parse(content)
+  }else{
+    return false
+  }
 }
 
 async function downloadRepo(repoPath, localPath) {
