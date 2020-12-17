@@ -12,7 +12,7 @@ const App = () => {
       <RouterComp
         routes={routes}
         titleInfo={{
-          logo: 'https://setmefree.yy.com/Joyy.png',
+          logo: require('src/assets/img/efox.png'),
           text: <ProjectListAction />,
         }}
         userProfile={null}

@@ -1,5 +1,5 @@
-import React, {Suspense, useEffect} from 'react'
-import {Route, BrowserRouter as Router, Switch, useLocation} from 'react-router-dom'
+import React, {Suspense} from 'react'
+import {Route, BrowserRouter as Router, Switch} from 'react-router-dom'
 import LoadingComp from 'src/components/LoadingComp'
 import P404Comp from 'src/components/P404Comp'
 import {routes, Troutes} from 'src/configs/router'

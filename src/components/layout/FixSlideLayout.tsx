@@ -7,7 +7,6 @@ import LogoBox from 'src/components/layout/LogoBox'
 import './FixSlideLayout.less'
 import {TLayoutProps} from 'src/types'
 import {observer} from 'mobx-react-lite'
-
 const {Header, Footer} = Layout
 const {Content, Sider} = Layout
 
@@ -35,44 +34,25 @@ const FixSlideLayout = (props: TLayoutProps) => {
     <>{props.children}</>
   ) : (
     <Layout className={`light`}>
-      {aside ? (
-        aside
-      ) : (
-        <Sider trigger={null} collapsible collapsed={collapsed} theme={'light'} className={`AsideSider`}>
-          <TitleBox theme={'light'} titleInfo={props.titleInfo} />
-          <RouteMenu
-            options={{
-              theme: 'light',
-              onClick: e => {
-                // history.push(e.key)
-              },
-              mode: 'inline',
-              openKeys: openKey,
-              // onOpenChange: d => setOpenKey(d),
-              defaultSelectedKeys: selectKey,
-              ...props.menuOptions,
-            }}
-            routes={routes}
-          />
-        </Sider>
-      )}
+      <Sider trigger={null} collapsible collapsed={collapsed} theme={'light'} className={`AsideSider`}>
+        <TitleBox theme={'light'} titleInfo={props.titleInfo} />
+        <RouteMenu
+          options={{
+            theme: 'light',
+            onClick: e => {
+              history.push(e.key.toString())
+            },
+            mode: 'inline',
+            openKeys: openKey,
+            defaultSelectedKeys: selectKey,
+            ...props.menuOptions,
+          }}
+          routes={routes}
+        />
+      </Sider>
       <Layout className="site-layout">
-        <Header className={`fixlayout-header light`}>
-          <Row gutter={24} style={{width: '100%'}}>
-            <Col>
-              {typeof collapsed !== 'undefined' ? (
-                <span className="triggerCollapsed" onClick={e => setCollapsed(!collapsed)}>
-                  {collapsed ? (
-                    <MenuUnfoldOutlined style={{fontSize: 20, color: theme === 'dark' ? '#fff' : '#333'}} />
-                  ) : (
-                    <MenuFoldOutlined style={{fontSize: 20, color: theme === 'dark' ? '#fff' : '#333'}} />
-                  )}
-                </span>
-              ) : null}
-            </Col>
-          </Row>
-        </Header>
-        <Content style={{margin: '0px 24px 24px', overflow: 'initial'}}>
+        <Header className={`fixlayout-header light`}></Header>
+        <Content style={{margin: '24px', overflow: 'initial'}}>
           <div>{props.children}</div>
         </Content>
         <Footer

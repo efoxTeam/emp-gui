@@ -20,7 +20,7 @@ const ProjectListComp = () => {
   const [total, setTotal] = useState(0)
   const [projectList, setProjectList] = useState<TprojectList>([])
   const {projectStore} = useStores()
-  const {getProjectInfo, setProjectInfo, projectInfo} = projectStore
+  const {getProjectInfo, projectInfo} = projectStore
   const [createProjectShow, createProjectShowAction] = useState(false)
   const getProjectListAct = async (param?: TprojectListParams) => {
     setInfo({

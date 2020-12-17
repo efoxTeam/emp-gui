@@ -39,7 +39,6 @@ const TEMPLATES = [
 ]
 
 const Main = () => {
-  const {demoStore} = useStores()
   // 项目列表
   const [projectList, projectListAction] = useState(PROJECTS)
   // 模版列表

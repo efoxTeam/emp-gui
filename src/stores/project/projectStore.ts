@@ -6,7 +6,7 @@ import {getProjectInfo, getProjectList, getTemplates, TProjectDedetail} from 'sr
 export const projectStore = () => {
   const templates: {type: string; repo: string}[] = []
   const projectInfo: TProjectDedetail = {
-    id: '0',
+    id: '',
     name: '',
     type: '',
     path: '',
