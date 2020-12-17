@@ -37,7 +37,7 @@ class ProjectRest extends Base {
     const path = req.query.path || '../'
     const dirs = readDir(path)
     res.setHeader('Content-Type', 'application/json')
-    res.json({path: currentPath, dirs})
+    res.json(super.successJson({path: currentPath, dirs}))
   }
   detail(req, res) {
     const project = projectDetail(req.query.id)
