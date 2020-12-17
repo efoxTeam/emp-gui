@@ -22,7 +22,7 @@ class ProjectRest extends Base {
     this.params = req.body
     const downloadPath = Path.join(req.body.path, req.body.name)
     const repo = template[req.body.type] || template.react
-    downloadRepo(repo, downloadPath)
+    // downloadRepo(repo, downloadPath)
     return super.post(req, res)
   }
   typeList(req, res) {

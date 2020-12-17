@@ -7,6 +7,9 @@ function modal(name) {
 class Service {
   retrieve(name, parmas = {}) {
     const pageSize = parmas.pageSize || 10
+    const page = parmas.page || 0
+    delete parmas.pageSize
+    delete parmas.page
     const list = modal(name).filter(parmas).sortBy('createTime').take(pageSize).value() || []
     const total = modal(name).filter(parmas).size().value()
     return {list, total, pageSize}
