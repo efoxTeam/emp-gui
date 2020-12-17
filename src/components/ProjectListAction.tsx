@@ -3,7 +3,7 @@ import CardList from 'src/components/CardList'
 import CreateProject from 'src/components/CreateProject'
 import {useStores} from 'src/stores'
 import {TprojectList, TprojectListParam} from 'src/api/project'
-import {useObserver} from 'mobx-react-lite'
+import {observer, useObserver} from 'mobx-react-lite'
 import {Dropdown, Card, Avatar, Button} from 'antd'
 import envStorage from 'src/helpers/envStorage'
 import {getProjectList} from 'src/api/project'
@@ -108,4 +108,4 @@ const ProjectListComp = () => {
   ))
 }
 
-export default ProjectListComp
+export default observer(ProjectListComp)
