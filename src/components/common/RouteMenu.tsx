@@ -4,7 +4,6 @@ import {MenuProps} from 'antd/lib/menu'
 import {SubMenuProps} from 'antd/lib/menu/SubMenu'
 import {RoutesType} from 'src/types'
 import {useHistory} from 'react-router-dom'
-import {useStores} from 'src/stores'
 import {useObserver} from 'mobx-react-lite'
 
 const {SubMenu} = Menu
@@ -16,17 +15,15 @@ export type TRouteMenu = {
 }
 
 export const IconName = ({route}: {route: RoutesType}) => {
-  const {langStore} = useStores()
   return useObserver(() => (
     <span>
       {route.icon && route.icon.render()}
-      <span>{(route.langKey && langStore?.$menu && langStore.$menu[route.langKey]) || route.name}</span>
+      <span>{route.name}</span>
     </span>
   ))
 }
 
 const createContent = ({routes, isShow}: {routes: RoutesType[]; isShow: (r: RoutesType) => boolean}) => {
-  const {langStore} = useStores()
   const list = routes.filter(r => isShow(r))
   return useObserver(
     () =>
@@ -65,7 +62,6 @@ const createContent = ({routes, isShow}: {routes: RoutesType[]; isShow: (r: Rout
 
 const RouteMenu = (props: TRouteMenu) => {
   const history = useHistory()
-  const {userStore} = useStores()
   const {routes = [], options = {}, topMenuOptions} = props
   const menuOptions = Object.assign(
     {},
@@ -75,8 +71,8 @@ const RouteMenu = (props: TRouteMenu) => {
     options,
   )
   const isShow = (route: RoutesType) => {
-    const {hide, role} = route
-    return !hide && ((role && userStore?.permission.includes(role)) || !role)
+    const {hide} = route
+    return !hide
   }
   return (
     <Menu {...menuOptions}>

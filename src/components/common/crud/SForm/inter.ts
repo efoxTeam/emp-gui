@@ -3,11 +3,11 @@ import {InputProps, GroupProps, SearchProps, TextAreaProps, PasswordProps} from 
 import {RadioGroupProps, RadioChangeEvent} from 'antd/lib/radio/interface'
 import {UploadProps} from 'antd/lib/upload'
 import {FormProps, Rule, FormItemProps as FormItemProp} from 'antd/lib/form'
-import {FormInstance} from 'antd/lib/form/util'
+import {FormInstance} from 'antd/lib/form'
 import {DatePickerProps} from 'antd/lib/date-picker'
 import {TimePickerProps} from 'antd/lib/time-picker'
 import {AutoCompleteProps} from 'antd/lib/auto-complete'
-import {SliderProps} from 'antd/lib/slider'
+
 import {InputNumberProps} from 'antd/lib/input-number'
 import {SelectProps} from 'rc-select/lib/'
 declare const ButtonHTMLTypes: ['submit', 'button', 'reset']
@@ -55,7 +55,7 @@ export type FormItemOptionsType =
   | DatePickerProps
   | TimePickerProps
   | UploadProps
-  | SliderProps
+  // | SliderProps
   | InputNumberProps
   | SelectProps
   | undefined

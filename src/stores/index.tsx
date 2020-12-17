@@ -21,7 +21,7 @@ export const StoreProvider = ({children, stores}: TstoreProviderProps) => {
   return useObserver(() => <storeContext.Provider value={Stores}>{children}</storeContext.Provider>)
 }
 // Store hook
-export const useStores: () => any = () => {
+export const useStores: () => TconfigStore = () => {
   const stores = useContext(storeContext)
   if (!stores) {
     // this is especially useful in TypeScript so you don't need to be checking for null all the time

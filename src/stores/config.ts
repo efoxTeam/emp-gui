@@ -4,12 +4,12 @@ import {remoteStore, TRemoteStore} from 'src/stores/remote'
 import {StoresType} from 'src/types'
 
 export type TconfigStore = {
-  // demoStore: TDemoStore
+  demoStore: TDemoStore
   projectStore: TProjectStore
   remoteStore: TRemoteStore
 }
 const stores: StoresType = {
-  // demoStore,
+  demoStore,
   projectStore,
   remoteStore,
 }
