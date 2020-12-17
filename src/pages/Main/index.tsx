@@ -45,7 +45,7 @@ const Main = () => {
   const [templates, templatesAction] = useState(TEMPLATES)
   const [showCreateModal, showCreateModalAction] = useState(false)
   const inputFileRef = React.useRef<HTMLInputElement>(null)
-
+  const {demoStore} = useStores()
   useEffect(() => {
     demoStore.getDemoinfo({id: 1606796764967}).then((res: any) => {
       console.log('demo-get-info-from-db', res)
