@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const git = require('git-promise') // 运行git命令
 function readDir(pathname = './') {
   const dir = []
   // 判断当前是否是一个目录
@@ -21,19 +22,38 @@ function readDir(pathname = './') {
   return dir
 }
 
-function writeFile(path, content) {
-  fs.writeFile(path, content, function (err) {
+function writeJson(path, content) {
+  if (typeof content !== 'object') return
+  fs.writeFile(path, JSON.stringify(content, null, 2), 'utf-8', function (err) {
     if (err) {
       console.log(err)
     }
   })
 }
-function downloadRepo(repo, name) {
-  require('@efox/emp-cli/helpers/downloadRepo')(repo, name, '')
+
+function readFile(filePath) {
+  const content = fs.readFileSync(filePath, 'utf-8')
+  return JSON.parse(content)
+}
+
+async function downloadRepo(repoPath, localPath) {
+  const _branch = '--'
+  const _repoPath = `clone ${_branch} ${repoPath} ${localPath}`
+  if (!fs.existsSync(localPath)) {
+    await git(_repoPath)
+    await fs.rmdir(`${localPath}/.git`, {recursive: true}, err => {
+      console.log(err)
+    })
+    return 1
+  } else {
+    console.log('已存在指定目录')
+    return 0
+  }
 }
 
 module.exports = {
   readDir,
-  writeFile,
+  writeJson,
   downloadRepo,
+  readFile,
 }

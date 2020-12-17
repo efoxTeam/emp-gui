@@ -20,6 +20,22 @@ const Routes = [
     path: '/projects/readDir',
     method: project.readDir,
   },
+  {
+    path: '/projects/typeList',
+    method: project.typeList,
+  },
+  {
+    path: '/projects/detail',
+    method: project.detail,
+  },
+  {
+    path: '/projects/addRemote',
+    method: project.addRemote,
+  },
+  {
+    path: '/projects/deleteRemote',
+    method: project.deleteRemote,
+  },
 ]
 module.exports = {
   Routes,

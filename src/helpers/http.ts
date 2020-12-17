@@ -8,4 +8,8 @@ const http = axios.create({
   // withCredentials: true,
 })
 
+http.interceptors.response.use(response => {
+  return response.data
+})
+
 export default http

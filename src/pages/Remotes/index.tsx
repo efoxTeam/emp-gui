@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import {ModalForm, SForm} from 'src/components/common/crud'
 import CardList from 'src/components/CardList'
 import {SearchOutlined} from '@ant-design/icons'
-import {Card, Button, Drawer, Descriptions, Divider, List, Typography} from 'antd'
+import {Card, Button, Drawer, Descriptions, Divider, List, Typography, message} from 'antd'
 import style from './index.module.scss'
+import {FormInstance} from 'antd/lib/form'
+import {addRemote} from 'src/api/remote'
 const {Meta} = Card
 const {Title} = Typography
 const Com = () => {
@@ -16,6 +18,14 @@ const Com = () => {
     {id: 2, name: 'emp-preact', url: 'https://github.com/efoxTeam/emp-preact-template.git'},
     {id: 3, name: 'emp-vue3-template', url: 'https://github.com/efoxTeam/emp-vue3-template.git'},
   ])
+  const createRemoteForm = useRef<FormInstance>(null)
+
+  const onSubmitCreateRemote = async () => {
+    const values = createRemoteForm.current?.getFieldsValue()
+    const {data, code, msg} = await addRemote(values)
+    message[code === 0 ? 'success' : 'error'](msg)
+  }
+
   return (
     <>
       <Card style={{marginBottom: '20px'}}>
@@ -131,9 +141,10 @@ const Com = () => {
         />
       </Drawer>
       <ModalForm
-        title={'新建项目'}
+        title={'引入远程基站'}
         visible={showCreateModal}
         name={'createModalForm'}
+        dataRef={createRemoteForm}
         fromItems={[
           // {
           //   type: 'Select',
@@ -144,26 +155,31 @@ const Com = () => {
           // },
           {
             type: 'Input',
+            label: '基站名称',
+            name: 'projectName',
+            options: {
+              placeholder: '请输入基站名称：package.json的name',
+            },
+            rules: [{required: true, message: '请输入基站名称'}],
+          },
+          {
+            type: 'Input',
             label: '基站别名',
-            name: 'name',
+            name: 'alias',
             rules: [{required: true, message: '请输入基站别名'}],
           },
           {
             type: 'Input',
-            label: 'emp路径',
-            name: 'empPath',
-            rules: [{required: true, message: '请输入emp.js路径'}],
-          },
-          {
-            type: 'Input',
-            label: 'd.ts路径',
-            name: 'tsPath',
+            label: '基站远程路径',
+            name: 'path',
             options: {
-              placeholder: '默认获取基站默认生成index.d.ts文件',
+              placeholder: '',
             },
+            rules: [{required: true, message: '请输入基站远程路径'}],
             // rules: [{required: true, message: '请输入项目名称'}],
           },
         ]}
+        onSubmit={onSubmitCreateRemote}
         onCancel={() => setShowCreateModal(false)}
       />
     </>
