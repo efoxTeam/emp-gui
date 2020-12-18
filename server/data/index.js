@@ -21,12 +21,12 @@ class Service {
     return parmas.id
   }
   update(name, parmas) {
-    if(!parmas.id) return
+    if (!parmas.id) return
     parmas.updateTime = moment().valueOf()
     modal(name).find({id: parmas.id}).assign(parmas).write()
   }
   delete(name, id) {
-    if(!id) return
+    if (!id) return
     modal(name).remove({id: id}).write()
   }
 }

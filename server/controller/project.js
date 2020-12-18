@@ -8,7 +8,7 @@ function projectDetail(id) {
   const project = data.list[0]
   const empJson = readFile(Path.join(project.path, project.name, 'emp.json'))
   project.remotes = []
-  if(empJson){
+  if (empJson) {
     Object.keys(empJson.remotes).map(key => {
       project.remotes.push({alias: key, aliasUrl: empJson.remotes[key]})
     })

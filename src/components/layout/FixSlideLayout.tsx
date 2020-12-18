@@ -57,16 +57,10 @@ const FixSlideLayout = (props: TLayoutProps) => {
         </Sider>
         <Layout className="site-layout">
           <Header className={`fixlayout-header light`}>
-            <Row gutter={12}>
-              <Col span={3}>
-                <ProjectListAction />
-              </Col>
-              <Col span={3}>
-                <Button type="primary" onClick={() => showCreateProjectAction(true)}>
-                  创建项目
-                </Button>
-              </Col>
-            </Row>
+            <ProjectListAction />
+            <Button type="primary" style={{marginLeft: '20px'}} onClick={() => showCreateProjectAction(true)}>
+              创建项目
+            </Button>
           </Header>
           <Content style={{margin: '24px', overflow: 'initial'}}>
             <div>{props.children}</div>
