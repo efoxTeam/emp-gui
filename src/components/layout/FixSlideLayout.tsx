@@ -1,12 +1,14 @@
-import {Col, Layout, Row} from 'antd'
+import {Col, Layout, Row, Button} from 'antd'
 import {useHistory} from 'react-router-dom'
 import React, {useState, useEffect} from 'react'
-import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
 import RouteMenu from 'src/components/common/RouteMenu'
 import LogoBox from 'src/components/layout/LogoBox'
 import './FixSlideLayout.less'
 import {TLayoutProps} from 'src/types'
 import {observer} from 'mobx-react-lite'
+import ProjectListAction from 'src/components/ProjectListAction'
+import CreateProject from 'src/components/CreateProject'
+import {useStores} from 'src/stores'
 const {Header, Footer} = Layout
 const {Content, Sider} = Layout
 
@@ -21,6 +23,7 @@ const FixSlideLayout = (props: TLayoutProps) => {
   const [withoutLayout, setWithoutLayout] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
   const TitleBox: any = titleBox || LogoBox
+  const {showCreateProject, showCreateProjectAction} = useStores().projectStore
 
   useEffect(() => {
     setOpenKey([...openKey, ...[`/${pathname.split('/')[1]}`]])
@@ -33,38 +36,52 @@ const FixSlideLayout = (props: TLayoutProps) => {
   return withoutLayout ? (
     <>{props.children}</>
   ) : (
-    <Layout className={`light`}>
-      <Sider trigger={null} collapsible collapsed={collapsed} theme={'light'} className={`AsideSider`}>
-        <TitleBox theme={'light'} titleInfo={props.titleInfo} />
-        <RouteMenu
-          options={{
-            theme: 'light',
-            onClick: e => {
-              history.push(e.key.toString())
-            },
-            mode: 'inline',
-            openKeys: openKey,
-            defaultSelectedKeys: selectKey,
-            ...props.menuOptions,
-          }}
-          routes={routes}
-        />
-      </Sider>
-      <Layout className="site-layout">
-        <Header className={`fixlayout-header light`}></Header>
-        <Content style={{margin: '24px', overflow: 'initial'}}>
-          <div>{props.children}</div>
-        </Content>
-        <Footer
-          style={{
-            textAlign: 'center',
-            background: '#fff',
-            color: 'rgba(0, 0, 0, 0.65)',
-          }}>
-          ©2020 Created by Efox EMP Micro FE
-        </Footer>
+    <>
+      <CreateProject visible={showCreateProject} onClose={() => showCreateProjectAction(false)} />
+      <Layout className={`light`}>
+        <Sider trigger={null} collapsible collapsed={collapsed} theme={'light'} className={`AsideSider`}>
+          <TitleBox theme={'light'} titleInfo={props.titleInfo} />
+          <RouteMenu
+            options={{
+              theme: 'light',
+              onClick: e => {
+                history.push(e.key.toString())
+              },
+              mode: 'inline',
+              openKeys: openKey,
+              defaultSelectedKeys: selectKey,
+              ...props.menuOptions,
+            }}
+            routes={routes}
+          />
+        </Sider>
+        <Layout className="site-layout">
+          <Header className={`fixlayout-header light`}>
+            <Row gutter={12}>
+              <Col span={3}>
+                <ProjectListAction />
+              </Col>
+              <Col span={3}>
+                <Button type="primary" onClick={() => showCreateProjectAction(true)}>
+                  创建项目
+                </Button>
+              </Col>
+            </Row>
+          </Header>
+          <Content style={{margin: '24px', overflow: 'initial'}}>
+            <div>{props.children}</div>
+          </Content>
+          <Footer
+            style={{
+              textAlign: 'center',
+              background: '#fff',
+              color: 'rgba(0, 0, 0, 0.65)',
+            }}>
+            ©2020 Created by Efox EMP Micro FE
+          </Footer>
+        </Layout>
       </Layout>
-    </Layout>
+    </>
   )
 }
 
