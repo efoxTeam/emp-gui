@@ -4,7 +4,14 @@ import configStores from 'src/stores/config'
 import {routes} from 'src/configs/router'
 import ProjectListAction from 'src/components/ProjectListAction'
 import 'antd/dist/antd.css'
-import {StoreProvider} from './stores'
+import {StoreProvider, useStores} from './stores'
+import {observer, useObserver} from 'mobx-react-lite'
+
+const LogoComp = observer(() => {
+  const {name} = useStores().projectStore.projectInfo
+
+  return useObserver(() => <>{name}</>)
+})
 
 const App = () => {
   return (
@@ -13,7 +20,7 @@ const App = () => {
         routes={routes}
         titleInfo={{
           logo: require('src/assets/img/efox.png'),
-          text: <ProjectListAction />,
+          text: <LogoComp />,
         }}
         userProfile={null}
       />

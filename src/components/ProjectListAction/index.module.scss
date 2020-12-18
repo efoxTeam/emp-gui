@@ -1,0 +1,8 @@
+.projectCard {
+  transition: all 0.2s linear;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #eee;
+  }
+}

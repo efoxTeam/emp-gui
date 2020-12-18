@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react'
 import {ModalForm, SForm} from 'src/components/common/crud'
 import CardList from 'src/components/CardList'
 import {SearchOutlined} from '@ant-design/icons'
-import {Card, Button, Drawer, Descriptions, Divider, List, Typography, message} from 'antd'
+import {Card, Button, Drawer, Descriptions, Divider, List, Typography, message, Row, Col} from 'antd'
 import style from './index.module.scss'
 import {FormInstance} from 'antd/lib/form'
 import {addRemote} from 'src/api/remote'
@@ -37,26 +37,26 @@ const Com = () => {
             alert(e.Input)
           }}
           items={[
-            {
-              type: 'Input',
-              label: '',
-              name: 'Input',
-              options: {
-                placeholder: '远程基站别名',
-                suffix: <SearchOutlined />,
-              },
-              // rules: [{required: true, message: '请输入远程基站别名'}],
-            },
+            // {
+            //   type: 'Input',
+            //   label: '',
+            //   name: 'Input',
+            //   options: {
+            //     placeholder: '远程基站别名',
+            //     suffix: <SearchOutlined />,
+            //   },
+            //   // rules: [{required: true, message: '请输入远程基站别名'}],
+            // },
             {
               type: 'Button',
               label: '',
               formItemOptions: {style: {flex: 1}},
               data: [
-                {
-                  htmlType: 'submit',
-                  label: '查找',
-                  value: 'search',
-                },
+                // {
+                //   htmlType: 'submit',
+                //   label: '查找',
+                //   value: 'search',
+                // },
                 {
                   label: '引入远程基站',
                   value: 'add',
@@ -67,6 +67,7 @@ const Com = () => {
           ]}
         />
       </Card>
+
       <CardList
         list={remotes}
         nextPage={() => {}}
@@ -74,7 +75,13 @@ const Com = () => {
         pageSize={10}
         count={remotes.length}
         layout="row"
-        cardDom={(item: {aliasUrl: {split: (arg0: string) => [any, any]}; alias: React.ReactNode}) => {
+        pagination={<></>}
+        header={
+          <Typography>
+            <Title level={5}>远程基站列表</Title>
+          </Typography>
+        }
+        cardDom={item => {
           const [name, url] = item.aliasUrl.split('@')
           return (
             <Card
@@ -174,7 +181,7 @@ const Com = () => {
           },
           {
             type: 'Input',
-            label: '基站远程路径',
+            label: '基站路径',
             name: 'path',
             options: {
               placeholder: '',

@@ -88,7 +88,7 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
       width={720}
       onClose={onDrawerClose}
       visible={visible}
-      bodyStyle={{paddingBottom: 80}}
+      bodyStyle={{paddingTop: 0}}
       footer={
         <div
           style={{
@@ -102,7 +102,12 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
           </Button>
         </div>
       }>
-      <Form layout="vertical" onValuesChange={onHandleFormChange} ref={formRef} onFinish={onFormFinish}>
+      <Form
+        layout="vertical"
+        onValuesChange={onHandleFormChange}
+        ref={formRef}
+        onFinish={onFormFinish}
+        className={style.form}>
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item name="type" label="选择模版" rules={[{required: true, message: '请选择模版'}]}>

@@ -16,6 +16,10 @@ export const projectStore = () => {
   return {
     templates,
     projectInfo,
+    showCreateProject: false,
+    showCreateProjectAction(is: boolean) {
+      this.showCreateProject = is
+    },
     setProjectInfo(val: any) {
       envStorage.set('prodId', val.id)
       this.projectInfo = val

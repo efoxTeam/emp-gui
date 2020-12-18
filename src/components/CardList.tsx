@@ -1,5 +1,5 @@
 import React from 'react'
-import {Pagination, Card, Row, Col, Spin} from 'antd'
+import {Pagination, Card, Row, Col, Spin, List} from 'antd'
 import {PaginationProps} from 'antd/lib/pagination'
 export interface CardListProps {
   list: any
@@ -19,6 +19,7 @@ export interface CardListProps {
   style?: React.CSSProperties
   listClassName?: string
   className?: string
+  header?: React.ReactNode
 }
 const justifyContent = {
   start: 'flex-start',
@@ -43,27 +44,37 @@ export default ({
   style,
   listStyle,
   listClassName,
+  header,
 }: CardListProps) => {
   return (
     <>
       <Card className={className} style={style}>
         <Spin spinning={loading}>
           {layout === 'row' ? (
-            <Row gutter={[16, 24]} style={listStyle}>
-              {list.map((item: any, index: number) => (
-                <Col key={index} className="gutter-row" span={span}>
-                  {cardDom(item, index)}
-                </Col>
-              ))}
-            </Row>
-          ) : (
-            <div
+            <List
               className={listClassName}
-              style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center', marginBottom: '20px', ...listStyle}}>
-              {list.map((item: any, index: number) => (
-                <>{cardDom(item, index)}</>
-              ))}
-            </div>
+              style={listStyle}
+              dataSource={list}
+              header={header}
+              renderItem={(item, index) => {
+                return <List.Item>{cardDom(item, index)}</List.Item>
+              }}
+            />
+          ) : (
+            <List
+              className={listClassName}
+              style={listStyle}
+              grid={{gutter: 16, column: 4}}
+              dataSource={list}
+              header={header}
+              renderItem={(item, index) => (
+                <List.Item>
+                  <Col className="gutter-row" span={span}>
+                    {cardDom(item, index)}
+                  </Col>
+                </List.Item>
+              )}
+            />
           )}
           <div style={{display: 'flex', justifyContent: justifyContent[paginationJustify]}}>
             {footer}
