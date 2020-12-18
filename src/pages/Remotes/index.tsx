@@ -74,7 +74,7 @@ const Com = () => {
         pageSize={10}
         count={remotes.length}
         layout="row"
-        cardDom={item => {
+        cardDom={(item: {aliasUrl: {split: (arg0: string) => [any, any]}; alias: React.ReactNode}) => {
           const [name, url] = item.aliasUrl.split('@')
           return (
             <Card

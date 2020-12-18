@@ -58,16 +58,17 @@ const ProjectListComp = () => {
             <div style={{width: '400px'}}>
               <CardList
                 list={projectList || []}
-                nextPage={e => {
+                nextPage={(e: TprojectListParams | undefined) => {
                   getProjectListAct(e)
                 }}
+                listStyle={{maxHeight: '600px', overflowY: 'auto'}}
                 span={24}
                 page={info.page}
                 pageSize={info.pageSize}
                 count={total}
                 paginationOpt={{showSizeChanger: false}}
                 paginationJustify={'end'}
-                cardDom={item => (
+                cardDom={(item: {name: React.ReactNode; path: any}) => (
                   <Card style={{margin: '0 0 10px'}}>
                     <Meta
                       avatar={
