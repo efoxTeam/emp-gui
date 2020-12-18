@@ -69,7 +69,7 @@ const ProjectListComp = () => {
               paginationJustify={'end'}
               cardDom={item => (
                 <Card
-                  style={{margin: '0 0 10px'}}
+                  style={{margin: '0 0 10px', width: '100%'}}
                   onClick={() => item.id !== projectInfo.id && getProjectInfo({id: item.id})}
                   className={style.projectCard}>
                   <Meta

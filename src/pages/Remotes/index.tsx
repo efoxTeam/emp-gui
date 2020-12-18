@@ -76,6 +76,11 @@ const Com = () => {
         count={remotes.length}
         layout="row"
         pagination={<></>}
+        header={
+          <Typography>
+            <Title level={5}>远程基站列表</Title>
+          </Typography>
+        }
         cardDom={item => {
           const [name, url] = item.aliasUrl.split('@')
           return (

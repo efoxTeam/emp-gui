@@ -1,5 +1,5 @@
 import React from 'react'
-import {Pagination, Card, Row, Col, Spin} from 'antd'
+import {Pagination, Card, Row, Col, Spin, List} from 'antd'
 import {PaginationProps} from 'antd/lib/pagination'
 export interface CardListProps {
   list: any
@@ -15,6 +15,7 @@ export interface CardListProps {
   paginationOpt?: PaginationProps
   cardDom: (item: any, index: number) => React.ReactNode
   layout?: 'row' | 'flex'
+  header?: React.ReactNode
 }
 const justifyContent = {
   start: 'flex-start',
@@ -35,25 +36,33 @@ export default ({
   pagination,
   footer,
   paginationOpt,
+  header,
 }: CardListProps) => {
   return (
     <>
       <Card>
         <Spin spinning={loading}>
           {layout === 'row' ? (
-            <Row gutter={[16, 24]}>
-              {list.map((item: any, index: number) => (
-                <Col key={index} className="gutter-row" span={span}>
-                  {cardDom(item, index)}
-                </Col>
-              ))}
-            </Row>
+            <List
+              dataSource={list}
+              header={header}
+              renderItem={(item, index) => {
+                return <List.Item>{cardDom(item, index)}</List.Item>
+              }}
+            />
           ) : (
-            <div style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center', marginBottom: '20px'}}>
-              {list.map((item: any, index: number) => (
-                <>{cardDom(item, index)}</>
-              ))}
-            </div>
+            <List
+              grid={{gutter: 16, column: 4}}
+              dataSource={list}
+              header={header}
+              renderItem={(item, index) => (
+                <List.Item>
+                  <Col className="gutter-row" span={span}>
+                    {cardDom(item, index)}
+                  </Col>
+                </List.Item>
+              )}
+            />
           )}
           <div style={{display: 'flex', justifyContent: justifyContent[paginationJustify]}}>
             {footer}
