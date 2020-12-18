@@ -61,6 +61,7 @@ const ProjectListComp = () => {
               nextPage={e => {
                 getProjectListAct(e)
               }}
+              listStyle={{maxHeight: '600px', overflowY: 'auto'}}
               span={24}
               page={info.page}
               pageSize={info.pageSize}

@@ -14,9 +14,8 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
   const [dir, dirAction] = useState<string[]>([])
   const formRef = useRef<FormInstance>(null)
   const {projectStore} = useStores()
-
   const onHandleFormChange = (value: any) => {}
-
+  let timer: NodeJS.Timeout
   const onDrawerClose = () => {
     // 重置表单
     formRef.current?.resetFields()
@@ -27,6 +26,7 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
    * 输入框回车搜索
    */
   const searchDir = () => {
+    clearTimeout(timer)
     const local = envStorage.get(LOCALSTORAGE_CREATE_URL)
     fetchDirFileList(formRef.current?.getFieldValue('path') || (local !== 'undefined' ? local : '') || '')
   }
@@ -73,6 +73,15 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
       await projectStore.getProjectInfo({id: data.id})
       onDrawerClose?.()
     }
+  }
+  // const searchDirTimer = (e: React.KeyboardEvent) => {
+  const searchDirTimer = () => {
+    // if (e.key === 'Enter') return
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      // SetIsSearching(false)
+      searchDir()
+    }, 1000)
   }
 
   useEffect(() => {
@@ -136,7 +145,13 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
         <Row gutter={24}>
           <Col span={24}>
             <Form.Item name="path" label="选择目录" rules={[{required: true, message: 'Please enter url'}]}>
-              <Input style={{width: '100%'}} placeholder="输入项目名" onPressEnter={searchDir} />
+              <Input
+                style={{width: '100%'}}
+                placeholder="输入项目名"
+                onPressEnter={searchDir}
+                // onKeyUp={searchDirTimer}
+                onChange={searchDirTimer}
+              />
             </Form.Item>
           </Col>
         </Row>
