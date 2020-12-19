@@ -1,0 +1,26 @@
+
+.projectPath {
+  position: relative;
+  color: #1890ff;
+  text-decoration: underline;
+  cursor: pointer;
+  .projectPathTooltip {
+    visibility: hidden;
+    width: max-content;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 2px;
+    font-size: 14px;
+    
+    /* 定位 */
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 105%;
+  }
+  &:hover .projectPathTooltip {
+    visibility: visible;
+}
+}

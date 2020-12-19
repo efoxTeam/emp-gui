@@ -33,6 +33,14 @@ export const getDirFileList = (data: {path: string}): Promise<HTTP_RESP<{dirs: s
   })
 
 /**
+ * 获取当前项目目录结构
+ * @param path 当前路径
+ */
+export const openDir = (data: {path: string}): Promise<void> =>
+  http.get('/projects/openDir', {
+    params: data,
+  })
+/**
  * 创建项目
  * @param name 项目名称
  * @param type 模版
