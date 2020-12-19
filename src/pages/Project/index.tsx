@@ -5,6 +5,7 @@ import {useStores} from 'src/stores'
 const {Title} = Typography
 const Com = () => {
   const {projectStore} = useStores()
+
   return useObserver(() => (
     <>
       <Card>
@@ -23,7 +24,7 @@ const Com = () => {
             </Typography>
           }
           dataSource={projectStore.projectInfo.remotes}
-          renderItem={item => <List.Item>{item}</List.Item>}
+          renderItem={item => <List.Item>{item?.alias}</List.Item>}
         />
       </Card>
     </>
