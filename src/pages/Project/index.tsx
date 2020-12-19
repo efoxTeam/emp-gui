@@ -13,9 +13,9 @@ const Com = () => {
   return useObserver(() => (
     <>
       <Card>
-        <Descriptions title="项目名称">
+        <Descriptions title="基础信息">
           <Descriptions.Item label="模版类型">{projectStore.projectInfo.name}</Descriptions.Item>
-          <Descriptions.Item label="项目地址">
+          <Descriptions.Item label="储存位置">
             <span onClick={() => openDir({path: projectPath})} className={css.projectPath}>
               {projectPath}
               <span className={css.projectPathTooltip}>点击打开系统文件夹目录</span>
@@ -27,11 +27,11 @@ const Com = () => {
           size="small"
           header={
             <Typography>
-              <Title level={5}>共享资源列表</Title>
+              <Title level={5}>共享资源</Title>
             </Typography>
           }
-          dataSource={Object.keys(projectStore.projectInfo.exposes)}
-          renderItem={item => <List.Item>{item}</List.Item>}
+          dataSource={Object.entries(projectStore.projectInfo.exposes)}
+          renderItem={item => <List.Item>{`${item[0]}`}</List.Item>}
         />
       </Card>
     </>

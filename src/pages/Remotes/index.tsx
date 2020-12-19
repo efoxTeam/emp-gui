@@ -167,27 +167,30 @@ const Com = observer(() => {
           // },
           {
             type: 'Input',
-            label: '基站名称',
+            label: '使用别名',
             name: 'alias',
             options: {
-              placeholder: '请输入基站名称：package.json的name',
+              placeholder: '请输入基站名项目中package.json的name字段',
             },
-            rules: [{required: true, message: '请输入基站名称'}],
+            rules: [{required: true, message: '请输入使用别名'}],
           },
           {
             type: 'Input',
-            label: '基站别名',
+            label: '唯一标识',
             name: 'projectName',
-            rules: [{required: true, message: '请输入基站别名'}],
+            options: {
+              placeholder: '请输入基站项目中emp.json的name字段',
+            },
+            rules: [{required: true, message: '请输入唯一标识'}],
           },
           {
             type: 'Input',
             label: '基站路径',
             name: 'path',
             options: {
-              placeholder: '',
+              placeholder: '请输入基站项目的访问路径',
             },
-            rules: [{required: true, message: '请输入基站远程路径'}],
+            rules: [{required: true, message: '请输入基站项目的访问路径'}],
             // rules: [{required: true, message: '请输入项目名称'}],
           },
         ]}

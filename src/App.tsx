@@ -21,6 +21,7 @@ const App = () => {
         titleInfo={{
           logo: require('src/assets/img/efox.png'),
           text: <LogoComp />,
+          link: location.href,
         }}
         userProfile={null}
       />
