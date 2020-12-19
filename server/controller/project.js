@@ -5,10 +5,10 @@ const template = require('@efox/emp-cli/config/template')
 const {dbService} = require('../data/index')
 function projectDetail(id) {
   const data = dbService.retrieve('project', {id})
-  const project = data.list[0]
-  const empJson = readFile(Path.join(project.path, project.name, 'emp.json'))
+  const project = data.list[0] || {}
+  const empJson = readFile(Path.join(project?.path || '', project?.name || '', 'emp.json'))
   project.remotes = []
-  if(empJson){
+  if (empJson) {
     Object.keys(empJson.remotes).map(key => {
       project.remotes.push({alias: key, aliasUrl: empJson.remotes[key]})
     })
@@ -36,7 +36,7 @@ class ProjectRest extends Base {
     res.json(super.successJson(templateList))
   }
   readDir(req, res) {
-    const currentPath = req.query.path || process.cwd().replace('emp-gui', '')
+    const currentPath = req.query.path || process.cwd()?.split('/')?.slice(0, -1)?.join('/')
     const path = req.query.path || '../'
     const dirs = readDir(path)
     res.setHeader('Content-Type', 'application/json')
