@@ -162,7 +162,13 @@ const Main = () => {
             paginationOpt={{
               showSizeChanger: false,
             }}
-            cardDom={item => (
+            cardDom={(item: {
+              img: string | undefined
+              name: React.ReactNode
+              type: React.ReactNode
+              fullPath: React.ReactNode
+              description: React.ReactNode
+            }) => (
               <Card
                 style={{margin: '0 10px 10px'}}
                 cover={

@@ -4,7 +4,7 @@ import CreateProject from 'src/components/CreateProject'
 import {useStores} from 'src/stores'
 import {TprojectList, TprojectListParam} from 'src/api/project'
 import {observer, useObserver} from 'mobx-react-lite'
-import {Dropdown, Card, Avatar, Button} from 'antd'
+import {Dropdown, Card, Avatar, Button, Input} from 'antd'
 import envStorage from 'src/helpers/envStorage'
 import {getProjectList} from 'src/api/project'
 import style from './index.module.scss'
@@ -21,13 +21,14 @@ const ProjectListComp = () => {
   const [total, setTotal] = useState(0)
   const [projectList, setProjectList] = useState<TprojectList>([])
   const {projectStore} = useStores()
+  const [showDrowdown, showDrowdownAction] = useState(false)
   const {getProjectInfo, showCreateProjectAction, projectInfo} = projectStore
-  const getProjectListAct = async (param?: TprojectListParams) => {
+  const getProjectListAct = async (param?: TprojectListParams, name?: string) => {
     setInfo({
       ...info,
       ...param,
     })
-    const {code, data} = await getProjectList(info)
+    const {code, data} = await getProjectList({...info, name})
     setProjectList(data.list)
     setTotal(data.total)
   }
@@ -52,8 +53,10 @@ const ProjectListComp = () => {
       <Dropdown
         onVisibleChange={visible => {
           visible && getProjectListAct({page: 1})
+          showDrowdownAction(visible)
         }}
         trigger={['click']}
+        visible={showDrowdown}
         overlay={
           <div style={{width: '400px'}}>
             <CardList
@@ -61,6 +64,7 @@ const ProjectListComp = () => {
               nextPage={e => {
                 getProjectListAct(e)
               }}
+              listStyle={{maxHeight: '600px', overflowY: 'auto'}}
               span={24}
               page={info.page}
               pageSize={info.pageSize}
@@ -70,7 +74,10 @@ const ProjectListComp = () => {
               cardDom={item => (
                 <Card
                   style={{margin: '0 0 10px', width: '100%'}}
-                  onClick={() => item.id !== projectInfo.id && getProjectInfo({id: item.id})}
+                  onClick={() => {
+                    item.id !== projectInfo.id && getProjectInfo({id: item.id})
+                    showDrowdownAction(false)
+                  }}
                   className={style.projectCard}>
                   <Meta
                     avatar={
@@ -85,10 +92,19 @@ const ProjectListComp = () => {
                   />
                 </Card>
               )}
+              footer={
+                <div style={{flex: 1, marginRight: '20px'}}>
+                  <Input.Search
+                    placeholder="搜索项目"
+                    enterButton
+                    onSearch={value => getProjectListAct({page: 1}, value)}
+                  />
+                </div>
+              }
             />
           </div>
         }>
-        <Button>项目列表</Button>
+        <Button onClick={() => showDrowdownAction(true)}>项目列表</Button>
       </Dropdown>
     </>
   ))

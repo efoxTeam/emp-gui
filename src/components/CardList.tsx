@@ -15,6 +15,10 @@ export interface CardListProps {
   paginationOpt?: PaginationProps
   cardDom: (item: any, index: number) => React.ReactNode
   layout?: 'row' | 'flex'
+  listStyle?: React.CSSProperties
+  style?: React.CSSProperties
+  listClassName?: string
+  className?: string
   header?: React.ReactNode
 }
 const justifyContent = {
@@ -35,15 +39,21 @@ export default ({
   nextPage,
   pagination,
   footer,
+  className,
   paginationOpt,
+  style,
+  listStyle,
+  listClassName,
   header,
 }: CardListProps) => {
   return (
     <>
-      <Card>
+      <Card className={className} style={style}>
         <Spin spinning={loading}>
           {layout === 'row' ? (
             <List
+              className={listClassName}
+              style={listStyle}
               dataSource={list}
               header={header}
               renderItem={(item, index) => {
@@ -52,6 +62,8 @@ export default ({
             />
           ) : (
             <List
+              className={listClassName}
+              style={listStyle}
               grid={{gutter: 16, column: 4}}
               dataSource={list}
               header={header}
