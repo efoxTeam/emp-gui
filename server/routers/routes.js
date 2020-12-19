@@ -21,6 +21,10 @@ const Routes = [
     method: project.readDir,
   },
   {
+    path: '/projects/openDir',
+    method: project.openDir,
+  },
+  {
     path: '/projects/typeList',
     method: project.typeList,
   },

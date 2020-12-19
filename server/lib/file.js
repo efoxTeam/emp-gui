@@ -1,5 +1,7 @@
 const fs = require('fs')
 const path = require('path')
+const os = require('os')
+const exec = require('child_process').exec
 const git = require('git-promise') // 运行git命令
 function readDir(pathname = './') {
   const dir = []
@@ -22,6 +24,20 @@ function readDir(pathname = './') {
   return dir
 }
 
+function openDir(dirpath = '') {
+  // exec('explorer.exe /select,"E:\\Workspace\\Java"')
+  const platform = os.platform()
+  let BIN = ''
+  if (platform === 'win32') {
+    BIN = `exploreor ${dirpath}`
+  } else if (platform === '') {
+    BIN = `nautilus ${dirpath}`
+  } else {
+    BIN = `open ${dirpath}`
+  }
+  BIN && exec(BIN)
+}
+
 function writeJson(path, content) {
   if (typeof content !== 'object') return
   fs.writeFile(path, JSON.stringify(content, null, 2), 'utf-8', function (err) {
@@ -33,10 +49,10 @@ function writeJson(path, content) {
 
 function readFile(filePath) {
   const exist = fs.existsSync(filePath)
-  if(exist){
+  if (exist) {
     const content = fs.readFileSync(filePath, 'utf-8')
     return JSON.parse(content)
-  }else{
+  } else {
     return false
   }
 }
@@ -58,6 +74,7 @@ async function downloadRepo(repoPath, localPath) {
 
 module.exports = {
   readDir,
+  openDir,
   writeJson,
   downloadRepo,
   readFile,

@@ -1,6 +1,6 @@
 const Base = require('./base')
 const Path = require('path')
-const {readDir, downloadRepo, readFile, writeJson} = require('../lib/file')
+const {readDir, openDir, downloadRepo, readFile, writeJson} = require('../lib/file')
 const template = require('@efox/emp-cli/config/template')
 const {dbService} = require('../data/index')
 function projectDetail(id) {
@@ -41,6 +41,14 @@ class ProjectRest extends Base {
     const dirs = readDir(path)
     res.setHeader('Content-Type', 'application/json')
     res.json(super.successJson({path: currentPath, dirs}))
+  }
+  openDir(req, res) {
+    const dirpath = req.query.path
+    if (dirpath) {
+      openDir(dirpath)
+    }
+    res.setHeader('Content-Type', 'application/json')
+    res.json(super.successJson({}))
   }
   detail(req, res) {
     const project = projectDetail(req.query.id)
