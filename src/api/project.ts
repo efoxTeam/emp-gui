@@ -1,7 +1,7 @@
 import http from 'src/helpers/http'
 import {HTTP_RESP} from 'src/typing'
 
-export type TprojectList = {id: number; name: string; type: string; path: string}[]
+export type TprojectList = {id: string; name: string; type: string; path: string}[]
 export type TprojectListParam = {
   name?: string
   type?: string
@@ -15,7 +15,7 @@ export type TProjectDedetail = {
   type: string
   path: string
   remotes: {alias: string; aliasUrl: string}[]
-  expose: Record<string, string>[]
+  exposes: Record<string, string>
 }
 
 /**
@@ -53,7 +53,7 @@ export const addProject = (data: {name: string; type: string; path: string}): Pr
  * 获取项目详情
  * @param id 项目id
  */
-export const getProjectInfo = (data: {id: string}): Promise<HTTP_RESP<{}>> =>
+export const getProjectInfo = (data: {id: string}): Promise<HTTP_RESP<TProjectDedetail>> =>
   http.get('/projects/detail', {
     params: data,
   })

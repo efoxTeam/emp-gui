@@ -30,8 +30,8 @@ const Com = () => {
               <Title level={5}>共享资源列表</Title>
             </Typography>
           }
-          dataSource={projectStore.projectInfo.remotes}
-          renderItem={item => <List.Item>{item?.alias}</List.Item>}
+          dataSource={Object.keys(projectStore.projectInfo.exposes)}
+          renderItem={item => <List.Item>{item}</List.Item>}
         />
       </Card>
     </>

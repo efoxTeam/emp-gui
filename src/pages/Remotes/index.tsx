@@ -7,10 +7,10 @@ import style from './index.module.scss'
 import {FormInstance} from 'antd/lib/form'
 import {addRemote} from 'src/api/remote'
 import {useStores} from 'src/stores'
-import {useObserver} from 'mobx-react-lite'
+import {observer, useObserver} from 'mobx-react-lite'
 const {Meta} = Card
 const {Title} = Typography
-const Com = () => {
+const Com = observer(() => {
   const {projectStore} = useStores()
   const {remotes} = projectStore.projectInfo
   const [drawerVisible, setDrawerVisible] = useState(false)
@@ -24,6 +24,7 @@ const Com = () => {
     message[success ? 'success' : 'error'](msg)
     if (success) {
       setShowCreateModal(false)
+      projectStore.getProjectInfo({id: projectStore.projectInfo.id})
     }
   }
 
@@ -195,6 +196,6 @@ const Com = () => {
       />
     </>
   ))
-}
+})
 
 export default Com

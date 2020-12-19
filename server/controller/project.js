@@ -8,10 +8,12 @@ function projectDetail(id) {
   const project = data.list[0] || {}
   const empJson = readFile(Path.join(project?.path || '', project?.name || '', 'emp.json'))
   project.remotes = []
+  project.exposes = {}
   if (empJson) {
     Object.keys(empJson.remotes).map(key => {
       project.remotes.push({alias: key, aliasUrl: empJson.remotes[key]})
     })
+    project.exposes = empJson.exposes || {}
   }
   return project
 }
@@ -70,7 +72,6 @@ class ProjectRest extends Base {
     const empPath = Path.join(project.path, project.name, 'emp.json')
     const empJson = readFile(empPath)
     empJson.remotes[alias] = projectName + '@' + path
-    console.log('empJson', empJson)
     writeJson(empPath, empJson)
     res.json(super.successJson())
   }

@@ -10,7 +10,7 @@ import {observer, useObserver} from 'mobx-react-lite'
 const LogoComp = observer(() => {
   const {name} = useStores().projectStore.projectInfo
 
-  return useObserver(() => <>{name}</>)
+  return useObserver(() => <>{name || '暂无项目'}</>)
 })
 
 const App = () => {

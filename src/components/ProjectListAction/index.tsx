@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import CardList from 'src/components/CardList'
 import CreateProject from 'src/components/CreateProject'
 import {useStores} from 'src/stores'
 import {TprojectList, TprojectListParam} from 'src/api/project'
 import {observer, useObserver} from 'mobx-react-lite'
-import {Dropdown, Card, Avatar, Button, Input} from 'antd'
+import {Dropdown, Card, Avatar, Button, Input, Form} from 'antd'
 import envStorage from 'src/helpers/envStorage'
 import {getProjectList} from 'src/api/project'
 import style from './index.module.scss'
+import {FormInstance} from 'antd/lib/form'
+import {getFrontLogo} from 'src/helpers/utils'
 export interface TprojectListParams extends Partial<TprojectListParam> {
   page?: number
   pageSize?: number
@@ -22,6 +24,7 @@ const ProjectListComp = () => {
   const [projectList, setProjectList] = useState<TprojectList>([])
   const {projectStore} = useStores()
   const [showDrowdown, showDrowdownAction] = useState(false)
+  const searchForm = useRef<FormInstance>(null)
   const {getProjectInfo, showCreateProjectAction, projectInfo} = projectStore
   const getProjectListAct = async (param?: TprojectListParams, name?: string) => {
     setInfo({
@@ -32,9 +35,16 @@ const ProjectListComp = () => {
     setProjectList(data.list)
     setTotal(data.total)
   }
+
+  const handleDrowdownShow = (is: boolean) => {
+    if (!is) searchForm.current?.resetFields()
+    showDrowdownAction(is)
+  }
+
   useEffect(() => {
     ;(async () => {
-      let prodId = envStorage.get('prodId')
+      let prodId = projectInfo.id
+      console.log(prodId)
       if (!prodId || prodId === 'undefined') {
         const {code, data} = await getProjectList({page: 1, pageSize: 10})
         if (data.list.length > 0) {
@@ -44,7 +54,8 @@ const ProjectListComp = () => {
           return
         }
       }
-      await getProjectInfo({id: prodId})
+      const response = await getProjectInfo({id: prodId})
+      if (!response.id) showCreateProjectAction(true)
     })()
   }, [])
 
@@ -53,7 +64,7 @@ const ProjectListComp = () => {
       <Dropdown
         onVisibleChange={visible => {
           visible && getProjectListAct({page: 1})
-          showDrowdownAction(visible)
+          handleDrowdownShow(visible)
         }}
         trigger={['click']}
         visible={showDrowdown}
@@ -76,17 +87,11 @@ const ProjectListComp = () => {
                   style={{margin: '0 0 10px', width: '100%'}}
                   onClick={() => {
                     item.id !== projectInfo.id && getProjectInfo({id: item.id})
-                    showDrowdownAction(false)
+                    handleDrowdownShow(false)
                   }}
                   className={style.projectCard}>
                   <Meta
-                    avatar={
-                      <Avatar
-                        src={
-                          'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png'
-                        }
-                      />
-                    }
+                    avatar={<Avatar src={getFrontLogo(item.name)} />}
                     title={item.name}
                     description={`地址：${item.path}`}
                   />
@@ -94,11 +99,11 @@ const ProjectListComp = () => {
               )}
               footer={
                 <div style={{flex: 1, marginRight: '20px'}}>
-                  <Input.Search
-                    placeholder="搜索项目"
-                    enterButton
-                    onSearch={value => getProjectListAct({page: 1}, value)}
-                  />
+                  <Form onFinish={values => getProjectListAct({page: 1}, values.search)} ref={searchForm}>
+                    <Form.Item name="search">
+                      <Input.Search placeholder="搜索项目" enterButton onSearch={() => searchForm.current?.submit()} />
+                    </Form.Item>
+                  </Form>
                 </div>
               }
             />

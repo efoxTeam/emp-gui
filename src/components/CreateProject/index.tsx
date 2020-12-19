@@ -1,9 +1,9 @@
-import {Button, Col, Drawer, Form, Input, Row, Select, List, message} from 'antd'
+import {Button, Col, Drawer, Form, Input, Row, Select, List, message, notification} from 'antd'
 import {FolderOutlined} from '@ant-design/icons'
 import {FormInstance} from 'antd/lib/form'
 import React, {useEffect, useRef, useState} from 'react'
 import {useStores} from 'src/stores'
-import {observer} from 'mobx-react-lite'
+import {observer, useObserver} from 'mobx-react-lite'
 import style from './index.module.scss'
 import envStorage from 'src/helpers/envStorage'
 import {addProject, getDirFileList} from 'src/api/project'
@@ -17,6 +17,15 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
   const onHandleFormChange = (value: any) => {}
   let timer: NodeJS.Timeout
   const onDrawerClose = () => {
+    console.log(projectStore.projectInfo.id)
+    if (!projectStore.projectInfo.id) {
+      return notification.warning({
+        message: '提示',
+        description: '请先创建您的第一个项目喔～',
+        duration: 1.5,
+        key: 'key',
+      })
+    }
     // 重置表单
     formRef.current?.resetFields()
     onClose?.()
@@ -78,10 +87,30 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
   const searchDirTimer = () => {
     // if (e.key === 'Enter') return
     clearTimeout(timer)
-    timer = setTimeout(() => {
-      // SetIsSearching(false)
-      searchDir()
-    }, 1000)
+    if (formRef.current?.getFieldValue('path') !== '') {
+      timer = setTimeout(() => {
+        // SetIsSearching(false)
+        searchDir()
+      }, 1000)
+    }
+  }
+
+  /**
+   * 前往上一级目录
+   */
+  const onClickPrevDir = () => {
+    const curDir = formRef.current?.getFieldValue('path')
+    const splitDir = curDir
+      .replace(/\/{1,}/, '/')
+      .split('/')
+      .filter((item: string) => item !== '')
+    splitDir.pop()
+
+    let newDir = '/'
+    if (splitDir.length) {
+      newDir += splitDir.join('/')
+    }
+    fetchDirFileList(newDir)
   }
 
   useEffect(() => {
@@ -91,12 +120,13 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
     }
   }, [visible])
 
-  return (
+  return useObserver(() => (
     <Drawer
       title="创建项目"
       width={720}
       onClose={onDrawerClose}
       visible={visible}
+      closable={false}
       bodyStyle={{paddingTop: 0}}
       footer={
         <div
@@ -151,6 +181,11 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
                 onPressEnter={searchDir}
                 // onKeyUp={searchDirTimer}
                 onChange={searchDirTimer}
+                suffix={
+                  <Button type="primary" onClick={onClickPrevDir}>
+                    上一级
+                  </Button>
+                }
               />
             </Form.Item>
           </Col>
@@ -166,7 +201,7 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
         )}
       />
     </Drawer>
-  )
+  ))
 }
 
 export default observer(CreateProject)

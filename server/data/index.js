@@ -1,5 +1,6 @@
 const {db} = require('./db')
 const moment = require('moment')
+const {params} = require('../controller/project')
 
 function modal(name) {
   return db.get(name)
@@ -10,8 +11,16 @@ class Service {
     const page = parmas.page || 0
     delete parmas.pageSize
     delete parmas.page
-    const list = modal(name).filter(parmas).sortBy('createTime').take(pageSize).value() || []
-    const total = modal(name).filter(parmas).size().value()
+
+    const filter = item => {
+      if (parmas.name) {
+        return item.name.indexOf(parmas.name) !== -1
+      } else {
+        return Object.keys(parmas).every(key => (key !== 'name' ? parmas[key] === item[key] : true))
+      }
+    }
+    const list = modal(name).filter(filter).sortBy('createTime').take(pageSize).value() || []
+    const total = modal(name).filter(filter).size().value()
     return {list, total, pageSize}
   }
   create(name, parmas) {

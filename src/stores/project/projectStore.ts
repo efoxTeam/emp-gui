@@ -3,16 +3,18 @@ import {HTTP_RESP, Project} from 'src/typing'
 import envStorage from 'src/helpers/envStorage'
 import {getProjectInfo, getProjectList, getTemplates, TProjectDedetail} from 'src/api/project'
 
+const initProjectInfo = {
+  id: envStorage.get('prodId') !== 'undefined' ? envStorage.get('prodId') : '',
+  name: '',
+  type: '',
+  path: '',
+  remotes: [],
+  exposes: {},
+}
+
 export const projectStore = () => {
   const templates: {type: string; repo: string}[] = []
-  const projectInfo: TProjectDedetail = {
-    id: '',
-    name: '',
-    type: '',
-    path: '',
-    remotes: [],
-    expose: [],
-  }
+  const projectInfo: TProjectDedetail = JSON.parse(JSON.stringify(initProjectInfo))
   return {
     templates,
     projectInfo,
@@ -22,7 +24,10 @@ export const projectStore = () => {
     },
     setProjectInfo(val: any) {
       envStorage.set('prodId', val.id)
-      this.projectInfo = val
+      this.projectInfo = {
+        ...initProjectInfo,
+        ...val,
+      }
     },
     async getTemplates() {
       const {data} = await getTemplates()
