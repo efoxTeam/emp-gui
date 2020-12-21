@@ -1,25 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {ModalForm, SForm} from 'src/components/common/crud'
+import {SForm} from 'src/components/common/crud'
 import CardList from 'src/components/CardList'
-import {SearchOutlined, EditOutlined} from '@ant-design/icons'
-import {
-  Card,
-  Button,
-  Drawer,
-  Descriptions,
-  Divider,
-  List,
-  Typography,
-  message,
-  Row,
-  Col,
-  Modal,
-  Form,
-  Input,
-} from 'antd'
+import {EditOutlined} from '@ant-design/icons'
+import {Card, Drawer, Descriptions, Divider, List, Typography, message, Modal, Form, Input} from 'antd'
 import style from './index.module.scss'
 import {FormInstance} from 'antd/lib/form'
-import {addRemote} from 'src/api/remote'
+import {addRemote, updateRemote} from 'src/api/remote'
 import {useStores} from 'src/stores'
 import {observer, useObserver} from 'mobx-react-lite'
 
@@ -31,6 +17,7 @@ const Com = observer(() => {
   const [drawerVisible, setDrawerVisible] = useState(false)
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [remoteModalType, remoteModalTypeAction] = useState<'create' | 'edit'>('create')
+  const [remoteAlias, setRemoteAlias] = useState('')
   const createRemoteForm = useRef<FormInstance>(null)
 
   const handleCreateModalShow = (is: boolean, isEdit?: boolean) => {
@@ -49,7 +36,20 @@ const Com = observer(() => {
     }
   }
 
+  const onSubmitUpdateRemote = async () => {
+    const values = createRemoteForm.current?.getFieldsValue()
+    const {data, code, msg} = await updateRemote({...values, updateAlias: remoteAlias, id: projectStore.projectInfo.id})
+    const success = code === 0
+    message[success ? 'success' : 'error'](msg)
+    if (success) {
+      handleCreateModalShow(false)
+      setRemoteAlias('')
+      projectStore.getProjectInfo({id: projectStore.projectInfo.id})
+    }
+  }
+
   const onEditRemote = (info: any) => {
+    setRemoteAlias(info.alias)
     handleCreateModalShow(true, true)
     setTimeout(() => {})
     createRemoteForm.current?.setFieldsValue(info)
@@ -188,14 +188,16 @@ const Com = observer(() => {
         />
       </Drawer>
       <Modal
-        title={'引入远程基站'}
+        title={remoteModalType === 'create' ? '引入远程基站' : `${remoteAlias}远程基站修改`}
         visible={showCreateModal}
         forceRender={true}
         cancelText="取消"
         okText={remoteModalType === 'create' ? '确定' : '修改'}
         onCancel={() => handleCreateModalShow(false)}
         onOk={() => createRemoteForm.current?.submit()}>
-        <Form ref={createRemoteForm} onFinish={onSubmitCreateRemote}>
+        <Form
+          ref={createRemoteForm}
+          onFinish={remoteModalType === 'create' ? onSubmitCreateRemote : onSubmitUpdateRemote}>
           <Form.Item
             label="使用别名"
             name="alias"
