@@ -6,7 +6,7 @@ const {dbService} = require('../data/index')
 function projectDetail(id) {
   const data = dbService.retrieve('project', {id})
   const project = data.list[0] || {}
-  const empJson = readFile(Path.join(project?.path || '', project?.name || '', 'emp.json'))
+  const empJson = readFile(Path.join(project.path || '', project.name || '', 'emp.json'))
   project.remotes = []
   project.exposes = {}
   if (empJson) {
@@ -16,6 +16,12 @@ function projectDetail(id) {
     project.exposes = empJson.exposes || {}
   }
   return project
+}
+function getEmpJson(id) {
+  const project = projectDetail(id)
+  const empPath = Path.join(project.path, project.name, 'emp.json')
+  const empJson = readFile(empPath)
+  return {empPath, empJson}
 }
 class ProjectRest extends Base {
   constructor(...args) {
@@ -38,7 +44,7 @@ class ProjectRest extends Base {
     res.json(super.successJson(templateList))
   }
   readDir(req, res) {
-    const currentPath = req.query.path || process.cwd()?.split('/')?.slice(0, -1)?.join('/')
+    const currentPath = req.query.path || process.cwd().split('/').slice(0, -1).join('/')
     const path = req.query.path || '../'
     const dirs = readDir(path)
     res.setHeader('Content-Type', 'application/json')
@@ -59,18 +65,22 @@ class ProjectRest extends Base {
   }
   deleteRemote(req, res) {
     const {id, alias} = req.query
-    const project = projectDetail(id)
-    const empPath = Path.join(project.path, project.name, 'emp.json')
-    const empJson = readFile(empPath)
+    const {empPath, empJson} = getEmpJson(id)
     delete empJson.remotes[alias]
     writeJson(empPath, empJson)
     res.json(super.successJson())
   }
   addRemote(req, res) {
     const {id, path, projectName, alias} = req.body
-    const project = projectDetail(id)
-    const empPath = Path.join(project.path, project.name, 'emp.json')
-    const empJson = readFile(empPath)
+    const {empPath, empJson} = getEmpJson(id)
+    empJson.remotes[alias] = projectName + '@' + path
+    writeJson(empPath, empJson)
+    res.json(super.successJson())
+  }
+  updateRemote(req, res) {
+    const {id, path, projectName, alias, updateAlias} = req.body
+    const {empPath, empJson} = getEmpJson(id)
+    delete empJson.remotes[updateAlias]
     empJson.remotes[alias] = projectName + '@' + path
     writeJson(empPath, empJson)
     res.json(super.successJson())

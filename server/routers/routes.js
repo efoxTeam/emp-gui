@@ -40,6 +40,10 @@ const Routes = [
     path: '/projects/deleteRemote',
     method: project.deleteRemote,
   },
+  {
+    path: '/projects/updateRemote',
+    method: project.updateRemote,
+  }
 ]
 module.exports = {
   Routes,
