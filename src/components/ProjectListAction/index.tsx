@@ -84,16 +84,16 @@ const ProjectListComp = () => {
               paginationJustify={'end'}
               cardDom={item => (
                 <Card
-                  style={{margin: '0 0 10px', width: '100%'}}
+                  style={{margin: '0', width: '100%'}}
                   onClick={() => {
                     item.id !== projectInfo.id && getProjectInfo({id: item.id})
                     handleDrowdownShow(false)
                   }}
                   className={style.projectCard}>
                   <Meta
-                    avatar={<Avatar src={getFrontLogo(item.name)} />}
+                    avatar={<Avatar shape="square" src={item.logo || getFrontLogo(item.type)} />}
                     title={item.name}
-                    description={`地址：${item.path}`}
+                    description={<p className={style.cardDescription}>地址：{item.path}</p>}
                   />
                 </Card>
               )}

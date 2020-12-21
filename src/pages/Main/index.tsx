@@ -1,13 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Header from 'src/pages/Main/components/Header'
-import {
-  SearchOutlined,
-  EditOutlined,
-  EllipsisOutlined,
-  DeleteOutlined,
-  ExclamationCircleOutlined,
-} from '@ant-design/icons'
-import {Button, Card, Input, Select, Modal} from 'antd'
+import {EditOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons'
+import {Button, Card, Input, Modal} from 'antd'
 import {useStores} from 'src/stores'
 import style from './index.module.scss'
 import CardList from 'src/components/CardList'
@@ -90,7 +84,6 @@ const Main = () => {
   }
 
   React.useEffect(() => {
-    console.log(1111, inputFileRef.current)
     if (inputFileRef.current !== null) {
       inputFileRef.current.setAttribute('directory', 'true')
       inputFileRef.current.setAttribute('webkitdirectory', 'true')
@@ -189,8 +182,8 @@ const Main = () => {
                   }
                   description={
                     <>
-                      <div className={style.Project_FullPath}>{item.fullPath}</div>
-                      <div className={style.description}>{item.description}</div>
+                      <div>{item.fullPath}</div>
+                      <div>{item.description}</div>
                     </>
                   }
                 />

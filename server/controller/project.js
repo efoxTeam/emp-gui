@@ -6,7 +6,8 @@ const {dbService} = require('../data/index')
 function projectDetail(id) {
   const data = dbService.retrieve('project', {id})
   const project = data.list[0] || {}
-  const empJson = readFile(Path.join(project?.path || '', project?.name || '', 'emp.json'))
+  console.log(project)
+  const empJson = readFile(Path.join(project.path || '', project.name || '', 'emp.json'))
   project.remotes = []
   project.exposes = {}
   if (empJson) {
@@ -38,7 +39,7 @@ class ProjectRest extends Base {
     res.json(super.successJson(templateList))
   }
   readDir(req, res) {
-    const currentPath = req.query.path || process.cwd()?.split('/')?.slice(0, -1)?.join('/')
+    const currentPath = req.query.path || process.cwd().split('/').slice(0, -1).join('/')
     const path = req.query.path || '../'
     const dirs = readDir(path)
     res.setHeader('Content-Type', 'application/json')

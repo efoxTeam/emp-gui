@@ -57,7 +57,7 @@ export default ({
               dataSource={list}
               header={header}
               renderItem={(item, index) => {
-                return <List.Item>{cardDom(item, index)}</List.Item>
+                return <List.Item style={{border: 'none'}}>{cardDom(item, index)}</List.Item>
               }}
             />
           ) : (
@@ -68,7 +68,7 @@ export default ({
               dataSource={list}
               header={header}
               renderItem={(item, index) => (
-                <List.Item>
+                <List.Item style={{border: 'none'}}>
                   <Col className="gutter-row" span={span}>
                     {cardDom(item, index)}
                   </Col>
