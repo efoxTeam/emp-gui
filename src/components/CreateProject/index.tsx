@@ -12,6 +12,7 @@ const LOCALSTORAGE_CREATE_URL = 'empGui-CreateProject-url'
 
 function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => void}) {
   const [dir, dirAction] = useState<string[]>([])
+  const [createLoading, createLoadingAction] = useState(false)
   const formRef = useRef<FormInstance>(null)
   const {projectStore} = useStores()
   const onHandleFormChange = (value: any) => {}
@@ -74,9 +75,19 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
    * 表单提交
    */
   const onFormFinish = async (values: any) => {
+    if (createLoading) return
+
+    createLoadingAction(true)
+    const key = 'updateable'
+    message.loading({
+      content: '正在创建项目...',
+      key,
+    })
     const response = await addProject(values)
     const {code, msg, data} = response
-    message.success(msg)
+    message.success({content: msg, key})
+    createLoadingAction(false)
+
     if (code === 0) {
       // 请求一下
       await projectStore.getProjectInfo({id: data.id})
@@ -136,7 +147,7 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
           <Button onClick={onDrawerClose} style={{marginRight: 8}}>
             取消
           </Button>
-          <Button onClick={onCreate} type="primary">
+          <Button onClick={onCreate} type="primary" loading={createLoading}>
             创建
           </Button>
         </div>

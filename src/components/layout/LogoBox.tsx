@@ -27,7 +27,7 @@ const LogoBox = ({titleInfo}: {titleInfo?: TitleInfo}) => {
             }
           }}>
           {titleInfo.logo ? <img src={titleInfo.logo} alt="logo" /> : null}
-          <i>{Text}</i>
+          <div>{Text}</div>
         </div>
       ) : null}
     </>

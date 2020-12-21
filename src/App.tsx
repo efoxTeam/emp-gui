@@ -10,7 +10,9 @@ import {observer, useObserver} from 'mobx-react-lite'
 const LogoComp = observer(() => {
   const {name} = useStores().projectStore.projectInfo
 
-  return useObserver(() => <>{name || '暂无项目'}</>)
+  return useObserver(() => (
+    <span style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{name || '暂无项目'}</span>
+  ))
 })
 
 const App = () => {

@@ -64,7 +64,7 @@ export default ({
             <List
               className={listClassName}
               style={listStyle}
-              grid={{gutter: 16, column: 4}}
+              grid={{column: 3}}
               dataSource={list}
               header={header}
               renderItem={(item, index) => (
