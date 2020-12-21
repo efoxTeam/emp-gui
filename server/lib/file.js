@@ -30,7 +30,7 @@ function openDir(dirpath = '') {
   let BIN = ''
   if (platform === 'win32') {
     BIN = `exploreor ${dirpath}`
-  } else if (platform === '') {
+  } else if (platform === 'linux') {
     BIN = `nautilus ${dirpath}`
   } else {
     BIN = `open ${dirpath}`

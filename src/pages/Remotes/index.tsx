@@ -196,10 +196,16 @@ const Com = observer(() => {
         onCancel={() => handleCreateModalShow(false)}
         onOk={() => createRemoteForm.current?.submit()}>
         <Form ref={createRemoteForm} onFinish={onSubmitCreateRemote}>
-          <Form.Item label="使用名称" name="alias" rules={[{required: true, message: '请输入基站名称'}]}>
+          <Form.Item
+            label="使用别名"
+            name="alias"
+            rules={[{required: true, message: '请输入基站名项目中package.json的name字段'}]}>
             <Input placeholder="" />
           </Form.Item>
-          <Form.Item label="唯一标识" name="projectName" rules={[{required: true, message: '请输入基站别名'}]}>
+          <Form.Item
+            label="唯一标识"
+            name="projectName"
+            rules={[{required: true, message: '请输入基站项目中emp.json的name字段'}]}>
             <Input placeholder="" />
           </Form.Item>
           <Form.Item label="基站路径" name="path" rules={[{required: true, message: '请输入基站远程路径'}]}>
