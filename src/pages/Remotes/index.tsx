@@ -103,6 +103,7 @@ const Com = observer(() => {
         pageSize={10}
         count={remotes.length}
         layout="flex"
+        grid={{column: 4}}
         pagination={<></>}
         header={
           <Typography>
@@ -113,7 +114,7 @@ const Com = observer(() => {
           const [name, url] = item.aliasUrl.split('@')
           return (
             <Card
-              style={{width: '250px'}}
+              style={{width: '250px', marginTop: '20px'}}
               actions={[
                 <EditOutlined
                   key="edit"

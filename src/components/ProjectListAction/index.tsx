@@ -1,11 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react'
 import CardList from 'src/components/CardList'
-import CreateProject from 'src/components/CreateProject'
 import {useStores} from 'src/stores'
 import {TprojectList, TprojectListParam} from 'src/api/project'
 import {observer, useObserver} from 'mobx-react-lite'
 import {Dropdown, Card, Avatar, Button, Input, Form} from 'antd'
-import envStorage from 'src/helpers/envStorage'
 import {getProjectList} from 'src/api/project'
 import style from './index.module.scss'
 import {FormInstance} from 'antd/lib/form'
@@ -75,7 +73,7 @@ const ProjectListComp = () => {
               nextPage={e => {
                 getProjectListAct(e)
               }}
-              listStyle={{maxHeight: '600px', overflowY: 'auto'}}
+              listStyle={{maxHeight: '600px', overflowY: 'auto', marginBottom: '20px'}}
               span={24}
               page={info.page}
               pageSize={info.pageSize}

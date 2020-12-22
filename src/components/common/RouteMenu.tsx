@@ -5,6 +5,7 @@ import {SubMenuProps} from 'antd/lib/menu/SubMenu'
 import {RoutesType} from 'src/types'
 import {useHistory} from 'react-router-dom'
 import {useObserver} from 'mobx-react-lite'
+import {useStores} from 'src/stores'
 
 const {SubMenu} = Menu
 
@@ -25,9 +26,11 @@ export const IconName = ({route}: {route: RoutesType}) => {
 
 const createContent = ({routes, isShow}: {routes: RoutesType[]; isShow: (r: RoutesType) => boolean}) => {
   const list = routes.filter(r => isShow(r))
+  const {projectStore} = useStores()
   return useObserver(
     () =>
       list.length &&
+      projectStore.projectInfo.id &&
       list.map(d => {
         const subRoutes = d?.routes?.filter(r => isShow(r)) || []
         if (subRoutes.length) {

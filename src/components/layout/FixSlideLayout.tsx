@@ -23,7 +23,7 @@ const FixSlideLayout = (props: TLayoutProps) => {
   const [withoutLayout, setWithoutLayout] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
   const TitleBox: any = titleBox || LogoBox
-  const {showCreateProject, showCreateProjectAction} = useStores().projectStore
+  const [showCreateProject, showCreateProjectAction] = useState(false) // useStores().projectStore
 
   useEffect(() => {
     setOpenKey([...openKey, ...[`/${pathname.split('/')[1]}`]])
