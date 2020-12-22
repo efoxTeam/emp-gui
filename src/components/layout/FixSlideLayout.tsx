@@ -51,15 +51,15 @@ const FixSlideLayout = (props: TLayoutProps) => {
             routes={routes}
           />
         </Sider>
-        <Layout className="site-layout">
+        <Layout className="site-layout" style={{height: '100vh'}}>
           <Header style={{background: '#fff'}}>
             <ProjectListAction />
             <Button type="primary" style={{marginLeft: '20px'}} onClick={() => showCreateProjectAction(true)}>
               创建项目
             </Button>
           </Header>
-          <Content style={{margin: '24px', overflow: 'initial'}}>
-            <div>{props.children}</div>
+          <Content style={{margin: '24px', overflow: 'initial', flex: 1, overflowY: 'auto'}}>
+            <>{props.children}</>
           </Content>
           <Footer
             style={{
