@@ -36,6 +36,7 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
       onClose={onDrawerClose}
       visible={visible}
       closable={false}
+      bodyStyle={{paddingTop: 0}}
       footer={
         <div
           style={{

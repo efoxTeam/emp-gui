@@ -12,14 +12,14 @@ const Main = () => {
   }, [])
   return (
     <>
-      <Card className={style.createProjectBox}>
+      <div className={style.createProjectBox}>
         <CreateProjectForm cRef={formRef} />
         <Button
           style={{zIndex: 2, position: 'absolute', right: '10px', top: '10px'}}
           onClick={() => formRef.current?.submit()}>
           创建
         </Button>
-      </Card>
+      </div>
     </>
   )
 }

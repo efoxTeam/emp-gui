@@ -1,58 +1,7 @@
-.Main {
-  .ant-card {
-    background: rgba(0, 0, 0, 0);
-    border: 0px;
-  }
-}
-
-.Content {
-  width: 1200px;
-  margin: 0 auto;
-}
-
-.Header_RightChild {
-  padding: 0 5px;
-
-  &:last-child {
-    padding-right: 0;
-  }
-}
-
-.Button_Import {
-  background-color: #eee;
-  border-color: #eee;
-  color: #666;
-
-  &:hover,
-  &:focus {
-    background-color: #fefefe;
-    color: #666;
-    border-color: #eee;
-  }
-}
-
-.Project_List {
-  margin-top: 20px;
-}
-
-.cardMeta {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-.cardMetaType {
-  font-size: 14px;
-  font-weight: normal;
-}
-.cardCover {
-  padding: 10px;
-  img {
-    width: 80%;
-    display: block;
-    margin: 0 auto;
-  }
-}
 
 .createProjectBox {
   position: relative;
+  padding: 0 24px 24px;
+  background-color: #fff;
+  box-sizing: border-box;
 }
