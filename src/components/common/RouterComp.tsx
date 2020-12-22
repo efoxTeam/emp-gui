@@ -1,12 +1,12 @@
-import React, {Suspense, useEffect} from 'react'
-import {Route, BrowserRouter as Router, Switch, useLocation, RouteProps} from 'react-router-dom'
-// import MarginLayout from 'src/components/layout/MarginLayout'
+import React, {Suspense} from 'react'
+import {Route, BrowserRouter as Router, Switch, RouteProps} from 'react-router-dom'
 import FixSlideLayout from 'src/components/layout/FixSlideLayout'
 import LoadingComp from './LoadingComp'
 import P404Comp from './P404Comp'
-import P403Comp from './P403Comp'
 import {useObserver} from 'mobx-react-lite'
 import {RoutesType, RouterCompType} from 'src/types'
+import {useStores} from 'src/stores'
+import Main from 'src/pages/Main'
 ////////////////
 let routes: RoutesType[] = []
 // 返回 component 的模型使用
@@ -21,23 +21,23 @@ function PrivateRoute({component: Component, role, ...rest}: PrivateRouteProps) 
     />
   ))
 }
-
-const IsFinishRoleLoading = ({userStore}: {userStore: any}) =>
-  userStore.permissionIsLoad === true ? <P403Comp /> : <LoadingComp />
-
 const RoutersComp = () => {
-  return (
+  const {projectStore} = useStores()
+  return useObserver(() => (
     <>
-      {routes.length > 0 &&
+      {routes.length > 0 && projectStore.projectInfo.id ? (
         routes.map((route, i) => {
           return route.path === '/' ? (
             <PrivateRoute role={route.role} exact path="/" key={i} component={route.component} />
           ) : (
             <RouteWithSubRoutes key={i} {...route} />
           )
-        })}
+        })
+      ) : (
+        <Main />
+      )}
     </>
-  )
+  ))
 }
 const SwitchMainRouter = () => {
   return (
@@ -78,7 +78,6 @@ const PrivateRouteComponent = ({props, route}: PrivateRouteComponentProps) => {
 //
 const RouteWithSubRoutes = (route: RoutesType) =>
   (route.component && (
-    // <Route path={route.path} render={props => <route.component {...props} routes={route.routes} />} />
     <Route exact path={route.path} render={props => <PrivateRouteComponent props={props} route={route} />} />
   )) || <SwitchRouter routes={route.group ? route.group : route.routes} />
 

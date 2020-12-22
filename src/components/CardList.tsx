@@ -1,6 +1,7 @@
 import React from 'react'
 import {Pagination, Card, Row, Col, Spin, List} from 'antd'
 import {PaginationProps} from 'antd/lib/pagination'
+import {ListGridType} from 'antd/lib/list'
 export interface CardListProps {
   list: any
   loading?: boolean
@@ -8,6 +9,7 @@ export interface CardListProps {
   pageSize: number
   count: number
   span?: number
+  grid?: ListGridType
   nextPage: (d: any) => void
   pagination?: React.ReactNode
   footer?: React.ReactNode
@@ -42,6 +44,7 @@ export default ({
   className,
   paginationOpt,
   style,
+  grid,
   listStyle,
   listClassName,
   header,
@@ -64,7 +67,7 @@ export default ({
             <List
               className={listClassName}
               style={listStyle}
-              grid={{column: 3}}
+              grid={grid || {column: 3}}
               dataSource={list}
               header={header}
               renderItem={(item, index) => (
