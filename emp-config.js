@@ -1,9 +1,9 @@
 const path = require('path')
 const withESbuild = require('@efox/emp-esbuild')
 module.exports = withESbuild(({config, env, empEnv}) => {
-  // console.log('empEnv===> 部署环境变量 serve模式不需要该变量', empEnv, env)
+  console.log('empEnv===> 部署环境变量 serve模式不需要该变量', empEnv, env)
   const port = 8002
-  const publicPath = `http://localhost:${port}/`
+  const publicPath = empEnv === 'dev' ? `http://localhost:${port}/` : './'
   config.resolve.alias.set('@', path.resolve('./', 'src'))
 
   config.output.publicPath(publicPath)

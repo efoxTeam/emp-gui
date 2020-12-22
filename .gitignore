@@ -23,7 +23,8 @@
 db.json
 /build
 .eslintcache
-/live-test/data.json
+/live-test
+./live
 
 npm-debug.log*
 yarn-debug.log*
