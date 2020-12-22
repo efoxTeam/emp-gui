@@ -84,6 +84,7 @@ const ProjectListComp = () => {
               paginationJustify={'end'}
               cardDom={item => (
                 <Card
+                  bordered={false}
                   style={{margin: '0', width: '100%'}}
                   onClick={() => {
                     item.id !== projectInfo.id && getProjectInfo({id: item.id})

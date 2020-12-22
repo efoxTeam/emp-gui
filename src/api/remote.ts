@@ -10,3 +10,13 @@ export const addRemote = async (data: {
   projectName: string
   alias: string
 }): Promise<HTTP_RESP<any>> => http.post('/projects/addRemote', data)
+/**
+ * 修改远程基站仓库
+ */
+export const updateRemote = async (data: {
+  id: string
+  path: string
+  projectName: string
+  alias: string
+  updateAlias: string
+}): Promise<HTTP_RESP<any>> => http.post('/projects/updateRemote', data)
