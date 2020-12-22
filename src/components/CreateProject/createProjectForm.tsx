@@ -1,5 +1,5 @@
 import {Form, Row, Col, Select, Input, Button, List, message} from 'antd'
-import React, {useImperativeHandle, useRef, useState, forwardRef} from 'react'
+import React, {useImperativeHandle, useRef, useState} from 'react'
 import {FolderOutlined} from '@ant-design/icons'
 import {useStores} from 'src/stores'
 import {useObserver} from 'mobx-react-lite'
@@ -170,4 +170,4 @@ const creatDom = ({finishAction, cRef}: {finishAction?: (re: any) => any; cRef?:
   ))
 }
 
-export default forwardRef(creatDom)
+export default creatDom

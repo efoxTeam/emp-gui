@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {TitleInfo, Theme} from 'src/types'
-import './LogoBox.less'
+import {TitleInfo} from 'src/types'
+import style from './LogoBox.module.scss'
 const defaultTitleInfo: TitleInfo = {
   logo: 'https://setmefree.yy.com/Joyy.png',
   text: (
@@ -17,7 +17,7 @@ const LogoBox = ({titleInfo}: {titleInfo?: TitleInfo}) => {
     <>
       {titleInfo ? (
         <div
-          className={`logo-box logo light`}
+          className={style['logo-box']}
           style={{cursor: titleInfo?.link ? 'pointer' : 'default'}}
           onClick={() => {
             if (typeof titleInfo?.link === 'string') {
