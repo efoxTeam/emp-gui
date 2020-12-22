@@ -114,7 +114,7 @@ const creatDom = ({finishAction, cRef}: {finishAction?: (re: any) => any; cRef?:
   }
 
   return useObserver(() => (
-    <>
+    <div className={style.drawContent}>
       <Form
         layout="vertical"
         onValuesChange={onHandleFormChange}
@@ -158,6 +158,7 @@ const creatDom = ({finishAction, cRef}: {finishAction?: (re: any) => any; cRef?:
         </Row>
       </Form>
       <List
+        className={style.dirList}
         itemLayout="horizontal"
         dataSource={dir}
         renderItem={item => (
@@ -166,7 +167,7 @@ const creatDom = ({finishAction, cRef}: {finishAction?: (re: any) => any; cRef?:
           </List.Item>
         )}
       />
-    </>
+    </div>
   ))
 }
 
