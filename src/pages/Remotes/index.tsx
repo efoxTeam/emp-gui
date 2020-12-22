@@ -21,8 +21,9 @@ const Com = observer(() => {
   const createRemoteForm = useRef<FormInstance>(null)
 
   const handleCreateModalShow = (is: boolean, isEdit?: boolean) => {
-    remoteModalTypeAction(isEdit ? 'edit' : 'create')
     setShowCreateModal(is)
+    remoteModalTypeAction(isEdit ? 'edit' : 'create')
+    if (!is) createRemoteForm.current?.resetFields()
   }
 
   const onSubmitCreateRemote = async () => {
