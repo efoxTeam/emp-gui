@@ -7,5 +7,7 @@ module.exports = {
     '@typescript-eslint/ban-types': 0,
     'react-hooks/rules-of-hooks': 0,
     'react/display-name': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    'react-hooks/exhaustive-deps': 0,
   },
 }
