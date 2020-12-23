@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "server/index.js",
   "license": "MIT",
-  "private": true,
   "files": [
     "dist",
     "server"
