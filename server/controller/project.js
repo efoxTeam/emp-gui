@@ -27,12 +27,12 @@ class ProjectRest extends Base {
   constructor(...args) {
     super(...args)
   }
-  post(req, res) {
+  async post(req, res) {
     console.log('post')
     this.params = req.body
     const downloadPath = Path.join(req.body.path, req.body.name)
     const repo = template[req.body.type] || template.react
-    downloadRepo(repo, downloadPath)
+    await downloadRepo(repo, downloadPath)
     return super.post(req, res)
   }
   typeList(req, res) {
@@ -84,6 +84,19 @@ class ProjectRest extends Base {
     empJson.remotes[alias] = projectName + '@' + path
     writeJson(empPath, empJson)
     res.json(super.successJson())
+  }
+  remoteDetail(req, res) {
+    const {empPath} = req.query
+    const host = empPath.replace(/\/{1,}emp\.js/, '')
+    res.json(
+      super.successJson({
+        empPath: empPath,
+        declarationPath: host + '/index.d.ts',
+        exposes: {
+          list: 'src/expose.js',
+        },
+      }),
+    )
   }
 }
 const project = new ProjectRest('project')

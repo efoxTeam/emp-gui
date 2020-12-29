@@ -1310,7 +1310,7 @@
     fs-extra "^9.0.0"
     npm-dts "^1.3.0"
 
-"@efox/eslint-config-react-prittier-ts@^1.1.0":
+"@efox/eslint-config-react-prittier-ts@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@efox/eslint-config-react-prittier-ts/-/eslint-config-react-prittier-ts-1.2.3.tgz#57263065237f6c5563e9b9ee2dda2c466583526f"
   integrity sha512-bnaZ0da8IS2x/7vhMEcOdaMampdQG1Lil7OkV7wgnNGYsRYOLRB3IBADsz/YHgSgSZ7KPMW9tjcwY/nNvW5exQ==
