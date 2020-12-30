@@ -8,7 +8,8 @@ import {FormInstance} from 'antd/lib/form'
 import {addRemote, remoteDetail, TRemoteInfo, updateRemote} from 'src/api/remote'
 import {useStores} from 'src/stores'
 import {observer, useObserver} from 'mobx-react-lite'
-
+import MarkdownBox from 'src/components/markdown/markdown-box'
+const readMeT = require('src/components/common/crud/SForm/index.md').default
 const {Meta} = Card
 const {Title} = Typography
 const Com = observer(() => {
@@ -182,7 +183,7 @@ const Com = observer(() => {
           closable={false}
           onClose={() => twoLevelDrawerAction(false)}
           visible={twoLevelDrawer}>
-          markdown
+          <MarkdownBox md={readMeT} />
         </Drawer>
       </Drawer>
       <Modal
