@@ -10,6 +10,8 @@ module.exports = withESbuild(({config, env, empEnv}) => {
   config.resolve.alias.set('@', path.resolve('./', 'src'))
   config.output.publicPath(publicPath)
 
+  config.module.rule('md').test(/\.md$/).use('raw-loader').loader('raw-loader')
+
   if (isPro) {
     config.devtool(false)
   } else {

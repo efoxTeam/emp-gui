@@ -13,8 +13,8 @@ const Com = () => {
   return useObserver(() => (
     <>
       <Card>
-        <Descriptions title="基础信息">
-          <Descriptions.Item label="模版类型">{projectStore.projectInfo.name}</Descriptions.Item>
+        <Descriptions title={projectStore.projectInfo.name}>
+          <Descriptions.Item label="模版类型">{projectStore.projectInfo.type}</Descriptions.Item>
           <Descriptions.Item label="储存位置">
             <span onClick={() => openDir({path: projectPath})} className={css.projectPath}>
               {projectPath}

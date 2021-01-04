@@ -1,6 +1,12 @@
 import http from 'src/helpers/http'
 import {HTTP_RESP} from 'src/typing'
 
+export type TRemoteInfo = {
+  empPath: string
+  declarationPath: string
+  exposes: Record<string, string>
+}
+
 /**
  * 添加远程基站仓库
  */
@@ -10,6 +16,7 @@ export const addRemote = async (data: {
   projectName: string
   alias: string
 }): Promise<HTTP_RESP<any>> => http.post('/projects/addRemote', data)
+
 /**
  * 修改远程基站仓库
  */
@@ -20,3 +27,9 @@ export const updateRemote = async (data: {
   alias: string
   updateAlias: string
 }): Promise<HTTP_RESP<any>> => http.post('/projects/updateRemote', data)
+
+/**
+ * 修改远程基站仓库
+ */
+export const remoteDetail = async (data: {empPath: string}): Promise<HTTP_RESP<TRemoteInfo>> =>
+  http.get('/projects/remoteDetail', {params: data})

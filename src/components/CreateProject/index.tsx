@@ -50,7 +50,7 @@ function CreateProject({visible, onClose}: {visible: boolean; onClose?: () => vo
           </Button>
         </div>
       }>
-      <CreateProjectForm cRef={formRef} />
+      <CreateProjectForm finishAction={() => onClose?.()} cRef={formRef} />
     </Drawer>
   ))
 }

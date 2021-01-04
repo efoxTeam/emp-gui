@@ -1,11 +1,11 @@
 const {dbService} = require('../data/index')
-class Base{
+class Base {
   constructor(modelName) {
     this.modelName = modelName
     this.params = {}
     Object.getOwnPropertyNames(Base.prototype)
-      .filter((propertyName) => propertyName !== 'constructor')
-      .forEach((method) => (this[method] = this[method].bind(this)))
+      .filter(propertyName => propertyName !== 'constructor')
+      .forEach(method => (this[method] = this[method].bind(this)))
   }
   post(req, res) {
     const params = req.body || this.params
@@ -31,10 +31,10 @@ class Base{
     res.setHeader('Content-Type', 'application/json')
     res.json({code: 0, msg: 'success'})
   }
-  successJson(data= {}){
+  successJson(data = {}) {
     return {code: 0, msg: 'success', data}
   }
-  errorJson(code, msg, data= {}){
+  errorJson(code, msg, data = {}) {
     return {code, msg, data}
   }
 }

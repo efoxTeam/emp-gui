@@ -2,13 +2,14 @@ import React, {useEffect, useRef, useState} from 'react'
 import {SForm} from 'src/components/common/crud'
 import CardList from 'src/components/CardList'
 import {EditOutlined} from '@ant-design/icons'
-import {Card, Drawer, Descriptions, Divider, List, Typography, message, Modal, Form, Input} from 'antd'
+import {Card, Drawer, Descriptions, Divider, List, Typography, message, Modal, Form, Input, Button} from 'antd'
 import style from './index.module.scss'
 import {FormInstance} from 'antd/lib/form'
-import {addRemote, updateRemote} from 'src/api/remote'
+import {addRemote, remoteDetail, TRemoteInfo, updateRemote} from 'src/api/remote'
 import {useStores} from 'src/stores'
 import {observer, useObserver} from 'mobx-react-lite'
-
+import MarkdownBox from 'src/components/markdown/markdown-box'
+const readMeT = require('src/components/common/crud/SForm/index.md').default
 const {Meta} = Card
 const {Title} = Typography
 const Com = observer(() => {
@@ -18,6 +19,8 @@ const Com = observer(() => {
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [remoteModalType, remoteModalTypeAction] = useState<'create' | 'edit'>('create')
   const [remoteAlias, setRemoteAlias] = useState('')
+  const [remoteInfo, remoteInfoAction] = useState<TRemoteInfo>()
+  const [twoLevelDrawer, twoLevelDrawerAction] = useState(false)
   const createRemoteForm = useRef<FormInstance>(null)
 
   const handleCreateModalShow = (is: boolean, isEdit?: boolean) => {
@@ -56,6 +59,16 @@ const Com = observer(() => {
     createRemoteForm.current?.setFieldsValue(info)
   }
 
+  const showRemoteDetailDrawer = async (url: string) => {
+    const {data} = await remoteDetail({empPath: url})
+    if (data) {
+      remoteInfoAction(data)
+      setDrawerVisible(true)
+    } else {
+      message['error']('获取基站详情失败')
+    }
+  }
+
   return useObserver(() => (
     <>
       <Card style={{marginBottom: '20px'}}>
@@ -66,26 +79,11 @@ const Com = observer(() => {
             alert(e.Input)
           }}
           items={[
-            // {
-            //   type: 'Input',
-            //   label: '',
-            //   name: 'Input',
-            //   options: {
-            //     placeholder: '远程基站别名',
-            //     suffix: <SearchOutlined />,
-            //   },
-            //   // rules: [{required: true, message: '请输入远程基站别名'}],
-            // },
             {
               type: 'Button',
               label: '',
               formItemOptions: {style: {flex: 1}},
               data: [
-                // {
-                //   htmlType: 'submit',
-                //   label: '查找',
-                //   value: 'search',
-                // },
                 {
                   label: '引入远程基站',
                   value: 'add',
@@ -131,9 +129,9 @@ const Com = observer(() => {
                 title={
                   <div className={style.cardMeta}>
                     <span>{item.alias}</span>
-                    {/* <Button type={'link'} onClick={() => setDrawerVisible(true)}>
+                    <Button type={'link'} onClick={() => showRemoteDetailDrawer(url)}>
                       查看
-                    </Button> */}
+                    </Button>
                   </div>
                 }
                 description={
@@ -150,7 +148,7 @@ const Com = observer(() => {
         }}
       />
       <Drawer
-        width={500}
+        width={600}
         title="react-base"
         placement="right"
         closable={false}
@@ -158,14 +156,10 @@ const Com = observer(() => {
         visible={drawerVisible}>
         <Descriptions column={1} title="">
           <Descriptions.Item label="emp.js路径">
-            <a href="https://github.com/efoxTeam/emp-react-template.git">
-              https://github.com/efoxTeam/emp-react-template.git
-            </a>
+            <a href="https://github.com/efoxTeam/emp-react-template.git">{remoteInfo?.empPath}</a>
           </Descriptions.Item>
           <Descriptions.Item label="d.ts路径">
-            <a href="https://github.com/efoxTeam/emp-react-template.git">
-              https://github.com/efoxTeam/emp-react-template.git
-            </a>
+            <a href="https://github.com/efoxTeam/emp-react-template.git">{remoteInfo?.declarationPath}</a>
           </Descriptions.Item>
         </Descriptions>
         <Divider />
@@ -176,18 +170,21 @@ const Com = observer(() => {
               <Title level={5}>共享资源列表</Title>
             </Typography>
           }
-          dataSource={[
-            'src/App',
-            'src/stores',
-            'src/stores/common/crud',
-            'src/components/layout/FixSlideLayout',
-            'src/components/layout/MarginLayout',
-            'src/components/common/crud',
-            'src/components/common/RouterComp',
-            'src/components/common/socketConnectMask',
-          ]}
-          renderItem={item => <List.Item>{item}</List.Item>}
+          dataSource={Object.keys(remoteInfo?.exposes || [])}
+          renderItem={item => (
+            <List.Item style={{cursor: 'pointer'}} onClick={() => twoLevelDrawerAction(true)}>
+              {remoteInfo?.exposes[item]}
+            </List.Item>
+          )}
         />
+        <Drawer
+          title={'组件文档'}
+          width={600}
+          closable={false}
+          onClose={() => twoLevelDrawerAction(false)}
+          visible={twoLevelDrawer}>
+          <MarkdownBox md={readMeT} />
+        </Drawer>
       </Drawer>
       <Modal
         title={remoteModalType === 'create' ? '引入远程基站' : `${remoteAlias}远程基站修改`}

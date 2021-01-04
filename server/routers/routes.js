@@ -43,7 +43,11 @@ const Routes = [
   {
     path: '/projects/updateRemote',
     method: project.updateRemote,
-  }
+  },
+  {
+    path: '/projects/remoteDetail',
+    method: project.remoteDetail,
+  },
 ]
 module.exports = {
   Routes,
