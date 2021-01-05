@@ -79,14 +79,9 @@ const Com = observer(() => {
           '/' +
           info?.exposes[key]?.replace('src', 'docs')?.replace(/(\/\w+$)/, ($1, $2) => `${$2?.replace(/\.\w+/, '')}.md`),
       }).catch(err => '')
-      if (content) {
-        mdContentAction(content)
-      } else {
-        mdContentAction('暂无文档')
-      }
+
+      mdContentAction(content || '暂无文档')
       twoLevelDrawerAction(true)
-      // console.log(info?.host + '/' + info?.exposes[key])
-      // console.log(content)
     }
   }
 

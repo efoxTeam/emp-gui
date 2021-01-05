@@ -42,6 +42,16 @@ class ProjectRest extends Base {
     const importName = importPath?.split('/')?.slice(-1)?.[0]
     const files = await getFiles(importPath)
     req.body.name = importName
+
+    const data = dbService.retrieve('project', {name: importName})
+
+    if (data.total) {
+      const has = data.list.some(item => Path.join(item.path, item.name) == importPath)
+      if (has) {
+        res.json(super.errorJson(-4, '该项目已经导入过了', importPath))
+        return
+      }
+    }
     if (!files.includes('package.json')) {
       res.setHeader('Content-Type', 'application/json')
       res.json(super.errorJson(-1, '导入项目没有package.json文件', importPath))
