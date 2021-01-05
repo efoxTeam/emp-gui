@@ -3,6 +3,8 @@ const Path = require('path')
 const {readDir, openDir, downloadRepo, readFile, getFiles, writeJson} = require('../lib/file')
 const template = require('@efox/emp-cli/config/template')
 const {dbService} = require('../data/index')
+const fetch = require('node-fetch')
+
 function projectDetail(id) {
   const data = dbService.retrieve('project', {id})
   const project = data.list[0] || {}
@@ -105,18 +107,22 @@ class ProjectRest extends Base {
     writeJson(empPath, empJson)
     res.json(super.successJson())
   }
-  remoteDetail(req, res) {
+  async remoteDetail(req, res) {
     const {empPath} = req.query
-    const host = empPath.replace(/\/{1,}emp\.js/, '')
+    const host = empPath?.split('/')?.slice(0, -1).join('/')
+    const empJSON = `${host}/emp.json`
+    const content = await (await fetch(empJSON)).json()
     res.json(
-      super.successJson({
-        host: host,
-        empPath: empPath,
-        declarationPath: host + '/index.d.ts',
-        exposes: {
-          list: 'src/expose.js',
-        },
-      }),
+      super.successJson(
+        Object.assign(
+          {
+            host,
+            empPath: empPath,
+            declarationPath: host + '/index.d.ts',
+          },
+          content,
+        ),
+      ),
     )
   }
 }

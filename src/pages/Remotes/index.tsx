@@ -21,6 +21,7 @@ const Com = observer(() => {
   const [remoteAlias, setRemoteAlias] = useState('')
   const [remoteInfo, remoteInfoAction] = useState<TRemoteInfo>()
   const [twoLevelDrawer, twoLevelDrawerAction] = useState(false)
+  const [readMeT, setReadMeT] = useState('')
   const createRemoteForm = useRef<FormInstance>(null)
   const [mdContent, mdContentAction] = useState('')
 
@@ -73,7 +74,10 @@ const Com = observer(() => {
   const showMdContent = async (info: TRemoteInfo | undefined, key: string) => {
     if (info) {
       const content = await remoteMdContent({
-        url: info?.host + '/' + info?.exposes[key].replace('src', 'docs').replace(/\.[A-Za-z0-9]{1,}$/, '.md'),
+        url:
+          info?.host +
+          '/' +
+          info?.exposes[key]?.replace('src', 'docs')?.replace(/(\/\w+$)/, ($1, $2) => `${$2?.replace(/\.\w+/, '')}.md`),
       }).catch(err => '')
       if (content) {
         mdContentAction(content)
