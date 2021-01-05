@@ -7,7 +7,7 @@ import {importProject, getDirFileList} from 'src/api/project'
 import envStorage from 'src/helpers/envStorage'
 import {FormInstance} from 'antd/lib/form'
 import style from './index.module.scss'
-const LOCALSTORAGE_CREATE_URL = 'empGui-CreateProject-url'
+const LOCALSTORAGE_IMPORT_URL = 'empGui-ImportProject-url'
 
 export interface TcRef<Values = any> extends FormInstance {
   // onCreate: () => void
@@ -34,7 +34,7 @@ const creatDom = ({finishAction, cRef}: {finishAction?: (re: any) => any; cRef?:
    */
   const searchDir = () => {
     clearTimeout(timer)
-    const local = envStorage.get(LOCALSTORAGE_CREATE_URL)
+    const local = envStorage.get(LOCALSTORAGE_IMPORT_URL)
     fetchDirFileList(formRef.current?.getFieldValue('path') || (local !== 'undefined' ? local : '') || '')
   }
 
@@ -55,7 +55,7 @@ const creatDom = ({finishAction, cRef}: {finishAction?: (re: any) => any; cRef?:
         path: data.path,
       })
       // 本地存储路径
-      envStorage.set(LOCALSTORAGE_CREATE_URL, data.path)
+      envStorage.set(LOCALSTORAGE_IMPORT_URL, data.path)
       dirAction(data.dirs)
     }
   }
