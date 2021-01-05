@@ -5,11 +5,11 @@ import {EditOutlined} from '@ant-design/icons'
 import {Card, Drawer, Descriptions, Divider, List, Typography, message, Modal, Form, Input, Button} from 'antd'
 import style from './index.module.scss'
 import {FormInstance} from 'antd/lib/form'
-import {addRemote, remoteDetail, TRemoteInfo, updateRemote} from 'src/api/remote'
+import {addRemote, remoteDetail, remoteMdContent, TRemoteInfo, updateRemote} from 'src/api/remote'
 import {useStores} from 'src/stores'
 import {observer, useObserver} from 'mobx-react-lite'
 import MarkdownBox from 'src/components/markdown/markdown-box'
-const readMeT = require('src/components/common/crud/SForm/index.md').default
+// const readMeT = require('src/components/common/crud/SForm/index.md').default
 const {Meta} = Card
 const {Title} = Typography
 const Com = observer(() => {
@@ -22,6 +22,7 @@ const Com = observer(() => {
   const [remoteInfo, remoteInfoAction] = useState<TRemoteInfo>()
   const [twoLevelDrawer, twoLevelDrawerAction] = useState(false)
   const createRemoteForm = useRef<FormInstance>(null)
+  const [mdContent, mdContentAction] = useState('')
 
   const handleCreateModalShow = (is: boolean, isEdit?: boolean) => {
     setShowCreateModal(is)
@@ -66,6 +67,22 @@ const Com = observer(() => {
       setDrawerVisible(true)
     } else {
       message['error']('获取基站详情失败')
+    }
+  }
+
+  const showMdContent = async (info: TRemoteInfo | undefined, key: string) => {
+    if (info) {
+      const content = await remoteMdContent({
+        url: info?.host + '/' + info?.exposes[key].replace('src', 'docs').replace(/\.[A-Za-z0-9]{1,}$/, '.md'),
+      }).catch(err => '')
+      if (content) {
+        mdContentAction(content)
+      } else {
+        mdContentAction('暂无文档')
+      }
+      twoLevelDrawerAction(true)
+      // console.log(info?.host + '/' + info?.exposes[key])
+      // console.log(content)
     }
   }
 
@@ -172,7 +189,7 @@ const Com = observer(() => {
           }
           dataSource={Object.keys(remoteInfo?.exposes || [])}
           renderItem={item => (
-            <List.Item style={{cursor: 'pointer'}} onClick={() => twoLevelDrawerAction(true)}>
+            <List.Item style={{cursor: 'pointer'}} onClick={() => showMdContent(remoteInfo, item)}>
               {remoteInfo?.exposes[item]}
             </List.Item>
           )}
@@ -183,7 +200,7 @@ const Com = observer(() => {
           closable={false}
           onClose={() => twoLevelDrawerAction(false)}
           visible={twoLevelDrawer}>
-          <MarkdownBox md={readMeT} />
+          <MarkdownBox md={mdContent} />
         </Drawer>
       </Drawer>
       <Modal

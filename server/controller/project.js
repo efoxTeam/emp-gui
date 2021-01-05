@@ -110,6 +110,7 @@ class ProjectRest extends Base {
     const host = empPath.replace(/\/{1,}emp\.js/, '')
     res.json(
       super.successJson({
+        host: host,
         empPath: empPath,
         declarationPath: host + '/index.d.ts',
         exposes: {

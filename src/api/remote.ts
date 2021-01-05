@@ -2,6 +2,7 @@ import http from 'src/helpers/http'
 import {HTTP_RESP} from 'src/typing'
 
 export type TRemoteInfo = {
+  host: string
   empPath: string
   declarationPath: string
   exposes: Record<string, string>
@@ -33,3 +34,5 @@ export const updateRemote = async (data: {
  */
 export const remoteDetail = async (data: {empPath: string}): Promise<HTTP_RESP<TRemoteInfo>> =>
   http.get('/projects/remoteDetail', {params: data})
+
+export const remoteMdContent = async (data: {url: string}): Promise<string> => http.get(data.url)
