@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import CardList from 'src/components/CardList'
 import CreateProject from 'src/components/CreateProject'
+import ImportProject from 'src/components/ImportProject'
 import {useStores} from 'src/stores'
 import {TprojectList, TprojectListParam} from 'src/api/project'
 import {observer, useObserver} from 'mobx-react-lite'
@@ -22,6 +23,7 @@ const ProjectListComp = () => {
   const {projectStore} = useStores()
   const {getProjectInfo, projectInfo} = projectStore
   const [createProjectShow, createProjectShowAction] = useState(false)
+  const [importProjectShow, importProjectShowAction] = useState(false)
   const getProjectListAct = async (param?: TprojectListParams) => {
     setInfo({
       ...info,
@@ -88,6 +90,9 @@ const ProjectListComp = () => {
                     <Button type="primary" onClick={() => createProjectShowAction(true)}>
                       创建项目
                     </Button>
+                    <Button type="primary" onClick={() => importProjectShowAction(true)}>
+                      导入项目
+                    </Button>
                   </div>
                 }
               />
@@ -100,11 +105,17 @@ const ProjectListComp = () => {
           </a>
         </Dropdown>
       ) : (
-        <a style={{color: '#333'}} href="javascript:;" onClick={() => createProjectShowAction(true)}>
-          创建项目
-        </a>
+        <>
+          <a style={{color: '#333'}} href="javascript:;" onClick={() => createProjectShowAction(true)}>
+            创建项目
+          </a>
+          <a style={{color: '#333'}} href="javascript:;" onClick={() => importProjectShowAction(true)}>
+            导入项目
+          </a>
+        </>
       )}
       <CreateProject visible={createProjectShow} onClose={() => createProjectShowAction(false)} />
+      <ImportProject visible={importProjectShow} onClose={() => importProjectShowAction(false)} />
     </>
   ))
 }

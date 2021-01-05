@@ -57,6 +57,14 @@ function readFile(filePath) {
   }
 }
 
+async function getFiles(folderPath) {
+  if (fs.existsSync(folderPath)) {
+    return await fs.readdirSync(folderPath)
+  } else {
+    return []
+  }
+}
+
 async function downloadRepo(repoPath, localPath) {
   const _branch = '--'
   const _repoPath = `clone ${_branch} ${repoPath} ${localPath}`
@@ -78,4 +86,5 @@ module.exports = {
   writeJson,
   downloadRepo,
   readFile,
+  getFiles,
 }

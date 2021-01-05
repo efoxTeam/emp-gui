@@ -50,6 +50,14 @@ export const addProject = (data: {name: string; type: string; path: string}): Pr
   http.post('/projects/add', data)
 
 /**
+ * 导入项目
+ * @param name 项目名称
+ * @param type 模版
+ * @param path 哪个路径创建
+ */
+export const importProject = (data: {path: string}): Promise<HTTP_RESP<{id: string}>> =>
+  http.post('/projects/import', data)
+/**
  * 获取项目详情
  * @param id 项目id
  */

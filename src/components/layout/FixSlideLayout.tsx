@@ -8,6 +8,7 @@ import {TLayoutProps} from 'src/types'
 import {observer} from 'mobx-react-lite'
 import ProjectListAction from 'src/components/ProjectListAction'
 import CreateProject from 'src/components/CreateProject'
+import ImportProject from 'src/components/ImportProject'
 const {Header, Footer} = Layout
 const {Content, Sider} = Layout
 
@@ -20,6 +21,7 @@ const FixSlideLayout = (props: TLayoutProps) => {
   const [withoutLayout, setWithoutLayout] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
   const [showCreateProject, showCreateProjectAction] = useState(false) // useStores().projectStore
+  const [importProjectShow, importProjectShowAction] = useState(false)
 
   useEffect(() => {
     setOpenKey([...openKey, ...[`/${pathname.split('/')[1]}`]])
@@ -34,6 +36,7 @@ const FixSlideLayout = (props: TLayoutProps) => {
   ) : (
     <>
       <CreateProject visible={showCreateProject} onClose={() => showCreateProjectAction(false)} />
+      <ImportProject visible={importProjectShow} onClose={() => importProjectShowAction(false)} />
       <Layout className={`light`}>
         <Sider trigger={null} collapsible collapsed={collapsed} theme={'light'} className={style.AsideSider}>
           <LogoBox titleInfo={props.titleInfo} />
@@ -56,6 +59,9 @@ const FixSlideLayout = (props: TLayoutProps) => {
             <ProjectListAction />
             <Button type="primary" style={{marginLeft: '20px'}} onClick={() => showCreateProjectAction(true)}>
               创建项目
+            </Button>
+            <Button type="primary" style={{marginLeft: '20px'}} onClick={() => importProjectShowAction(true)}>
+              导入项目
             </Button>
           </Header>
           <Content style={{margin: '24px', overflow: 'initial', flex: 1, overflowY: 'auto'}}>

@@ -37,6 +37,7 @@ class Base {
   errorJson(code, msg, data = {}) {
     return {code, msg, data}
   }
+  import() {}
 }
 
 module.exports = Base

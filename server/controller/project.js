@@ -1,6 +1,6 @@
 const Base = require('./base')
 const Path = require('path')
-const {readDir, openDir, downloadRepo, readFile, writeJson} = require('../lib/file')
+const {readDir, openDir, downloadRepo, readFile, getFiles, writeJson} = require('../lib/file')
 const template = require('@efox/emp-cli/config/template')
 const {dbService} = require('../data/index')
 function projectDetail(id) {
@@ -33,6 +33,26 @@ class ProjectRest extends Base {
     const downloadPath = Path.join(req.body.path, req.body.name)
     const repo = template[req.body.type] || template.react
     await downloadRepo(repo, downloadPath)
+    return super.post(req, res)
+  }
+  async import(req, res) {
+    const importPath = req.body.path
+    const importName = importPath?.split('/')?.slice(-1)?.[0]
+    const files = await getFiles(importPath)
+    req.body.name = importName
+    if (!files.includes('package.json')) {
+      res.setHeader('Content-Type', 'application/json')
+      res.json(super.errorJson(-1, '导入项目没有package.json文件', importPath))
+      return
+    } else if (!files.includes('emp-config.js')) {
+      res.setHeader('Content-Type', 'application/json')
+      res.json(super.errorJson(-2, '导入项目没有emp-config.js文件', importPath))
+      return
+    } else if (!files.includes('emp.json')) {
+      res.setHeader('Content-Type', 'application/json')
+      res.json(super.errorJson(-3, '导入项目需要改造成有emp.json文件', importPath))
+      return
+    }
     return super.post(req, res)
   }
   typeList(req, res) {

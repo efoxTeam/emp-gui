@@ -9,6 +9,10 @@ const Routes = [
     method: project.post,
   },
   {
+    path: '/projects/import',
+    method: project.import,
+  },
+  {
     path: '/projects/put',
     method: project.put,
   },
