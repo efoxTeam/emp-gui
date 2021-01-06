@@ -62,12 +62,12 @@ const Com = observer(() => {
   }
 
   const showRemoteDetailDrawer = async (url: string) => {
-    const {data} = await remoteDetail({empPath: url})
-    if (data) {
+    const {code, data, msg} = await remoteDetail({empPath: url})
+    if (code === 0 && data) {
       remoteInfoAction(data)
       setDrawerVisible(true)
     } else {
-      message['error']('获取基站详情失败')
+      message['error'](msg)
     }
   }
 
