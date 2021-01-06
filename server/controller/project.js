@@ -136,7 +136,7 @@ class ProjectRest extends Base {
     const empJSON = `${host}/emp.json`
     const response = await fetch(empJSON).catch(() => '')
 
-    if (response.size) {
+    if (response.status === 200) {
       // if (fetchEmp) content =
       res.json(
         super.successJson(

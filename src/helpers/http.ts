@@ -17,10 +17,10 @@ http.interceptors.request.use((config: AxiosRequestConfig) => {
 })
 
 http.interceptors.response.use((response: any) => {
-  if (response?.status?.code !== 0) {
-    console.log('===response===', response)
-    throw response
-  }
+  // if (response?.status?.code !== 0) {
+  //   console.log('===response===', response)
+  //   throw response
+  // }
   return response.data
 })
 
