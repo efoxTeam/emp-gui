@@ -2,6 +2,7 @@ import http from 'src/helpers/http'
 import {HTTP_RESP, Project} from 'src/typing'
 import envStorage from 'src/helpers/envStorage'
 import {getProjectInfo, getProjectList, getTemplates, TProjectDedetail} from 'src/api/project'
+import {message} from 'antd'
 
 const initProjectInfo = {
   id: envStorage.get('prodId') !== 'undefined' ? envStorage.get('prodId') : '',
@@ -75,11 +76,15 @@ export const projectStore = () => {
       return data
     },
     async getProjectInfo({id}: {id: string}) {
-      const {code, data} = await getProjectInfo({id})
-      if (code === 0) {
-        this.setProjectInfo(data)
+      try {
+        const {code, data} = await getProjectInfo({id})
+        if (code === 0) {
+          this.setProjectInfo(data)
+        }
+        return data
+      } catch (response) {
+        message.error(response?.data?.msg || '请求出错')
       }
-      return data
     },
   }
 }

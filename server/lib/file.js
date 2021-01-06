@@ -65,6 +65,10 @@ async function getFiles(folderPath) {
   }
 }
 
+function isExist(path) {
+  return fs.existsSync(path)
+}
+
 async function downloadRepo(repoPath, localPath) {
   const _branch = '--'
   const _repoPath = `clone ${_branch} ${repoPath} ${localPath}`
@@ -87,4 +91,5 @@ module.exports = {
   downloadRepo,
   readFile,
   getFiles,
+  isExist,
 }

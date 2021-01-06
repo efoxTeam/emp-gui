@@ -53,7 +53,7 @@ const ProjectListComp = () => {
         }
       }
       const response = await getProjectInfo({id: prodId})
-      if (!response.id) showCreateProjectAction(true)
+      if (!response?.id) showCreateProjectAction(true)
     })()
   }, [])
 

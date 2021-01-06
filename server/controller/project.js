@@ -1,6 +1,6 @@
 const Base = require('./base')
 const Path = require('path')
-const {readDir, openDir, downloadRepo, readFile, getFiles, writeJson} = require('../lib/file')
+const {readDir, openDir, downloadRepo, readFile, getFiles, writeJson, isExist} = require('../lib/file')
 const template = require('@efox/emp-cli/config/template')
 const {dbService} = require('../data/index')
 const fetch = require('node-fetch')
@@ -92,8 +92,15 @@ class ProjectRest extends Base {
   }
   detail(req, res) {
     const project = projectDetail(req.query.id)
-    res.setHeader('Content-Type', 'application/json')
-    res.json(super.successJson(project))
+    const projectPath = `${project.path}/${project.name}`
+    if (isExist(projectPath)) {
+      res.setHeader('Content-Type', 'application/json')
+      res.json(super.successJson(project))
+    } else {
+      dbService.delete(this.modelName, project.id)
+      res.setHeader('Content-Type', 'application/json')
+      res.json(super.errorJson(-1, '该项目目录已经被删除'))
+    }
   }
   deleteRemote(req, res) {
     const {id, alias} = req.query

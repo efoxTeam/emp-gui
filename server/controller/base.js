@@ -38,6 +38,8 @@ class Base {
     return {code, msg, data}
   }
   import() {}
+
+  detail() {}
 }
 
 module.exports = Base
