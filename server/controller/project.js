@@ -4,11 +4,15 @@ const {readDir, openDir, downloadRepo, readFile, getFiles, writeJson, isExist} =
 const template = require('@efox/emp-cli/config/template')
 const {dbService} = require('../data/index')
 const fetch = require('node-fetch')
+const {type} = require('os')
+const {existsSync} = require('fs')
 
 function projectDetail(id) {
   const data = dbService.retrieve('project', {id})
   const project = data.list[0] || {}
-  const empJson = readFile(Path.join(project.path || '', project.name || '', 'emp.json'))
+  const empJsonPath = Path.join(project.path || '', project.name || '', 'emp.json')
+  const empJson = readFile(empJsonPath)
+
   project.remotes = []
   project.exposes = {}
   if (empJson) {
@@ -70,7 +74,9 @@ class ProjectRest extends Base {
   typeList(req, res) {
     const templateList = []
     Object.keys(template).map(key => {
-      templateList.push({type: key, repo: template[key]})
+      if (!['react-base', 'react-project', 'vue3-base', 'vue3-project'].includes(key)) {
+        templateList.push({type: key, repo: template[key]})
+      }
     })
     res.setHeader('Content-Type', 'application/json')
     res.json(super.successJson(templateList))
@@ -128,19 +134,25 @@ class ProjectRest extends Base {
     const {empPath} = req.query
     const host = empPath?.split('/')?.slice(0, -1).join('/')
     const empJSON = `${host}/emp.json`
-    const content = await (await fetch(empJSON)).json()
-    res.json(
-      super.successJson(
-        Object.assign(
-          {
-            host,
-            empPath: empPath,
-            declarationPath: host + '/index.d.ts',
-          },
-          content,
+    const response = await fetch(empJSON).catch(() => '')
+
+    if (response.size) {
+      // if (fetchEmp) content =
+      res.json(
+        super.successJson(
+          Object.assign(
+            {
+              host,
+              empPath: empPath,
+              declarationPath: host + '/index.d.ts',
+            },
+            await response.json(),
+          ),
         ),
-      ),
-    )
+      )
+    } else {
+      res.json(super.errorJson(-1, '远程基站读取失败'))
+    }
   }
 }
 const project = new ProjectRest('project')
