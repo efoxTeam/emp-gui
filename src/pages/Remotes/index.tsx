@@ -73,15 +73,19 @@ const Com = observer(() => {
 
   const showMdContent = async (info: TRemoteInfo | undefined, key: string) => {
     if (info) {
-      const content = await remoteMdContent({
+      const {code, data, msg} = await remoteMdContent({
         url:
           info?.host +
           '/' +
           info?.exposes[key]?.replace('src', 'docs')?.replace(/(\/\w+$)/, ($1, $2) => `${$2?.replace(/\.\w+/, '')}.md`),
-      }).catch(err => '')
+      })
 
-      mdContentAction(content || '暂无文档')
-      twoLevelDrawerAction(true)
+      if (code === 0 && data) {
+        mdContentAction(data || '暂无文档')
+        twoLevelDrawerAction(true)
+      } else {
+        message['error'](msg)
+      }
     }
   }
 

@@ -154,6 +154,18 @@ class ProjectRest extends Base {
       res.json(super.errorJson(-1, '远程基站读取失败'))
     }
   }
+  async remoteComponentMd(req, res) {
+    const {url} = req.query
+    if (url) {
+      const response = await fetch(url).catch(() => '')
+      if (response.status === 200) {
+        const content = await response.text()
+        res.json(super.successJson(content))
+      } else {
+        res.json(super.errorJson(-1, '获取基站组件文档失败'))
+      }
+    }
+  }
 }
 const project = new ProjectRest('project')
 module.exports = project

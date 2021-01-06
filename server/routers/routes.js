@@ -52,6 +52,10 @@ const Routes = [
     path: '/projects/remoteDetail',
     method: project.remoteDetail,
   },
+  {
+    path: '/projects/remoteComponentMd',
+    method: project.remoteComponentMd,
+  },
 ]
 module.exports = {
   Routes,

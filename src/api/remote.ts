@@ -35,4 +35,8 @@ export const updateRemote = async (data: {
 export const remoteDetail = async (data: {empPath: string}): Promise<HTTP_RESP<TRemoteInfo>> =>
   http.get('/projects/remoteDetail', {params: data})
 
-export const remoteMdContent = async (data: {url: string}): Promise<string> => http.get(data.url)
+/**
+ * 获取远端组件md
+ */
+export const remoteMdContent = async (data: {url: string}): Promise<HTTP_RESP<string>> =>
+  http.get('/projects/remoteComponentMd', {params: data})
