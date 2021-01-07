@@ -1,7 +1,6 @@
 import marked from 'marked'
 import hljs from 'highlight.js'
-// import 'highlight.js/styles/github.css'
-import './markdown-box.scss'
+import style from './markdown-box.module.scss'
 import React from 'react'
 import {Card} from 'antd'
 marked.setOptions({
@@ -20,9 +19,9 @@ marked.setOptions({
 })
 const MarkdownBox = ({md}: {md: string}) => {
   return (
-    <Card>
-      <pre className="markdown-box" dangerouslySetInnerHTML={{__html: marked(md)}} />
-    </Card>
+    // <Card>
+    <pre className={style['markdown-box']} dangerouslySetInnerHTML={{__html: marked(md)}} />
+    // </Card>
   )
 }
 export default MarkdownBox

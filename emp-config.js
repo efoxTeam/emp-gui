@@ -3,7 +3,7 @@ const withESbuild = require('@efox/emp-esbuild')
 
 module.exports = withESbuild(({config, env, empEnv}) => {
   console.log('empEnv===> 部署环境变量 serve模式不需要该变量', empEnv, env)
-  const port = 8002
+  const port = 8888
   const isPro = env === 'production'
   const publicPath = !isPro ? `http://localhost:${port}/` : './'
 
