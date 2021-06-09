@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {TitleInfo} from 'src/types'
 import style from './LogoBox.module.scss'
 const defaultTitleInfo: TitleInfo = {
-  logo: 'https://setmefree.yy.com/Joyy.png',
+  logo: '',
   text: (
     <>
       EMP ANTD <span style={{fontSize: '12px'}}>by Efox</span>
